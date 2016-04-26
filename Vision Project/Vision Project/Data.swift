@@ -25,24 +25,21 @@ class Data: NSObject {
             let medications = results as! [NSManagedObject]
             if (medications.count > 0){
                 for (var i = 0; i < medications.count; i++){
-                    let type = medications[i].valueForKey("type") as! String;
-                    let date = medications[i].valueForKey("dateTime") as! NSDate;
-                    let location = medications[i].valueForKey("location") as! String;
-                    let careProvider = medications[i].valueForKey("careProvider") as! String;
-                    let notes = medications[i].valueForKey("notes") as! String;
-                    let id = medications[i].valueForKey("id") as! String;
+                    let name = medications[i].valueForKey("type") as! String;
                     let imageData = medications[i].valueForKey("image") as! NSData?;
-                    let croppedPhotoData = medications[i].valueForKey("croppedPhoto") as! NSData?;
+                    let croppedImageData = medications[i].valueForKey("croppedImage") as! NSData?;
+                    let info = medications[i].valueForKey("info") as! String;
+                    let id = medications[i].valueForKey("id") as! String;
                     
                     var image: UIImage?;
-                    var croppedPhoto: UIImage?;
+                    var croppedImage: UIImage?;
                     
                     if (imageData != nil){
                         image = UIImage(data: imageData!);
-                        croppedPhoto = UIImage(data: croppedPhotoData!);
+                        croppedImage = UIImage(data: croppedImageData!);
                     }
                     
-                    let temp: Medication = Medication(withType: type, andDate: date, andLocation: location, andCareProvider: careProvider, andNotes: notes, andPhoto: image, andCroppedPhoto: croppedPhoto, andId: id);
+                    let temp: Medication = Medication(withName: name, andImage: image, andCroppedImage: croppedImage, andInfo: info, andId: id);
                     
                     medicationArray.append(temp);
                 }
@@ -73,18 +70,15 @@ class Data: NSObject {
             if (med.image != nil){
                 let imageData = UIImageJPEGRepresentation(med.image!, 1)
                 medicationNew.setValue(imageData, forKey: "image")
-                let croppedPhotoData = UIImageJPEGRepresentation(med.croppedPhoto!, 1)
-                medicationNew.setValue(croppedPhotoData, forKey: "croppedPhoto")
+                let croppedImageData = UIImageJPEGRepresentation(med.croppedImage!, 1)
+                medicationNew.setValue(croppedImageData, forKey: "croppedImage")
             } else {
                 medicationNew.setNilValueForKey("image");
                 medicationNew.setNilValueForKey("croppedPhoto");
             }
             
-            medicationNew.setValue(med.type, forKey: "type")
-            medicationNew.setValue(med.date, forKey: "dateTime")
-            medicationNew.setValue(med.location, forKey: "location")
-            medicationNew.setValue(med.careProvider, forKey: "careProvider")
-            medicationNew.setValue(med.notes, forKey: "notes")
+            medicationNew.setValue(med.name, forKey: "name")
+            medicationNew.setValue(med.info, forKey: "info")
             medicationNew.setValue(id, forKey: "id")
             
         } else {
@@ -98,20 +92,17 @@ class Data: NSObject {
                 try managedContext.executeFetchRequest(fetchRequest)
                 let info = results as! [NSManagedObject]
                 if (info.count == 1){
-                    info[0].setValue(med.type, forKey: "type")
-                    info[0].setValue(med.date, forKey: "dateTime")
-                    info[0].setValue(med.location, forKey: "location")
-                    info[0].setValue(med.careProvider, forKey: "careProvider")
-                    info[0].setValue(med.notes, forKey: "notes")
+                    info[0].setValue(med.name, forKey: "name")
+                    info[0].setValue(med.info, forKey: "info")
                     
                     if (med.image != nil){
                         let imageData = UIImageJPEGRepresentation(med.image!, 1)
                         info[0].setValue(imageData, forKey: "image")
-                        let croppedPhotoData = UIImageJPEGRepresentation(med.croppedPhoto!, 1)
-                        info[0].setValue(croppedPhotoData, forKey: "croppedPhoto")
+                        let croppedImageData = UIImageJPEGRepresentation(med.croppedImage!, 1)
+                        info[0].setValue(croppedImageData, forKey: "croppedImage")
                     } else {
                         info[0].setNilValueForKey("image")
-                        info[0].setNilValueForKey("croppedPhoto")
+                        info[0].setNilValueForKey("croppedImage")
                     }
                     
                     

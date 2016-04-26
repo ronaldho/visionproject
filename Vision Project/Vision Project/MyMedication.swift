@@ -16,9 +16,9 @@ class MyMedication: Medication {
         super.init();
     };
     
-    init(withName name:String, andImage image: UIImage?, andCroppedImage croppedImage: UIImage?, andInfo info:String, andNotes notes:String){
+    init(withName name:String, andImage image: UIImage?, andCroppedImage croppedImage: UIImage?, andInfo info:String, andNotes notes:String, andId id:String){
         self.notes = notes;
-        super.init(withName: name, andImage: image, andCroppedImage: croppedImage, andInfo: info);
+        super.init(withName: name, andImage: image, andCroppedImage: croppedImage, andInfo: info, andId: id);
     }
     
     override func toString() -> String{

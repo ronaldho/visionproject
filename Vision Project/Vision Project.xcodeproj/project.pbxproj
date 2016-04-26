@@ -10,8 +10,6 @@
 		49B8434A1CCF4A1500F7D81E /* MyMedicationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */; };
 		49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */; };
 		49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */; };
-		49DA89D11CC9C49A0027CF21 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89D01CC9C49A0027CF21 /* FirstViewController.swift */; };
-		49DA89D31CC9C49A0027CF21 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89D21CC9C49A0027CF21 /* SecondViewController.swift */; };
 		49DA89D61CC9C49A0027CF21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DA89D41CC9C49A0027CF21 /* Main.storyboard */; };
 		49DA89D81CC9C49A0027CF21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DA89D71CC9C49A0027CF21 /* Assets.xcassets */; };
 		49DA89DB1CC9C49A0027CF21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DA89D91CC9C49A0027CF21 /* LaunchScreen.storyboard */; };
@@ -26,8 +24,6 @@
 		49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationTableViewCell.swift; sourceTree = "<group>"; };
 		49DA89CB1CC9C49A0027CF21 /* Vision Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vision Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		49DA89D01CC9C49A0027CF21 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		49DA89D21CC9C49A0027CF21 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		49DA89D51CC9C49A0027CF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49DA89D71CC9C49A0027CF21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49DA89DA1CC9C49A0027CF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49B8434D1CCF4D7B00F7D81E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */,
+				49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		49DA89C21CC9C49A0027CF21 = {
 			isa = PBXGroup;
 			children = (
@@ -70,15 +75,12 @@
 			children = (
 				49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */,
 				49DA89E61CC9C5950027CF21 /* Model.xcdatamodeld */,
-				49DA89D01CC9C49A0027CF21 /* FirstViewController.swift */,
-				49DA89D21CC9C49A0027CF21 /* SecondViewController.swift */,
 				49DA89D41CC9C49A0027CF21 /* Main.storyboard */,
 				49DA89D71CC9C49A0027CF21 /* Assets.xcassets */,
 				49DA89D91CC9C49A0027CF21 /* LaunchScreen.storyboard */,
 				49DA89DC1CC9C49A0027CF21 /* Info.plist */,
 				49DA89E21CC9C4CB0027CF21 /* Data.swift */,
-				49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */,
-				49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */,
+				49B8434D1CCF4D7B00F7D81E /* Views */,
 				49DA89E91CC9C5B60027CF21 /* Models */,
 			);
 			path = "Vision Project";
@@ -166,10 +168,8 @@
 			files = (
 				49DA89E51CC9C4E00027CF21 /* Medication.swift in Sources */,
 				49DA89EB1CC9C8080027CF21 /* MyMedication.swift in Sources */,
-				49DA89D31CC9C49A0027CF21 /* SecondViewController.swift in Sources */,
 				49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */,
 				49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */,
-				49DA89D11CC9C49A0027CF21 /* FirstViewController.swift in Sources */,
 				49DA89E31CC9C4CB0027CF21 /* Data.swift in Sources */,
 				49B8434A1CCF4A1500F7D81E /* MyMedicationsTableViewController.swift in Sources */,
 				49DA89E81CC9C5950027CF21 /* Model.xcdatamodeld in Sources */,
