@@ -12,13 +12,13 @@ import UIKit
 
 class Data: NSObject {
     
-    static func getAllMedications() -> [Medication]{
+    static func getAllMedications() -> [MyMedication]{
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Medication")
+        let fetchRequest = NSFetchRequest(entityName: "MyMedication")
         
-        var medicationArray: [Medication] = [Medication]();
+        var medicationArray: [MyMedication] = [MyMedication]();
         do {
             let results =
             try managedContext.executeFetchRequest(fetchRequest)
@@ -28,8 +28,13 @@ class Data: NSObject {
                     let name = medications[i].valueForKey("type") as! String;
                     let imageData = medications[i].valueForKey("image") as! NSData?;
                     let croppedImageData = medications[i].valueForKey("croppedImage") as! NSData?;
+                    let breakfast = medications[i].valueForKey("breakfast") as! Bool;
+                    let lunch = medications[i].valueForKey("lunch") as! Bool;
+                    let dinner = medications[i].valueForKey("dinner") as! Bool;
+                    let bed = medications[i].valueForKey("bed") as! Bool;
                     let info = medications[i].valueForKey("info") as! String;
                     let id = medications[i].valueForKey("id") as! String;
+                    let notes = medications[i].valueForKey("notes") as! String;
                     
                     var image: UIImage?;
                     var croppedImage: UIImage?;
@@ -39,7 +44,7 @@ class Data: NSObject {
                         croppedImage = UIImage(data: croppedImageData!);
                     }
                     
-                    let temp: Medication = Medication(withName: name, andImage: image, andCroppedImage: croppedImage, andInfo: info, andId: id);
+                    let temp: MyMedication = MyMedication(withName: name, andImage: image, andCroppedImage: croppedImage, andInfo: info, andNotes: notes, andId: id, andBreakfast: breakfast, andLunch: lunch, andDinner: dinner, andBed: bed);
                     
                     medicationArray.append(temp);
                 }
@@ -53,7 +58,7 @@ class Data: NSObject {
         return medicationArray;
     }
     
-    static func saveMedication(med: Medication) -> String{
+    static func saveMedication(med: MyMedication) -> String{
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
@@ -61,7 +66,7 @@ class Data: NSObject {
         var id = NSUUID().UUIDString
         
         if (med.id == "0"){
-            let entity =  NSEntityDescription.entityForName("Medication",
+            let entity =  NSEntityDescription.entityForName("MyMedication",
                 inManagedObjectContext:managedContext)
             
             let medicationNew = NSManagedObject(entity: entity!,
@@ -80,11 +85,16 @@ class Data: NSObject {
             medicationNew.setValue(med.name, forKey: "name")
             medicationNew.setValue(med.info, forKey: "info")
             medicationNew.setValue(id, forKey: "id")
+            medicationNew.setValue(med.notes, forKey: "notes")
+            medicationNew.setValue(med.breakfast, forKey: "breakfast")
+            medicationNew.setValue(med.lunch, forKey: "lunch")
+            medicationNew.setValue(med.dinner, forKey: "dinner")
+            medicationNew.setValue(med.bed, forKey: "bed")
             
         } else {
             id = med.id
             
-            let fetchRequest = NSFetchRequest(entityName: "Medication")
+            let fetchRequest = NSFetchRequest(entityName: "MyMedication")
             fetchRequest.predicate = NSPredicate(format: "id=%@", med.id);
             
             do {
@@ -94,6 +104,11 @@ class Data: NSObject {
                 if (info.count == 1){
                     info[0].setValue(med.name, forKey: "name")
                     info[0].setValue(med.info, forKey: "info")
+                    info[0].setValue(med.notes, forKey: "notes")
+                    info[0].setValue(med.breakfast, forKey: "breakfast")
+                    info[0].setValue(med.lunch, forKey: "lunch")
+                    info[0].setValue(med.dinner, forKey: "dinner")
+                    info[0].setValue(med.bed, forKey: "bed")
                     
                     if (med.image != nil){
                         let imageData = UIImageJPEGRepresentation(med.image!, 1)
@@ -125,7 +140,7 @@ class Data: NSObject {
     }
     
     
-    static func deleteMedication(med: Medication){
+    static func deleteMedication(med: MyMedication){
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
@@ -134,7 +149,7 @@ class Data: NSObject {
             print("Error: trying to delete medication with id == 0");
             
         } else {
-            let fetchRequest = NSFetchRequest(entityName: "Medication")
+            let fetchRequest = NSFetchRequest(entityName: "MyMedication")
             fetchRequest.predicate = NSPredicate(format: "id=%@", med.id);
             
             do {
