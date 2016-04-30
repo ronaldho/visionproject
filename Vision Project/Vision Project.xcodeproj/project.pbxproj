@@ -70,12 +70,14 @@
 		49B8434D1CCF4D7B00F7D81E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				49D6D6061CD5330C00EBDA7B /* AGViewController.swift */,
 				49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */,
 				49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */,
-				49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */,
 				49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */,
 				49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */,
+				49D6D6061CD5330C00EBDA7B /* AGViewController.swift */,
+				49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */,
+				49D6D60F1CD5341300EBDA7B /* AGImageView.swift */,
+				49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -83,8 +85,6 @@
 		49D6D60A1CD5338900EBDA7B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */,
-				49D6D60F1CD5341300EBDA7B /* AGImageView.swift */,
 				49D6D60D1CD5340000EBDA7B /* ImageUtils.swift */,
 				49DA89E21CC9C4CB0027CF21 /* Data.swift */,
 				49D6D60B1CD533B600EBDA7B /* StaticDates.swift */,

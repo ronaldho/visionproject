@@ -302,10 +302,10 @@
             </objects>
             <point key="canvasLocation" x="1727" y="-312"/>
         </scene>
-        <!--View Controller-->
+        <!--My Medication View Controller-->
         <scene sceneID="EuU-3a-aQy">
             <objects>
-                <viewController id="HsG-9c-Nwc" sceneMemberID="viewController">
+                <viewController id="HsG-9c-Nwc" customClass="MyMedicationViewController" customModule="Vision_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FaP-Ux-Vqf"/>
                         <viewControllerLayoutGuide type="bottom" id="5hp-BG-9DJ"/>
@@ -330,6 +330,9 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="dateTextInputPressed:" destination="HsG-9c-Nwc" eventType="editingDidBegin" id="xNp-zp-930"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Appointment for..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Urb-Ph-eq8">
                                                         <rect key="frame" x="0.0" y="60" width="544" height="40"/>
@@ -486,6 +489,9 @@
                                                                 <color key="value" red="0.41568627450000001" green="0.41568627450000001" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="addPhoto:" destination="HsG-9c-Nwc" eventType="touchUpInside" id="XT3-Kh-ayg"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37T-uP-pqt">
                                                         <rect key="frame" x="0.0" y="355" width="544" height="569"/>
@@ -503,6 +509,9 @@
                                                                     <constraint firstAttribute="width" constant="40" id="gxa-Xq-Cnv"/>
                                                                 </constraints>
                                                                 <state key="normal" image="ic_delete"/>
+                                                                <connections>
+                                                                    <action selector="deletePhoto:" destination="HsG-9c-Nwc" eventType="touchUpInside" id="vGS-uw-GAp"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -579,7 +588,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EyG-uL-VPr">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ERU-TH-Vhe"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ERU-TH-Vhe">
+                            <connections>
+                                <action selector="cancel:" destination="HsG-9c-Nwc" id="FhD-BP-F5N"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="5j3-TL-bpP"/>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

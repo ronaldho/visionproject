@@ -13,7 +13,7 @@ class AGInputViewController: AGViewController, UIImagePickerControllerDelegate,
         
         @IBOutlet var dateField: UITextField?;
         @IBOutlet var notesField: UITextView?;
-        @IBOutlet var photo: ThriveImageView?;
+        @IBOutlet var photo: AGImageView?;
         @IBOutlet var addPhotoButton: UIButton?;
         @IBOutlet var photoContainer: UIView?;
         @IBOutlet var deleteButton: UIButton?;

@@ -12,7 +12,7 @@ import UIKit
 
 class Data: NSObject {
     
-    static func getAllMedications() -> [MyMedication]{
+    static func getAllMyMedications() -> [MyMedication]{
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
@@ -58,7 +58,7 @@ class Data: NSObject {
         return medicationArray;
     }
     
-    static func saveMedication(med: MyMedication) -> String{
+    static func saveMyMedication(med: MyMedication) -> String{
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
@@ -140,7 +140,7 @@ class Data: NSObject {
     }
     
     
-    static func deleteMedication(med: MyMedication){
+    static func deleteMyMedication(med: MyMedication){
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext

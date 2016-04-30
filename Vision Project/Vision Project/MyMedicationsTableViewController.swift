@@ -16,6 +16,11 @@ protocol MyMedicationCellDelegate {
     
 }
 
+protocol InputViewDelegate {
+//    var itemToScrollToId: String? {get set};
+//    func autoscroll();
+}
+
 class MyMedicationsTableViewController: UITableViewController, FilterCellDelegate, MyMedicationCellDelegate {
 
     var myMedications: MyMedications = MyMedications();
@@ -27,7 +32,7 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        myMedications.meds = Data.getAllMedications();
+        myMedications.meds = Data.getAllMyMedications();
         
 
         // Uncomment the following line to preserve selection between presentations
