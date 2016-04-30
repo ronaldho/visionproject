@@ -11,6 +11,15 @@
 		49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */; };
 		49D6D5FF1CD4809F00EBDA7B /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */; };
 		49D6D6011CD4819700EBDA7B /* MyMedications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6001CD4819700EBDA7B /* MyMedications.swift */; };
+		49D6D6031CD519C600EBDA7B /* MyMedicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */; };
+		49D6D6051CD532C700EBDA7B /* AGInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */; };
+		49D6D6071CD5330C00EBDA7B /* AGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6061CD5330C00EBDA7B /* AGViewController.swift */; };
+		49D6D6091CD5337800EBDA7B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6081CD5337800EBDA7B /* UIColorExtension.swift */; };
+		49D6D60C1CD533B600EBDA7B /* StaticDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D60B1CD533B600EBDA7B /* StaticDates.swift */; };
+		49D6D60E1CD5340000EBDA7B /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D60D1CD5340000EBDA7B /* ImageUtils.swift */; };
+		49D6D6101CD5341300EBDA7B /* AGImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D60F1CD5341300EBDA7B /* AGImageView.swift */; };
+		49D6D6121CD5343500EBDA7B /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */; };
+		49D6D6141CD5346600EBDA7B /* UITextField+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6131CD5346600EBDA7B /* UITextField+Shake.swift */; };
 		49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */; };
 		49DA89D61CC9C49A0027CF21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DA89D41CC9C49A0027CF21 /* Main.storyboard */; };
 		49DA89D81CC9C49A0027CF21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DA89D71CC9C49A0027CF21 /* Assets.xcassets */; };
@@ -26,6 +35,15 @@
 		49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationTableViewCell.swift; sourceTree = "<group>"; };
 		49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		49D6D6001CD4819700EBDA7B /* MyMedications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedications.swift; sourceTree = "<group>"; };
+		49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationViewController.swift; sourceTree = "<group>"; };
+		49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGInputViewController.swift; sourceTree = "<group>"; };
+		49D6D6061CD5330C00EBDA7B /* AGViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGViewController.swift; sourceTree = "<group>"; };
+		49D6D6081CD5337800EBDA7B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		49D6D60B1CD533B600EBDA7B /* StaticDates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticDates.swift; path = ../StaticDates.swift; sourceTree = "<group>"; };
+		49D6D60D1CD5340000EBDA7B /* ImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
+		49D6D60F1CD5341300EBDA7B /* AGImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGImageView.swift; sourceTree = "<group>"; };
+		49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
+		49D6D6131CD5346600EBDA7B /* UITextField+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Shake.swift"; sourceTree = "<group>"; };
 		49DA89CB1CC9C49A0027CF21 /* Vision Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vision Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DA89D51CC9C49A0027CF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -52,11 +70,36 @@
 		49B8434D1CCF4D7B00F7D81E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				49D6D6061CD5330C00EBDA7B /* AGViewController.swift */,
 				49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */,
+				49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */,
+				49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */,
 				49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */,
 				49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		49D6D60A1CD5338900EBDA7B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */,
+				49D6D60F1CD5341300EBDA7B /* AGImageView.swift */,
+				49D6D60D1CD5340000EBDA7B /* ImageUtils.swift */,
+				49DA89E21CC9C4CB0027CF21 /* Data.swift */,
+				49D6D60B1CD533B600EBDA7B /* StaticDates.swift */,
+				49D6D6081CD5337800EBDA7B /* UIColorExtension.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		49D6D6151CD5347B00EBDA7B /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				49D6D6131CD5346600EBDA7B /* UITextField+Shake.swift */,
+			);
+			name = "Third Party";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		49DA89C21CC9C49A0027CF21 = {
@@ -84,9 +127,10 @@
 				49DA89D71CC9C49A0027CF21 /* Assets.xcassets */,
 				49DA89D91CC9C49A0027CF21 /* LaunchScreen.storyboard */,
 				49DA89DC1CC9C49A0027CF21 /* Info.plist */,
-				49DA89E21CC9C4CB0027CF21 /* Data.swift */,
 				49B8434D1CCF4D7B00F7D81E /* Views */,
 				49DA89E91CC9C5B60027CF21 /* Models */,
+				49D6D60A1CD5338900EBDA7B /* Utilities */,
+				49D6D6151CD5347B00EBDA7B /* Third Party */,
 			);
 			path = "Vision Project";
 			sourceTree = "<group>";
@@ -172,15 +216,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49D6D6071CD5330C00EBDA7B /* AGViewController.swift in Sources */,
+				49D6D6121CD5343500EBDA7B /* FullImageViewController.swift in Sources */,
 				49D6D6011CD4819700EBDA7B /* MyMedications.swift in Sources */,
+				49D6D6101CD5341300EBDA7B /* AGImageView.swift in Sources */,
 				49DA89E51CC9C4E00027CF21 /* Medication.swift in Sources */,
 				49DA89EB1CC9C8080027CF21 /* MyMedication.swift in Sources */,
 				49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */,
 				49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */,
+				49D6D6091CD5337800EBDA7B /* UIColorExtension.swift in Sources */,
 				49DA89E31CC9C4CB0027CF21 /* Data.swift in Sources */,
+				49D6D60E1CD5340000EBDA7B /* ImageUtils.swift in Sources */,
 				49D6D5FF1CD4809F00EBDA7B /* FilterTableViewCell.swift in Sources */,
 				49B8434A1CCF4A1500F7D81E /* MyMedicationsTableViewController.swift in Sources */,
+				49D6D6031CD519C600EBDA7B /* MyMedicationViewController.swift in Sources */,
+				49D6D60C1CD533B600EBDA7B /* StaticDates.swift in Sources */,
+				49D6D6141CD5346600EBDA7B /* UITextField+Shake.swift in Sources */,
 				49DA89E81CC9C5950027CF21 /* Model.xcdatamodeld in Sources */,
+				49D6D6051CD532C700EBDA7B /* AGInputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
