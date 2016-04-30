@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		49B8434A1CCF4A1500F7D81E /* MyMedicationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */; };
 		49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */; };
+		49D6D5FF1CD4809F00EBDA7B /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */; };
+		49D6D6011CD4819700EBDA7B /* MyMedications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6001CD4819700EBDA7B /* MyMedications.swift */; };
 		49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */; };
 		49DA89D61CC9C49A0027CF21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DA89D41CC9C49A0027CF21 /* Main.storyboard */; };
 		49DA89D81CC9C49A0027CF21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DA89D71CC9C49A0027CF21 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 /* Begin PBXFileReference section */
 		49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationsTableViewController.swift; sourceTree = "<group>"; };
 		49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationTableViewCell.swift; sourceTree = "<group>"; };
+		49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		49D6D6001CD4819700EBDA7B /* MyMedications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedications.swift; sourceTree = "<group>"; };
 		49DA89CB1CC9C49A0027CF21 /* Vision Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vision Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DA89D51CC9C49A0027CF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,6 +54,7 @@
 			children = (
 				49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */,
 				49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */,
+				49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 			children = (
 				49DA89E41CC9C4E00027CF21 /* Medication.swift */,
 				49DA89EA1CC9C8080027CF21 /* MyMedication.swift */,
+				49D6D6001CD4819700EBDA7B /* MyMedications.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -166,11 +172,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49D6D6011CD4819700EBDA7B /* MyMedications.swift in Sources */,
 				49DA89E51CC9C4E00027CF21 /* Medication.swift in Sources */,
 				49DA89EB1CC9C8080027CF21 /* MyMedication.swift in Sources */,
 				49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */,
 				49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */,
 				49DA89E31CC9C4CB0027CF21 /* Data.swift in Sources */,
+				49D6D5FF1CD4809F00EBDA7B /* FilterTableViewCell.swift in Sources */,
 				49B8434A1CCF4A1500F7D81E /* MyMedicationsTableViewController.swift in Sources */,
 				49DA89E81CC9C5950027CF21 /* Model.xcdatamodeld in Sources */,
 			);

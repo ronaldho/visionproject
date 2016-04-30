@@ -8,10 +8,27 @@
 
 import UIKit
 
-class MyMedicationsTableViewController: UITableViewController {
+protocol FilterCellDelegate {
+    func filterMedList(time: String);
+}
 
+protocol MyMedicationCellDelegate {
+    
+}
+
+class MyMedicationsTableViewController: UITableViewController, FilterCellDelegate, MyMedicationCellDelegate {
+
+    var myMedications: MyMedications = MyMedications();
+    
+    func filterMedList(time: String){
+        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None);
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        myMedications.meds = Data.getAllMedications();
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,24 +45,32 @@ class MyMedicationsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1 + myMedications.meds.count;
+        //Add 1 for filter header
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
-        // Configure the cell...
+        if (indexPath == 0){
+            let cell = tableView.dequeueReusableCellWithIdentifier("filterCell", forIndexPath: indexPath) as! FilterTableViewCell;
+            cell.delegate = self;
+            
+            return cell
 
-        return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("myMedicationCell", forIndexPath: indexPath) as! MyMedicationTableViewCell;
+            cell.delegate = self;
+            cell.myMedication = myMedications.meds[indexPath.row - 1];
+            
+            return cell
+        }
+
+       
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

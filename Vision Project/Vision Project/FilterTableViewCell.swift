@@ -8,19 +8,27 @@
 
 import UIKit
 
-class MyMedicationTableViewCell: UITableViewCell {
+class FilterTableViewCell: UITableViewCell {
 
-    var delegate: MyMedicationCellDelegate!;
-    var myMedication: MyMedication!;
+    var delegate: FilterCellDelegate!;
     
-    @IBOutlet var medImage: UIImageView!;
-    @IBOutlet var medName: UILabel!;
     @IBOutlet var breakfastView: UIView!;
     @IBOutlet var lunchView: UIView!;
     @IBOutlet var dinnerView: UIView!;
     @IBOutlet var bedView: UIView!;
-    @IBOutlet var medInfo: UILabel!;
     
+    @IBAction func breakfastTapped(){
+        
+    }
+    @IBAction func lunchTapped(){
+        
+    }
+    @IBAction func dinnerTapped(){
+        
+    }
+    @IBAction func bedTapped(){
+        
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
