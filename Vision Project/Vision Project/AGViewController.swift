@@ -1,6 +1,6 @@
 //
-//  ThriveViewController.swift
-//  Thrive Pregnancy
+//  AGViewController.swift
+//  AG Pregnancy
 //
 //  Created by Andrew on 9/02/16.
 //  Copyright © 2016 Andrew. All rights reserved.
@@ -17,7 +17,9 @@ class AGViewController: UIViewController {
         
         self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.barTintColor = UIColor(red: 250/255, green: 200/255, blue: 51/255, alpha: 1);
+        self.navigationController!.navigationBar.barTintColor = UIColor.visionDarkGreenColor();
+        
+        self.view.backgroundColor = UIColor.visionTanColor();
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: "adjustForKeyboard:", name: UIKeyboardWillHideNotification, object: nil)
@@ -30,7 +32,7 @@ class AGViewController: UIViewController {
     }
     
 //    func textFieldShouldReturn(field: UITextField) -> Bool{
-//        let nextField = (field as! ThriveText).nextField
+//        let nextField = (field as! AGText).nextField
 //        
 //        if ((nextField) != nil) {
 //            nextField.becomeFirstResponder()

@@ -15,10 +15,10 @@ class MyMedicationTableViewCell: UITableViewCell {
     
     @IBOutlet var medImage: UIImageView!;
     @IBOutlet var medName: UILabel!;
-    @IBOutlet var breakfastView: UIView!;
-    @IBOutlet var lunchView: UIView!;
-    @IBOutlet var dinnerView: UIView!;
-    @IBOutlet var bedView: UIView!;
+    @IBOutlet var breakfastImage: UIImageView!;
+    @IBOutlet var lunchImage: UIImageView!;
+    @IBOutlet var dinnerImage: UIImageView!;
+    @IBOutlet var bedImage: UIImageView!;
     @IBOutlet var medInfo: UILabel!;
     
     

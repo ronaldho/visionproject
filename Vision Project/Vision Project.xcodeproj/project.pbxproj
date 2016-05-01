@@ -20,6 +20,7 @@
 		49D6D6101CD5341300EBDA7B /* AGImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D60F1CD5341300EBDA7B /* AGImageView.swift */; };
 		49D6D6121CD5343500EBDA7B /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */; };
 		49D6D6141CD5346600EBDA7B /* UITextField+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6131CD5346600EBDA7B /* UITextField+Shake.swift */; };
+		49D6D6171CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6161CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift */; };
 		49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */; };
 		49DA89D61CC9C49A0027CF21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DA89D41CC9C49A0027CF21 /* Main.storyboard */; };
 		49DA89D81CC9C49A0027CF21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DA89D71CC9C49A0027CF21 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		49D6D60F1CD5341300EBDA7B /* AGImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGImageView.swift; sourceTree = "<group>"; };
 		49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		49D6D6131CD5346600EBDA7B /* UITextField+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Shake.swift"; sourceTree = "<group>"; };
+		49D6D6161CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextMedicationTimerCircle.swift; sourceTree = "<group>"; };
 		49DA89CB1CC9C49A0027CF21 /* Vision Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vision Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DA89D51CC9C49A0027CF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */,
 				49D6D60F1CD5341300EBDA7B /* AGImageView.swift */,
 				49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */,
+				49D6D6161CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49D6D6071CD5330C00EBDA7B /* AGViewController.swift in Sources */,
+				49D6D6171CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift in Sources */,
 				49D6D6121CD5343500EBDA7B /* FullImageViewController.swift in Sources */,
 				49D6D6011CD4819700EBDA7B /* MyMedications.swift in Sources */,
 				49D6D6101CD5341300EBDA7B /* AGImageView.swift in Sources */,

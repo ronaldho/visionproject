@@ -25,7 +25,7 @@ class Data: NSObject {
             let medications = results as! [NSManagedObject]
             if (medications.count > 0){
                 for (var i = 0; i < medications.count; i++){
-                    let name = medications[i].valueForKey("type") as! String;
+                    let name = medications[i].valueForKey("name") as! String;
                     let imageData = medications[i].valueForKey("image") as! NSData?;
                     let croppedImageData = medications[i].valueForKey("croppedImage") as! NSData?;
                     let breakfast = medications[i].valueForKey("breakfast") as! Bool;
@@ -79,7 +79,7 @@ class Data: NSObject {
                 medicationNew.setValue(croppedImageData, forKey: "croppedImage")
             } else {
                 medicationNew.setNilValueForKey("image");
-                medicationNew.setNilValueForKey("croppedPhoto");
+                medicationNew.setNilValueForKey("croppedImage");
             }
             
             medicationNew.setValue(med.name, forKey: "name")

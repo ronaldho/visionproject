@@ -1,6 +1,6 @@
 //
 //  StaticDates.swift
-//  Thrive Pregnancy
+//  EMIT
 //
 //  Created by Andrew on 24/11/15.
 //  Copyright © 2015 Andrew. All rights reserved.

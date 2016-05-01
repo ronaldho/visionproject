@@ -12,10 +12,10 @@ class MyMedicationViewController: AGInputViewController {
 
     @IBOutlet var medImage: AGImageView!;
     @IBOutlet var medName: UITextField!;
-    @IBOutlet var breakfastImageView: UIImageView!;
-    @IBOutlet var lunchImageView: UIImageView!;
-    @IBOutlet var dinnerImageView: UIImageView!;
-    @IBOutlet var bedImageView: UIImageView!;
+    @IBOutlet var breakfastButton: UIButton!;
+    @IBOutlet var lunchButton: UIButton!;
+    @IBOutlet var dinnerButton: UIButton!;
+    @IBOutlet var bedButton: UIButton!;
     @IBOutlet var medInfo: UITextField!;
     @IBOutlet var medNotes: UITextField!;
     
@@ -56,55 +56,55 @@ class MyMedicationViewController: AGInputViewController {
     }
     
     override func viewDidLoad() {
-        if (newMode){
-            self.title = "New MyMedication"
-            self.deleteButton!.hidden = true;
-        } else {
-            self.title = "Edit MyMedication"
-        }
-        
-        loadFields();
-        
+//        if (newMode){
+//            self.title = "New MyMedication"
+//            self.deleteButton!.hidden = true;
+//        } else {
+//            self.title = "Edit MyMedication"
+//        }
+//        
+//        loadFields();
+//        
         super.viewDidLoad()
     }
     
     @IBAction func toggleBreakfast(){
         if (med.breakfast){
             med.breakfast = false;
-            //breakfastImageView.image =
+            breakfastButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
         } else {
             med.breakfast = true;
-            //breakfastImageView.image =
+            breakfastButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
         }
     }
     
     @IBAction func toggleLunch(){
         if (med.lunch){
             med.lunch = false;
-            //lunchImageView.image =
+            lunchButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
         } else {
             med.lunch = true;
-            //lunchImageView.image =
+            lunchButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
         }
     }
     
     @IBAction func toggleDinner(){
         if (med.dinner){
             med.dinner = false;
-            //dinnerImageView.image =
+            dinnerButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
         } else {
             med.dinner = true;
-            //dinnerImageView.image =
+            dinnerButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
         }
     }
     
     @IBAction func toggleBed(){
         if (med.bed){
             med.bed = false;
-            //bedImageView.image =
+            bedButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
         } else {
             med.bed = true;
-            //bedImageView.image =
+            bedButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
         }
     }
     
@@ -115,16 +115,16 @@ class MyMedicationViewController: AGInputViewController {
             medNotes.text = med.notes;
             
             if (med.breakfast){
-                //breakfastImageView.image =
+                //breakfastButton.image =
             }
             if (med.lunch){
-                //lunchImageView.image =
+                //lunchButton.image =
             }
             if (med.dinner){
-                //dinnerImageView.image =
+                //dinnerButton.image =
             }
             if (med.bed){
-                //bedImageView.image =
+                //bedButton.image =
             }
             
             if (med.image != nil){
@@ -143,17 +143,19 @@ class MyMedicationViewController: AGInputViewController {
     
     @IBAction func save(sender: UIButton){
         
-        if (date != StaticDates.sharedInstance.defaultDate){
-//            let notes: String = (notesField!.textColor == UIColor.greyPlaceholderColor()) ? "" : notesField!.text;
-//            let myMedicationId: String =
-//            Data.saveMyMedication(MyMedication(withType: myMedicationType.text!, andDate: date, andLocation: myMedicationLocation.text!, andCareProvider: myMedicationCareProvider.text!, andNotes: notes, andPhoto: photo!.fullImage, andCroppedPhoto: photo!.image, andId: med.id));
-            
-//            delegate?.itemToScrollToId = myMedicationId
-            
-            self.dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            dateField!.shake(10, delta: 10, speed: 0.1);
-        }
+        Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: nil, andCroppedImage: nil, andInfo: "", andNotes: "", andId: "0", andBreakfast: med.breakfast, andLunch: med.lunch, andDinner: med.dinner, andBed: med.bed));
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+//        if (date != StaticDates.sharedInstance.defaultDate){
+////            let notes: String = (notesField!.textColor == UIColor.greyPlaceholderColor()) ? "" : notesField!.text;
+////            let myMedicationId: String =
+//
+//            
+////            delegate?.itemToScrollToId = myMedicationId
+//            
+//        } else {
+//            dateField!.shake(10, delta: 10, speed: 0.1);
+//        }
     }
     
     override func configureDatePicker(inout picker: UIDatePicker){

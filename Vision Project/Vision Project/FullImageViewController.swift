@@ -1,6 +1,6 @@
 //
 //  FullImageViewController
-//  Thrive Pregnancy
+//  EMIT
 //
 //  Created by Andrew on 5/12/15.
 //  Copyright © 2015 Andrew. All rights reserved.

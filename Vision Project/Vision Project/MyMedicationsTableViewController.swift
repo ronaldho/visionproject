@@ -32,6 +32,15 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController!.navigationBar.barTintColor = UIColor.visionDarkGreenColor();
+        self.tableView.allowsSelection = false;
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 44.0;
+        self.tableView.backgroundColor = UIColor.visionTanColor();
+        
         myMedications.meds = Data.getAllMyMedications();
         
 
@@ -59,17 +68,42 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
-        if (indexPath == 0){
-            let cell = tableView.dequeueReusableCellWithIdentifier("filterCell", forIndexPath: indexPath) as! FilterTableViewCell;
+        
+        if (indexPath.row == 0){
+            let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as! FilterTableViewCell;
             cell.delegate = self;
             
             return cell
 
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("myMedicationCell", forIndexPath: indexPath) as! MyMedicationTableViewCell;
+            let cell = tableView.dequeueReusableCellWithIdentifier("MyMedicationCell", forIndexPath: indexPath) as! MyMedicationTableViewCell;
             cell.delegate = self;
-            cell.myMedication = myMedications.meds[indexPath.row - 1];
+            let med = myMedications.meds[indexPath.row - 1];
+            cell.myMedication = med;
+            cell.medName.text = med.name;
+            cell.medInfo.text = med.info;
+            
+            if (med.breakfast){
+                cell.breakfastImage.image = UIImage(named: "blueCircle");
+            } else {
+                cell.breakfastImage.image = UIImage(named: "lightGreyCircle")
+            }
+            if (med.lunch){
+                cell.lunchImage.image = UIImage(named: "blueCircle");
+            } else {
+                cell.lunchImage.image = UIImage(named: "lightGreyCircle")
+            }
+            if (med.dinner){
+                cell.dinnerImage.image = UIImage(named: "blueCircle");
+            } else {
+                cell.dinnerImage.image = UIImage(named: "lightGreyCircle")
+            }
+            if (med.bed){
+                cell.bedImage.image = UIImage(named: "blueCircle");
+            } else {
+                cell.bedImage.image = UIImage(named: "lightGreyCircle")
+            }
+            
             
             return cell
         }

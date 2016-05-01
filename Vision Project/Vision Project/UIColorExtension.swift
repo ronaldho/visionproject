@@ -1,6 +1,6 @@
 //
 //  UIColorExtension.swift
-//  Thrive Pregnancy
+//  EMIT
 //
 //  Created by Andrew on 8/02/16.
 //  Copyright © 2016 Andrew. All rights reserved.
@@ -18,19 +18,26 @@ extension UIColor{
         return UIColor.grayColor().colorWithAlphaComponent(0.5)
     }
     
-    class func thriveRedColor() -> UIColor {
-        return UIColor(red: 244/255, green: 122/255, blue: 85/255, alpha: 1.0)
+    class func visionTanColor() -> UIColor {
+        return UIColor(red: 239/255, green: 234/255, blue: 219/255, alpha: 1.0)
     }
     
-    class func thriveYellowColor() -> UIColor {
-        return UIColor(red: 255/255, green: 203/255, blue: 0/255, alpha: 1.0)
+    class func visionDarkGreenColor() -> UIColor {
+        return UIColor(red: 47/255, green: 92/255, blue: 29/255, alpha: 1.0)
+    }
+    //#2F5C1D
+    
+    class func visionLightGreenColor() -> UIColor {
+        return UIColor(red: 98/255, green: 169/255, blue: 69/255, alpha: 1.0)
     }
     
-    class func thriveLightYellowColor() -> UIColor {
-        return UIColor(red: 255/255, green: 215/255, blue: 102/255, alpha: 1.0)
+    class func visionBlueColor() -> UIColor {
+        return UIColor(red: 22/255, green: 70/255, blue: 143/255, alpha: 1.0)
     }
+    //#16468F
     
-    class func thriveBlueColor() -> UIColor {
-        return UIColor(red: 119/255, green: 203/255, blue: 205/255, alpha: 1.0)
+    class func visionPurpleColor() -> UIColor {
+        return UIColor(red: 155/255, green: 20/255, blue: 89/255, alpha: 1.0)
     }
+    //#9B1459
 }
