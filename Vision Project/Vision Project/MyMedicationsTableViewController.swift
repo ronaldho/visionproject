@@ -13,7 +13,7 @@ protocol FilterCellDelegate {
 }
 
 protocol MyMedicationCellDelegate {
-    
+    func editMed(cell: MyMedicationTableViewCell)
 }
 
 protocol InputViewDelegate {
@@ -21,12 +21,44 @@ protocol InputViewDelegate {
 //    func autoscroll();
 }
 
-class MyMedicationsTableViewController: UITableViewController, FilterCellDelegate, MyMedicationCellDelegate {
+class MyMedicationsTableViewController: UITableViewController, FilterCellDelegate,
+    MyMedicationCellDelegate, InputViewDelegate {
 
     var myMedications: MyMedications = MyMedications();
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "NewMyMedication"){
+            let navCtrl = segue.destinationViewController as! UINavigationController;
+            let mmvc: MyMedicationViewController = navCtrl.viewControllers[0] as! MyMedicationViewController;
+            mmvc.delegate = self;
+            mmvc.newMode = true;
+            
+        } else if (segue.identifier == "EditMyMedication"){
+            let navCtrl = segue.destinationViewController as! UINavigationController;
+            let mmvc: MyMedicationViewController = navCtrl.viewControllers[0] as! MyMedicationViewController;
+            mmvc.med = (sender as! MyMedicationTableViewCell).myMedication;
+            mmvc.delegate = self;
+            mmvc.newMode = false;
+            
+        }
+    }
+    
+    @IBAction func newMyMedication(button: UIButton){
+        performSegueWithIdentifier("NewMyMedication", sender: button)
+    }
+    
+    func editMed(cell: MyMedicationTableViewCell){
+        performSegueWithIdentifier("EditMyMedication", sender: cell);
+    }
+    
     func filterMedList(time: String){
         self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None);
+    }
+    
+    override func viewWillAppear(animated: Bool){
+        myMedications.meds = Data.getAllMyMedications();
+        self.tableView.reloadData();
+
     }
     
     override func viewDidLoad() {
@@ -41,7 +73,7 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
         self.tableView.estimatedRowHeight = 44.0;
         self.tableView.backgroundColor = UIColor.visionTanColor();
         
-        myMedications.meds = Data.getAllMyMedications();
+        //myMedications.meds = Data.getAllMyMedications();
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -102,6 +134,12 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
                 cell.bedImage.image = UIImage(named: "blueCircle");
             } else {
                 cell.bedImage.image = UIImage(named: "lightGreyCircle")
+            }
+            
+            if (med.image != nil){
+                cell.medImage.image = med.image;
+            } else {
+                cell.medImage.image = UIImage(named: "tablet");
             }
             
             

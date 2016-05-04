@@ -21,6 +21,9 @@ class MyMedicationTableViewCell: UITableViewCell {
     @IBOutlet var bedImage: UIImageView!;
     @IBOutlet var medInfo: UILabel!;
     
+    @IBAction func editMed(){
+        self.delegate?.editMed(self);
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

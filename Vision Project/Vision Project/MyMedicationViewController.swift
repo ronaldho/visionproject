@@ -56,15 +56,15 @@ class MyMedicationViewController: AGInputViewController {
     }
     
     override func viewDidLoad() {
-//        if (newMode){
-//            self.title = "New MyMedication"
-//            self.deleteButton!.hidden = true;
-//        } else {
-//            self.title = "Edit MyMedication"
-//        }
-//        
-//        loadFields();
-//        
+        if (newMode){
+            self.title = "New My Medication"
+            self.deleteButton!.hidden = true;
+        } else {
+            self.title = "Edit My Medication"
+        }
+        
+        loadFields();
+        
         super.viewDidLoad()
     }
     
@@ -111,20 +111,35 @@ class MyMedicationViewController: AGInputViewController {
     override func loadFields(){
         if (med.id != "0"){
             medName.text = med.name;
-            medInfo.text = med.info;
-            medNotes.text = med.notes;
+            //medInfo.text = med.info;
+            //medNotes.text = med.notes;
             
             if (med.breakfast){
-                //breakfastButton.image =
+                breakfastButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
+            } else {
+                breakfastButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
             }
             if (med.lunch){
-                //lunchButton.image =
+                lunchButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
+            } else {
+                lunchButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
             }
             if (med.dinner){
-                //dinnerButton.image =
+                dinnerButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
+            } else {
+                dinnerButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
             }
             if (med.bed){
-                //bedButton.image =
+                bedButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
+            } else {
+                bedButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
+            }
+            
+            if (notesField!.text == ""){
+                notesField!.text = "Notes"
+                notesField!.textColor = UIColor.greyPlaceholderColor()
+            } else {
+                notesField!.textColor = UIColor.blackColor()
             }
             
             if (med.image != nil){
@@ -143,8 +158,9 @@ class MyMedicationViewController: AGInputViewController {
     
     @IBAction func save(sender: UIButton){
         
-        Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: nil, andCroppedImage: nil, andInfo: "", andNotes: "", andId: "0", andBreakfast: med.breakfast, andLunch: med.lunch, andDinner: med.dinner, andBed: med.bed));
+        Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: nil, andCroppedImage: nil, andInfo: "", andNotes: "", andId: med.id, andBreakfast: med.breakfast, andLunch: med.lunch, andDinner: med.dinner, andBed: med.bed, andDate: med.date));
         self.dismissViewControllerAnimated(true, completion: nil)
+
         
 //        if (date != StaticDates.sharedInstance.defaultDate){
 ////            let notes: String = (notesField!.textColor == UIColor.greyPlaceholderColor()) ? "" : notesField!.text;

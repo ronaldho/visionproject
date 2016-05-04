@@ -29,6 +29,10 @@
 		49DA89E51CC9C4E00027CF21 /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89E41CC9C4E00027CF21 /* Medication.swift */; };
 		49DA89E81CC9C5950027CF21 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89E61CC9C5950027CF21 /* Model.xcdatamodeld */; };
 		49DA89EB1CC9C8080027CF21 /* MyMedication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89EA1CC9C8080027CF21 /* MyMedication.swift */; };
+		49E4244F1CD9C68B00CFCA22 /* Tablet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49E4244E1CD9C68B00CFCA22 /* Tablet.jpg */; };
+		49E424511CD9D16500CFCA22 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424501CD9D16500CFCA22 /* HistoryTableViewController.swift */; };
+		49E424531CD9D23200CFCA22 /* MyMedicationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424521CD9D23200CFCA22 /* MyMedicationHistory.swift */; };
+		49E424551CD9D6B300CFCA22 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424541CD9D6B300CFCA22 /* HistoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +60,10 @@
 		49DA89E41CC9C4E00027CF21 /* Medication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medication.swift; sourceTree = "<group>"; };
 		49DA89E71CC9C5950027CF21 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		49DA89EA1CC9C8080027CF21 /* MyMedication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedication.swift; sourceTree = "<group>"; };
+		49E4244E1CD9C68B00CFCA22 /* Tablet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Tablet.jpg; sourceTree = "<group>"; };
+		49E424501CD9D16500CFCA22 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		49E424521CD9D23200CFCA22 /* MyMedicationHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationHistory.swift; sourceTree = "<group>"; };
+		49E424541CD9D6B300CFCA22 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +81,10 @@
 			isa = PBXGroup;
 			children = (
 				49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */,
+				49E424501CD9D16500CFCA22 /* HistoryTableViewController.swift */,
 				49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */,
 				49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */,
+				49E424541CD9D6B300CFCA22 /* HistoryTableViewCell.swift */,
 				49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */,
 				49D6D6061CD5330C00EBDA7B /* AGViewController.swift */,
 				49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */,
@@ -128,6 +138,7 @@
 				49DA89E61CC9C5950027CF21 /* Model.xcdatamodeld */,
 				49DA89D41CC9C49A0027CF21 /* Main.storyboard */,
 				49DA89D71CC9C49A0027CF21 /* Assets.xcassets */,
+				49E4244E1CD9C68B00CFCA22 /* Tablet.jpg */,
 				49DA89D91CC9C49A0027CF21 /* LaunchScreen.storyboard */,
 				49DA89DC1CC9C49A0027CF21 /* Info.plist */,
 				49B8434D1CCF4D7B00F7D81E /* Views */,
@@ -143,6 +154,7 @@
 			children = (
 				49DA89E41CC9C4E00027CF21 /* Medication.swift */,
 				49DA89EA1CC9C8080027CF21 /* MyMedication.swift */,
+				49E424521CD9D23200CFCA22 /* MyMedicationHistory.swift */,
 				49D6D6001CD4819700EBDA7B /* MyMedications.swift */,
 			);
 			name = Models;
@@ -207,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49DA89DB1CC9C49A0027CF21 /* LaunchScreen.storyboard in Resources */,
+				49E4244F1CD9C68B00CFCA22 /* Tablet.jpg in Resources */,
 				49DA89D81CC9C49A0027CF21 /* Assets.xcassets in Resources */,
 				49DA89D61CC9C49A0027CF21 /* Main.storyboard in Resources */,
 			);
@@ -223,10 +236,13 @@
 				49D6D6171CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift in Sources */,
 				49D6D6121CD5343500EBDA7B /* FullImageViewController.swift in Sources */,
 				49D6D6011CD4819700EBDA7B /* MyMedications.swift in Sources */,
+				49E424511CD9D16500CFCA22 /* HistoryTableViewController.swift in Sources */,
 				49D6D6101CD5341300EBDA7B /* AGImageView.swift in Sources */,
 				49DA89E51CC9C4E00027CF21 /* Medication.swift in Sources */,
 				49DA89EB1CC9C8080027CF21 /* MyMedication.swift in Sources */,
+				49E424551CD9D6B300CFCA22 /* HistoryTableViewCell.swift in Sources */,
 				49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */,
+				49E424531CD9D23200CFCA22 /* MyMedicationHistory.swift in Sources */,
 				49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */,
 				49D6D6091CD5337800EBDA7B /* UIColorExtension.swift in Sources */,
 				49DA89E31CC9C4CB0027CF21 /* Data.swift in Sources */,
