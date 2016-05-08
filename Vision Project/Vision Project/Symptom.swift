@@ -58,10 +58,10 @@ class Symptom: NSObject {
         var stringOutput: String = "";
         var count = 0;
         for tagID in tagIDs {
-            stringOutput = stringOutput + tagID
             if (count != 0){
                 stringOutput = stringOutput + "|"
             }
+            stringOutput = stringOutput + tagID
             count++;
         }
         return stringOutput;

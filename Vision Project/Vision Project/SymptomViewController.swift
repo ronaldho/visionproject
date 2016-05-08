@@ -39,7 +39,6 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         if (!found){
             symptom.tagIDs.append(sender.symptomTag!.id);
         }
-        print(symptom.tagIDs);
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
