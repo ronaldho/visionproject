@@ -70,10 +70,8 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
         self.tableView.allowsSelection = false;
         
         self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 44.0;
+        self.tableView.estimatedRowHeight = 130;
         self.tableView.backgroundColor = UIColor.visionTanColor();
-        
-        //myMedications.meds = Data.getAllMyMedications();
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -95,25 +93,24 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + myMedications.meds.count;
-        //Add 1 for filter header
+        return myMedications.getCurrentMeds().count;
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if (indexPath.row == 0){
-            let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as! FilterTableViewCell;
-            cell.delegate = self;
-            
-            return cell
-
-        } else {
+//        if (indexPath.row == 0){
+//            let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as! FilterTableViewCell;
+//            cell.delegate = self;
+//            
+//            return cell
+//
+//        } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("MyMedicationCell", forIndexPath: indexPath) as! MyMedicationTableViewCell;
             cell.delegate = self;
-            let med = myMedications.meds[indexPath.row - 1];
+            let med = myMedications.getCurrentMeds()[indexPath.row];
             cell.myMedication = med;
             cell.medName.text = med.name;
-            cell.medInfo.text = med.info;
+            cell.medInstructions.text = med.instructions;
             
             if (med.breakfast){
                 cell.breakfastImage.image = UIImage(named: "blueCircle");
@@ -144,7 +141,7 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
             
             
             return cell
-        }
+//        }
 
        
     }

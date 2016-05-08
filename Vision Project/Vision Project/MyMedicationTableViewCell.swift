@@ -19,10 +19,10 @@ class MyMedicationTableViewCell: UITableViewCell {
     @IBOutlet var lunchImage: UIImageView!;
     @IBOutlet var dinnerImage: UIImageView!;
     @IBOutlet var bedImage: UIImageView!;
-    @IBOutlet var medInfo: UILabel!;
+    @IBOutlet var medInstructions: UILabel!;
     
     @IBAction func editMed(){
-        self.delegate?.editMed(self);
+        self.delegate.editMed(self);
     }
     
     override func awakeFromNib() {

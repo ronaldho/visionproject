@@ -36,37 +36,11 @@ class AGInputViewController: AGViewController, UIImagePickerControllerDelegate,
             
             loadFields();
             
-            if (notesField != nil){
-                notesField!.delegate = self
-                notesField!.layer.cornerRadius = 5;
-                notesField!.layer.borderColor = UIColor.greyTextFieldBorderColor().CGColor;
-                notesField!.layer.borderWidth = 0.5;
-                if (notesField!.text == ""){
-                    notesField!.text = "Notes"
-                    notesField!.textColor = UIColor.greyPlaceholderColor()
-                } else {
-                    notesField!.textColor = UIColor.blackColor()
-                }
-            }
+
         }
         
         func loadFields(){
             // Override in subclasses
-        }
-        
-        func textViewDidBeginEditing(textView: UITextView) {
-            if textView.textColor == UIColor.greyPlaceholderColor(){
-                textView.text = ""
-                textView.textColor = UIColor.blackColor()
-            }
-        }
-        
-        func textViewDidEndEditing(textView: UITextView) {
-            let trimmedString = textView.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            if (trimmedString == ""){
-                textView.text = "Notes"
-                textView.textColor = UIColor.greyPlaceholderColor()
-            }
         }
         
         func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {

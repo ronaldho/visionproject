@@ -21,4 +21,24 @@ class MyMedications: NSObject {
         self.meds = meds;
         super.init()
     }
+    
+    func getCurrentMeds() -> [MyMedication]{
+        var currentMeds: [MyMedication] = [];
+        for med in meds{
+            if (!med.discontinued){
+                currentMeds.append(med);
+            }
+        }
+        return currentMeds;
+    }
+    
+    func getDiscontinuedMeds() -> [MyMedication]{
+        var discontinuedMeds: [MyMedication] = [];
+        for med in meds{
+            if (med.discontinued){
+                discontinuedMeds.append(med);
+            }
+        }
+        return discontinuedMeds;
+    }
 }

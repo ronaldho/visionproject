@@ -17,13 +17,45 @@ class MyMedicationViewController: AGInputViewController {
     @IBOutlet var dinnerButton: UIButton!;
     @IBOutlet var bedButton: UIButton!;
     @IBOutlet var medInfo: UITextField!;
-    @IBOutlet var medNotes: UITextField!;
+    @IBOutlet var medInstructions: UITextView!;
+    @IBOutlet var discontinueButton: UIButton!;
     
     var delegate: InputViewDelegate?;
     var savedApptId: String = "";
     var med: MyMedication = MyMedication();
     
+    func textViewDidBeginEditing(textView: UITextView) {
+        if textView.textColor == UIColor.greyPlaceholderColor(){
+            textView.text = ""
+            textView.textColor = UIColor.blackColor()
+        }
+    }
     
+    func textViewDidEndEditing(textView: UITextView) {
+        let trimmedString = textView.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        if (trimmedString == ""){
+            textView.text = "Instructions"
+            textView.textColor = UIColor.greyPlaceholderColor()
+        }
+    }
+    
+    @IBAction func toggleDiscontinue(){
+        if med.discontinued == false {
+            med.discontinued = true
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.discontinueButton.backgroundColor = UIColor.visionBlueColor();
+                self.discontinueButton.setTitle("Restart", forState: UIControlState.Normal)
+            })
+            
+        } else {
+            med.discontinued = false
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.discontinueButton.backgroundColor = UIColor.visionPurpleColor();
+                self.discontinueButton.setTitle("Discontinue", forState: UIControlState.Normal)
+            })
+            
+        }
+    }
     @IBAction func deleteMyMedication(){
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
@@ -56,14 +88,35 @@ class MyMedicationViewController: AGInputViewController {
     }
     
     override func viewDidLoad() {
+        addPhotoButton!.hidden = true;
+        photoContainer!.hidden = true;
+        
         if (newMode){
             self.title = "New My Medication"
+            self.discontinueButton!.hidden = true;
             self.deleteButton!.hidden = true;
         } else {
             self.title = "Edit My Medication"
+            if (med.discontinued){
+                self.discontinueButton.backgroundColor = UIColor.visionBlueColor();
+                self.discontinueButton.setTitle("Restart", forState: UIControlState.Normal);
+            }
         }
         
         loadFields();
+        
+        if (medInstructions != nil){
+            medInstructions!.delegate = self
+            medInstructions!.layer.cornerRadius = 5;
+            medInstructions!.layer.borderColor = UIColor.greyTextFieldBorderColor().CGColor;
+            medInstructions!.layer.borderWidth = 0.5;
+            if (medInstructions!.text == ""){
+                medInstructions!.text = "Instructions"
+                medInstructions!.textColor = UIColor.greyPlaceholderColor()
+            } else {
+                medInstructions!.textColor = UIColor.blackColor()
+            }
+        }
         
         super.viewDidLoad()
     }
@@ -111,8 +164,7 @@ class MyMedicationViewController: AGInputViewController {
     override func loadFields(){
         if (med.id != "0"){
             medName.text = med.name;
-            //medInfo.text = med.info;
-            //medNotes.text = med.notes;
+            medInstructions.text = med.instructions;
             
             if (med.breakfast){
                 breakfastButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
@@ -135,11 +187,11 @@ class MyMedicationViewController: AGInputViewController {
                 bedButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
             }
             
-            if (notesField!.text == ""){
-                notesField!.text = "Notes"
-                notesField!.textColor = UIColor.greyPlaceholderColor()
+            if (medInstructions!.text == ""){
+                medInstructions!.text = "Instructions"
+                medInstructions!.textColor = UIColor.greyPlaceholderColor()
             } else {
-                notesField!.textColor = UIColor.blackColor()
+                medInstructions!.textColor = UIColor.blackColor()
             }
             
             if (med.image != nil){
@@ -158,7 +210,7 @@ class MyMedicationViewController: AGInputViewController {
     
     @IBAction func save(sender: UIButton){
         
-        Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: nil, andCroppedImage: nil, andInfo: "", andNotes: "", andId: med.id, andBreakfast: med.breakfast, andLunch: med.lunch, andDinner: med.dinner, andBed: med.bed, andDate: med.date));
+        Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: nil, andCroppedImage: nil, andInfo: "", andInstructions: medInstructions.text!, andId: med.id, andBreakfast: med.breakfast, andLunch: med.lunch, andDinner: med.dinner, andBed: med.bed, andDate: med.date, andDiscontinued: med.discontinued));
         self.dismissViewControllerAnimated(true, completion: nil)
 
         
