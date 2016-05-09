@@ -19,15 +19,40 @@ class MyMedicationViewController: AGInputViewController {
     @IBOutlet var medInfo: UITextField!;
     @IBOutlet var medInstructions: UITextView!;
     @IBOutlet var discontinueButton: UIButton!;
+    @IBOutlet var addFromGlossaryButton: UIButton!;
+    @IBOutlet var medInfoButton: UIButton!;
+    
     
     var delegate: InputViewDelegate?;
     var savedApptId: String = "";
     var med: MyMedication = MyMedication();
+    var medList: Medications = Medications();
+
+    
+    @IBAction func medNameChanged(textField: UITextField){
+        var found: Bool = false;
+        if textField.text!.characters.count > 2 {
+            for med in medList.medications {
+                print(med.name.lowercaseString);
+                print(textField.text!.lowercaseString);
+                if med.name.lowercaseString.hasPrefix(textField.text!.lowercaseString){
+                    found = true;
+                    addFromGlossaryButton.hidden = false;
+                    addFromGlossaryButton.setTitle(String(format: "Add %@ from Glossary", arguments: [med.name]), forState: UIControlState.Normal)
+                }
+            }
+        }
+        if !found {
+            addFromGlossaryButton.hidden = true;
+        }
+    }
     
     func textViewDidBeginEditing(textView: UITextView) {
-        if textView.textColor == UIColor.greyPlaceholderColor(){
-            textView.text = ""
-            textView.textColor = UIColor.blackColor()
+        if textView == medInstructions {
+            if textView.textColor == UIColor.greyPlaceholderColor(){
+                textView.text = ""
+                textView.textColor = UIColor.blackColor()
+            }
         }
     }
     
@@ -90,6 +115,8 @@ class MyMedicationViewController: AGInputViewController {
     override func viewDidLoad() {
         addPhotoButton!.hidden = true;
         photoContainer!.hidden = true;
+        addFromGlossaryButton.hidden = true;
+        medInfoButton.hidden = true;
         
         if (newMode){
             self.title = "New My Medication"

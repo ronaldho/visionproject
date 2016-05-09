@@ -393,6 +393,9 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <action selector="medNameChanged:" destination="HsG-9c-Nwc" eventType="editingChanged" id="81a-O6-EZl"/>
+                                                                </connections>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3L-Hp-efZ">
                                                                 <rect key="frame" x="504" y="0.0" width="40" height="40"/>
@@ -637,7 +640,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="My Medication" id="EyG-uL-VPr">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ERU-TH-Vhe">
-                            <color key="tintColor" red="0.60784313729999995" green="0.078431372550000003" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="cancel:" destination="HsG-9c-Nwc" id="FhD-BP-F5N"/>
                             </connections>
@@ -652,6 +655,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1100"/>
                     <connections>
+                        <outlet property="addFromGlossaryButton" destination="RRP-Xn-S3c" id="Z9x-oz-Buy"/>
                         <outlet property="addPhotoButton" destination="mz0-Wd-vTc" id="d7e-EJ-27b"/>
                         <outlet property="bedButton" destination="nvt-EN-ne2" id="03C-2q-DES"/>
                         <outlet property="breakfastButton" destination="xHD-B6-qch" id="fnB-Jp-slr"/>
@@ -660,6 +664,7 @@
                         <outlet property="discontinueButton" destination="caV-pb-EGP" id="NBC-dY-gqx"/>
                         <outlet property="lunchButton" destination="YGK-xO-5Ws" id="KjY-yJ-5Rv"/>
                         <outlet property="medImage" destination="lHS-mJ-4tD" id="yJX-A6-LpN"/>
+                        <outlet property="medInfoButton" destination="L3L-Hp-efZ" id="gnr-Y5-WXC"/>
                         <outlet property="medInstructions" destination="axh-Io-Y4P" id="GWH-uL-cnM"/>
                         <outlet property="medName" destination="Vwv-Ip-DTE" id="Uk0-0e-IvX"/>
                         <outlet property="photoContainer" destination="37T-uP-pqt" id="C5j-A2-mfq"/>
@@ -902,7 +907,7 @@
         <scene sceneID="7kJ-jJ-uMd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OAW-Y2-Rlp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Symptoms" image="bacteria" id="gEN-LD-R4V"/>
+                    <tabBarItem key="tabBarItem" title="Symptoms" image="stethoscope" id="gEN-LD-R4V"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fCU-eN-7X0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1172,7 +1177,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Symptom" id="lpz-F1-J4Q">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hr7-b0-RbK">
-                            <color key="tintColor" red="0.60784313729999995" green="0.078431372550000003" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="cancel:" destination="XIe-84-IEe" id="gC5-cj-SOE"/>
                             </connections>
@@ -1239,7 +1244,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bacteria" width="30" height="30"/>
         <image name="blueCircle" width="100" height="100"/>
         <image name="edit_pencil" width="20" height="20"/>
         <image name="glossary" width="30" height="30"/>
@@ -1247,10 +1251,11 @@
         <image name="ic_delete" width="20" height="20"/>
         <image name="lightGreyCircle" width="100" height="100"/>
         <image name="pill" width="30" height="30"/>
+        <image name="stethoscope" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="VlI-bn-K0L"/>
-        <segue reference="YYj-ep-A0P"/>
+        <segue reference="BvG-4b-oQq"/>
         <segue reference="qK1-BF-HjE"/>
     </inferredMetricsTieBreakers>
 </document>

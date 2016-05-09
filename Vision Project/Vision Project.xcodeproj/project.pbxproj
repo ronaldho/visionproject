@@ -43,6 +43,7 @@
 		49E424651CDDD1F000CFCA22 /* SymptomTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424641CDDD1F000CFCA22 /* SymptomTagCollectionViewCell.swift */; };
 		49E424671CDDD65400CFCA22 /* SymptomTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424661CDDD65400CFCA22 /* SymptomTags.swift */; };
 		49E424691CDFDC2900CFCA22 /* MailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424681CDFDC2900CFCA22 /* MailSender.swift */; };
+		49E4246B1CE04DEA00CFCA22 /* Medications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4246A1CE04DEA00CFCA22 /* Medications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		49E424641CDDD1F000CFCA22 /* SymptomTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymptomTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		49E424661CDDD65400CFCA22 /* SymptomTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymptomTags.swift; sourceTree = "<group>"; };
 		49E424681CDFDC2900CFCA22 /* MailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailSender.swift; sourceTree = "<group>"; };
+		49E4246A1CE04DEA00CFCA22 /* Medications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				49DA89E41CC9C4E00027CF21 /* Medication.swift */,
+				49E4246A1CE04DEA00CFCA22 /* Medications.swift */,
 				49DA89EA1CC9C8080027CF21 /* MyMedication.swift */,
 				49E424521CD9D23200CFCA22 /* MyMedicationHistory.swift */,
 				49D6D6001CD4819700EBDA7B /* MyMedications.swift */,
@@ -274,6 +277,7 @@
 				49E424571CDB1DE500CFCA22 /* Symptom.swift in Sources */,
 				49E4245B1CDD9D0700CFCA22 /* SymptomTableViewController.swift in Sources */,
 				49DA89EB1CC9C8080027CF21 /* MyMedication.swift in Sources */,
+				49E4246B1CE04DEA00CFCA22 /* Medications.swift in Sources */,
 				49E424551CD9D6B300CFCA22 /* HistoryTableViewCell.swift in Sources */,
 				49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */,
 				49E424531CD9D23200CFCA22 /* MyMedicationHistory.swift in Sources */,
