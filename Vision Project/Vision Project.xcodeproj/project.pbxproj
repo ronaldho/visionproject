@@ -44,6 +44,8 @@
 		49E424671CDDD65400CFCA22 /* SymptomTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424661CDDD65400CFCA22 /* SymptomTags.swift */; };
 		49E424691CDFDC2900CFCA22 /* MailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424681CDFDC2900CFCA22 /* MailSender.swift */; };
 		49E4246B1CE04DEA00CFCA22 /* Medications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4246A1CE04DEA00CFCA22 /* Medications.swift */; };
+		49E4246D1CE07A2200CFCA22 /* GlossaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */; };
+		49E4246F1CE07A3B00CFCA22 /* AGTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +88,8 @@
 		49E424661CDDD65400CFCA22 /* SymptomTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymptomTags.swift; sourceTree = "<group>"; };
 		49E424681CDFDC2900CFCA22 /* MailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailSender.swift; sourceTree = "<group>"; };
 		49E4246A1CE04DEA00CFCA22 /* Medications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medications.swift; sourceTree = "<group>"; };
+		49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryTableViewController.swift; sourceTree = "<group>"; };
+		49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,8 @@
 				49E424601CDDA6AA00CFCA22 /* SymptomTagViewController.swift */,
 				49D6D6061CD5330C00EBDA7B /* AGViewController.swift */,
 				49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */,
+				49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */,
+				49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */,
 				49D6D60F1CD5341300EBDA7B /* AGImageView.swift */,
 				49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */,
 				49D6D6161CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift */,
@@ -280,6 +286,7 @@
 				49E4246B1CE04DEA00CFCA22 /* Medications.swift in Sources */,
 				49E424551CD9D6B300CFCA22 /* HistoryTableViewCell.swift in Sources */,
 				49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */,
+				49E4246F1CE07A3B00CFCA22 /* AGTableViewController.swift in Sources */,
 				49E424531CD9D23200CFCA22 /* MyMedicationHistory.swift in Sources */,
 				49E424691CDFDC2900CFCA22 /* MailSender.swift in Sources */,
 				49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */,
@@ -290,6 +297,7 @@
 				49D6D60E1CD5340000EBDA7B /* ImageUtils.swift in Sources */,
 				49E4245D1CDD9D2100CFCA22 /* SymptomTableViewCell.swift in Sources */,
 				49E424591CDB1E2800CFCA22 /* SymptomTag.swift in Sources */,
+				49E4246D1CE07A2200CFCA22 /* GlossaryTableViewController.swift in Sources */,
 				49D6D5FF1CD4809F00EBDA7B /* FilterTableViewCell.swift in Sources */,
 				49B8434A1CCF4A1500F7D81E /* MyMedicationsTableViewController.swift in Sources */,
 				49D6D6031CD519C600EBDA7B /* MyMedicationViewController.swift in Sources */,

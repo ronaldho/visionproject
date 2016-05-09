@@ -33,8 +33,6 @@ class MyMedicationViewController: AGInputViewController {
         var found: Bool = false;
         if textField.text!.characters.count > 2 {
             for med in medList.medications {
-                print(med.name.lowercaseString);
-                print(textField.text!.lowercaseString);
                 if med.name.lowercaseString.hasPrefix(textField.text!.lowercaseString){
                     found = true;
                     addFromGlossaryButton.hidden = false;

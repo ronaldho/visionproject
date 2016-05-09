@@ -125,6 +125,8 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         addPhotoButton!.hidden = true;
         photoContainer!.hidden = true;
         
+        
+        
         if (newMode){
             self.title = "New Symptom"
             self.deleteButton!.hidden = true;
@@ -153,6 +155,8 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     override func loadFields(){
         if (symptom.id != "0"){
             detailsText.text = symptom.text;
+            date = symptom.date;
+            dateField!.text = symptom.getDateString();
             
             if (detailsText!.text == ""){
                 detailsText!.text = "Instructions"
@@ -177,7 +181,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     
     @IBAction func save(sender: UIButton){
         
-        Data.saveSymptom(Symptom(withId: symptom.id, andDate: symptom.date, andText: detailsText.text, andTagIDs: symptom.tagIDs, andImage: symptom.image, andCroppedImage: symptom.croppedImage));
+        Data.saveSymptom(Symptom(withId: symptom.id, andDate: date, andText: detailsText.text, andTagIDs: symptom.tagIDs, andImage: symptom.image, andCroppedImage: symptom.croppedImage));
         self.dismissViewControllerAnimated(true, completion: nil)
         
         
@@ -194,19 +198,15 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     }
     
     override func configureDatePicker(inout picker: UIDatePicker){
-        picker.datePickerMode = UIDatePickerMode.DateAndTime
-        picker.minuteInterval = 5;
+        picker.datePickerMode = UIDatePickerMode.Date
+        //picker.minuteInterval = 5;
         
         let calendar = NSCalendar.currentCalendar();
         let components = calendar.components([.Year,.Month,.Day], fromDate: NSDate());
-        components.hour = 12;
+        //components.hour = 12;
         let newDate: NSDate = calendar.dateFromComponents(components)!;
         
         picker.setDate((date == StaticDates.sharedInstance.defaultDate) ? newDate : date, animated: true)
-    }
-    
-    override func getDateFormat() -> String{
-        return "MMMM d, h:mm a"
     }
 
 
