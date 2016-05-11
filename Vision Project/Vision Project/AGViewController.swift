@@ -22,8 +22,8 @@ class AGViewController: UIViewController {
         self.view.backgroundColor = UIColor.visionTanColor();
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: "adjustForKeyboard:", name: UIKeyboardWillHideNotification, object: nil)
-        notificationCenter.addObserver(self, selector: "adjustForKeyboard:", name: UIKeyboardWillChangeFrameNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(AGViewController.adjustForKeyboard(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(AGViewController.adjustForKeyboard(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,17 +31,17 @@ class AGViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-//    func textFieldShouldReturn(field: UITextField) -> Bool{
-//        let nextField = (field as! AGText).nextField
-//        
-//        if ((nextField) != nil) {
-//            nextField.becomeFirstResponder()
-//        } else {
-//            field.resignFirstResponder()
-//        }
-//        
-//        return true
-//    }
+    //    func textFieldShouldReturn(field: UITextField) -> Bool{
+    //        let nextField = (field as! AGText).nextField
+    //
+    //        if ((nextField) != nil) {
+    //            nextField.becomeFirstResponder()
+    //        } else {
+    //            field.resignFirstResponder()
+    //        }
+    //
+    //        return true
+    //    }
     
     func adjustForKeyboard(notification: NSNotification) {
         let userInfo = notification.userInfo!

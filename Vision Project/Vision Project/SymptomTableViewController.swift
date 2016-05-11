@@ -31,6 +31,27 @@ SymptomCellDelegate, InputViewDelegate {
             svc.symptom = (sender as! SymptomTableViewCell).symptom!;
             svc.delegate = self;
             svc.newMode = false;
+        } else if (segue.identifier == "SendSymptomPopover"){
+            let navCtrl = segue.destinationViewController as! UINavigationController;
+            let sendvc: SendViewController = navCtrl.viewControllers[0] as! SendViewController;
+            sendvc.allSymptoms = self.symptoms;
+        }
+    }
+    
+    @IBAction func sendButtonPressed(){
+        let ms: MailSender? = MailSender(parentVC: self);
+        if ((ms?.anyMailAvailable()) != nil){
+            performSegueWithIdentifier("SendSymptomPopover", sender: self);
+        } else {
+            let alertController = UIAlertController(title: nil, message: "No mail account found, please set up an account in iOS Mail app or Gmail", preferredStyle: .Alert)
+            
+            let actionOk = UIAlertAction(title: "OK",
+                                         style: .Default,
+                                         handler: nil)
+            
+            alertController.addAction(actionOk)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     

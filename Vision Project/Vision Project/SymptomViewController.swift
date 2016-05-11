@@ -16,11 +16,12 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
 
     @IBOutlet weak var detailsText: UITextView!
     @IBOutlet weak var symptomTagsCollection: UICollectionView!
-
     @IBOutlet weak var collectionHeight: NSLayoutConstraint!
+    
     var delegate: InputViewDelegate?;
     var savedApptId: String = "";
     var symptom: Symptom = Symptom();
+    
     
     func toggleSymptomTag(sender: SymptomTagCollectionViewCell) {
         var indexToRemove: Int = -1;
@@ -108,7 +109,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    func imageTapped(sender: UITapGestureRecognizer){
+    override func imageTapped(sender: UITapGestureRecognizer){
         performSegueWithIdentifier("FullImageFromSymptom", sender: sender)
     }
     

@@ -40,4 +40,16 @@ extension UIColor{
         return UIColor(red: 155/255, green: 20/255, blue: 89/255, alpha: 1.0)
     }
     //#9B1459
+    
+    
+    
+    class func mailBlueColor() -> UIColor {
+        return UIColor(red: 30/255, green: 90/255, blue: 239/255, alpha: 1.0)
+    }
+    //#1E5AEF
+    
+    class func gmailRedColor() -> UIColor {
+        return UIColor(red: 234/255, green: 0/255, blue: 0/255, alpha: 1.0)
+    }
+    //#EA0000
 }

@@ -34,7 +34,7 @@ class FullImageViewController: UIViewController {
             print("image is nil in viewDidLoad of FullImageViewController")
         }
         
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: "goBack");
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(FullImageViewController.goBack));
         tapRecognizer.numberOfTapsRequired = 1
         tapRecognizer.numberOfTouchesRequired = 1
         scrollView.addGestureRecognizer(tapRecognizer);

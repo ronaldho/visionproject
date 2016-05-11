@@ -97,7 +97,7 @@ class MyMedicationViewController: AGInputViewController {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    func imageTapped(sender: UITapGestureRecognizer){
+    override func imageTapped(sender: UITapGestureRecognizer){
         performSegueWithIdentifier("FullImageFromMyMedication", sender: sender)
     }
     

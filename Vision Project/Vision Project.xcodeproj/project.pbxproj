@@ -46,6 +46,7 @@
 		49E4246B1CE04DEA00CFCA22 /* Medications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4246A1CE04DEA00CFCA22 /* Medications.swift */; };
 		49E4246D1CE07A2200CFCA22 /* GlossaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */; };
 		49E4246F1CE07A3B00CFCA22 /* AGTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */; };
+		49E424711CE0F8C100CFCA22 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424701CE0F8C100CFCA22 /* SendViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		49E4246A1CE04DEA00CFCA22 /* Medications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medications.swift; sourceTree = "<group>"; };
 		49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryTableViewController.swift; sourceTree = "<group>"; };
 		49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTableViewController.swift; sourceTree = "<group>"; };
+		49E424701CE0F8C100CFCA22 /* SendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				49E4245E1CDD9D5B00CFCA22 /* SymptomViewController.swift */,
 				49E424641CDDD1F000CFCA22 /* SymptomTagCollectionViewCell.swift */,
 				49E424601CDDA6AA00CFCA22 /* SymptomTagViewController.swift */,
+				49E424701CE0F8C100CFCA22 /* SendViewController.swift */,
 				49D6D6061CD5330C00EBDA7B /* AGViewController.swift */,
 				49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */,
 				49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */,
@@ -192,9 +195,9 @@
 				49D6D6001CD4819700EBDA7B /* MyMedications.swift */,
 				49E424621CDDC12800CFCA22 /* Symptoms.swift */,
 				49E424561CDB1DE500CFCA22 /* Symptom.swift */,
-				49E424681CDFDC2900CFCA22 /* MailSender.swift */,
 				49E424581CDB1E2800CFCA22 /* SymptomTag.swift */,
 				49E424661CDDD65400CFCA22 /* SymptomTags.swift */,
+				49E424681CDFDC2900CFCA22 /* MailSender.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				49E424691CDFDC2900CFCA22 /* MailSender.swift in Sources */,
 				49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */,
 				49D6D6091CD5337800EBDA7B /* UIColorExtension.swift in Sources */,
+				49E424711CE0F8C100CFCA22 /* SendViewController.swift in Sources */,
 				49E4245F1CDD9D5B00CFCA22 /* SymptomViewController.swift in Sources */,
 				49E424671CDDD65400CFCA22 /* SymptomTags.swift in Sources */,
 				49DA89E31CC9C4CB0027CF21 /* Data.swift in Sources */,

@@ -12,9 +12,18 @@ import MessageUI
 class MailSender: NSObject, MFMailComposeViewControllerDelegate {
     
     let parentVC: UIViewController;
+    
     init(parentVC: UIViewController) {
         self.parentVC = parentVC;
         super.init();
+    }
+    
+    func anyMailAvailable() -> Bool {
+        if (gmailInstalled() || MFMailComposeViewController.canSendMail()){
+            return true;
+        } else {
+            return false;
+        }
     }
     
     func send(title: String, messageBody: String, toRecipents: [String]) {
@@ -40,5 +49,9 @@ class MailSender: NSObject, MFMailComposeViewControllerDelegate {
             default: break
             }
             parentVC.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
+    func gmailInstalled() -> Bool {
+        return UIApplication.sharedApplication().canOpenURL(NSURL(string: "googlegmail:///")!);
     }
 }

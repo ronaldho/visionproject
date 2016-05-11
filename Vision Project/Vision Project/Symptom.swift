@@ -62,7 +62,7 @@ class Symptom: NSObject {
                 stringOutput = stringOutput + "|"
             }
             stringOutput = stringOutput + tagID
-            count++;
+            count += 1;
         }
         return stringOutput;
     }
@@ -78,6 +78,10 @@ class Symptom: NSObject {
             }
         }
         return false;
+    }
+    
+    func toEmailString() -> String {
+        return "\(self.getDateString()) - \(self.text)"
     }
     
 }

@@ -24,7 +24,7 @@ class Data: NSObject {
             try managedContext.executeFetchRequest(fetchRequest)
             let medications = results as! [NSManagedObject]
             if (medications.count > 0){
-                for (var i = 0; i < medications.count; i++){
+                for i in 0...medications.count-1 {
                     let name = medications[i].valueForKey("name") as! String;
                     let imageData = medications[i].valueForKey("image") as! NSData?;
                     let croppedImageData = medications[i].valueForKey("croppedImage") as! NSData?;
@@ -200,7 +200,7 @@ class Data: NSObject {
             try managedContext.executeFetchRequest(fetchRequest)
             let medicationHistories = results as! [NSManagedObject]
             if (medicationHistories.count > 0){
-                for (var i = 0; i < medicationHistories.count; i++){
+                for i in 0...medicationHistories.count-1 {
                     let name = medicationHistories[i].valueForKey("name") as! String;
                     let imageData = medicationHistories[i].valueForKey("image") as! NSData?;
                     let croppedImageData = medicationHistories[i].valueForKey("croppedImage") as! NSData?;
@@ -370,7 +370,7 @@ class Data: NSObject {
             try managedContext.executeFetchRequest(fetchRequest)
             let symptoms = results as! [NSManagedObject]
             if (symptoms.count > 0){
-                for (var i = 0; i < symptoms.count; i++){
+                for i in 0 ... symptoms.count-1 {
                     let id = symptoms[i].valueForKey("id") as! String;
                     let date = symptoms[i].valueForKey("date") as! NSDate;
                     let text = symptoms[i].valueForKey("text") as! String;
