@@ -40,7 +40,6 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
                                     if !filteredSymptoms.symptoms.contains(symptom){
                                         filteredSymptoms.symptoms.append(symptom);
                                     }
-                                    
                                 }
                             }
                         } else {
@@ -50,7 +49,6 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
                         }
                         
                     }
-                    
                 }
             }
             
@@ -61,6 +59,69 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
         }
         
         return Symptoms();
+    }
+    
+    @IBAction override func dateTextInputPressed(sender: UITextField) {
+        
+        //Create the view
+        let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
+        
+        var datePickerView  : UIDatePicker = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
+        configureDatePicker(&datePickerView)
+        
+        datePickerView.center = CGPointMake(inputView.frame.size.width  / 2,
+                                            inputView.frame.size.height - datePickerView.frame.size.height / 2);
+        inputView.addSubview(datePickerView) // add date picker to UIView
+        
+        let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
+        doneButton.setTitle("Done", forState: UIControlState.Normal)
+        doneButton.setTitle("Done", forState: UIControlState.Highlighted)
+        doneButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        doneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        
+        inputView.addSubview(doneButton) // add Button to UIView
+        
+        
+        
+        sender.inputView = inputView
+        if (sender == startDateField){
+            doneButton.addTarget(self, action: #selector(SendViewController.doneButtonStart(_:)), forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+            
+            datePickerView.addTarget(self, action: #selector(SendViewController.handleStartDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            handleStartDatePicker(datePickerView) // Set the date
+        } else if (sender == endDateField){
+            doneButton.addTarget(self, action: #selector(SendViewController.doneButtonEnd(_:)), forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+            
+            datePickerView.addTarget(self, action: #selector(SendViewController.handleEndDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            handleEndDatePicker(datePickerView) // Set the date
+        }
+
+        
+        
+    }
+    
+    func handleStartDatePicker(sender: UIDatePicker) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = getDateFormat()
+        startDateField!.text = dateFormatter.stringFromDate(sender.date)
+        startDate = sender.date;
+    }
+    
+    func handleEndDatePicker(sender: UIDatePicker) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = getDateFormat()
+        endDateField!.text = dateFormatter.stringFromDate(sender.date)
+        endDate = sender.date;
+    }
+    
+    func doneButtonStart(sender:UIButton)
+    {
+        startDateField!.resignFirstResponder() // To resign the inputView on clicking done.
+    }
+    
+    func doneButtonEnd(sender:UIButton)
+    {
+        endDateField!.resignFirstResponder() // To resign the inputView on clicking done.
     }
     
     
@@ -82,12 +143,10 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
         } else if (sender == self.sendEmailButton) {
             ms?.send(title, messageBody: messageBody, toRecipents: []);
         }
-        
     }
     
     
     func toggleSymptomTag(sender: SymptomTagCollectionViewCell) {
-        
         var indexToRemove: Int = -1;
         var found: Bool = false;
         if (tagIDs.count > 0){
@@ -139,13 +198,7 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tagIDs = [];
-        
-        if MFMailComposeViewController.canSendMail() {
-            print("Can send mail")
-        } else {
-            print("Can't send mail")
-        }
+        tagIDs = ["0","1","2","3","4","5"];
         
         sendEmailButton.backgroundColor = UIColor.mailBlueColor();
         

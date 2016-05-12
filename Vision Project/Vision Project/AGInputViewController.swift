@@ -105,7 +105,6 @@ UINavigationControllerDelegate, UITextViewDelegate  {
         //Create the view
         let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
         
-        
         var datePickerView  : UIDatePicker = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
         configureDatePicker(&datePickerView)
         

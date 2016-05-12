@@ -69,6 +69,7 @@ SymptomCellDelegate, InputViewDelegate {
     
     override func viewWillAppear(animated: Bool){
         symptoms.symptoms = Data.getAllSymptoms();
+        symptoms.sort();
         self.tableView.reloadData();
         
     }
