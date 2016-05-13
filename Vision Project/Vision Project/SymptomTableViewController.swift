@@ -38,6 +38,10 @@ SymptomCellDelegate, InputViewDelegate {
         }
     }
     
+    @IBAction func flip(){
+        performSegueWithIdentifier("SymptomSplitView", sender: self)
+    }
+    
     @IBAction func sendButtonPressed(){
         let ms: MailSender? = MailSender(parentVC: self);
         if ((ms?.anyMailAvailable()) != nil){
@@ -77,9 +81,12 @@ SymptomCellDelegate, InputViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.barTintColor = UIColor.visionDarkGreenColor();
+        if (!self.isKindOfClass(SymptomSplitTableViewController)){
+            self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
+            self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+            self.navigationController!.navigationBar.barTintColor = UIColor.visionDarkGreenColor();
+        }
+        
         self.tableView.allowsSelection = false;
         
         self.tableView.rowHeight = UITableViewAutomaticDimension;
