@@ -31,11 +31,16 @@ SymptomCellDelegate, InputViewDelegate {
             svc.symptom = (sender as! SymptomTableViewCell).symptom!;
             svc.delegate = self;
             svc.newMode = false;
+            print("EditSymptom segue in SymptomTableViewController.prepareForSeque()");
         } else if (segue.identifier == "SendSymptomPopover"){
             let navCtrl = segue.destinationViewController as! UINavigationController;
             let sendvc: SendViewController = navCtrl.viewControllers[0] as! SendViewController;
             sendvc.allSymptoms = self.symptoms;
         }
+    }
+    
+    @IBAction func flip(){
+        performSegueWithIdentifier("SymptomSplitView", sender: self)
     }
     
     @IBAction func sendButtonPressed(){
@@ -68,18 +73,21 @@ SymptomCellDelegate, InputViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool){
-        symptoms.symptoms = Data.getAllSymptoms();
-        symptoms.sort();
-        self.tableView.reloadData();
+//        symptoms.symptoms = Data.getAllSymptoms();
+//        symptoms.sort();
+//        self.tableView.reloadData();
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.barTintColor = UIColor.visionDarkGreenColor();
+        if (!self.isKindOfClass(SymptomSplitTableViewController)){
+            self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
+            self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+            self.navigationController!.navigationBar.barTintColor = UIColor.visionDarkGreenColor();
+        }
+        
         self.tableView.allowsSelection = false;
         
         self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -107,6 +115,8 @@ SymptomCellDelegate, InputViewDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("SymptomCell", forIndexPath: indexPath) as! SymptomTableViewCell;
         cell.delegate = self;
         let symptom = symptoms.symptoms[indexPath.row];
+        
+        cell.backgroundColor = UIColor.visionTanColor();
         cell.symptom = symptom;
         cell.dateLabel.text = symptom.getDateString();
         cell.symptomTextLabel.text = symptom.text;

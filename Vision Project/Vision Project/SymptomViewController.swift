@@ -126,8 +126,6 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         addPhotoButton!.hidden = true;
         photoContainer!.hidden = true;
         
-        
-        
         if (newMode){
             self.title = "New Symptom"
             self.deleteButton!.hidden = true;

@@ -14,6 +14,6 @@ class Medications: NSObject {
     
     override init(){
         medications = [];
-        medications.append(Medication(withName: "Tacrolimus", andImage: nil, andCroppedImage: nil, andInfo: "", andId: ""));
+        //medications.append(Medication(withName: "Tacrolimus", andImage: nil, andCroppedImage: nil, andInfo: "", andId: ""));
     }
 }
