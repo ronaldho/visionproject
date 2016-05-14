@@ -693,7 +693,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhl-qe-qUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2476" y="1488"/>
+            <point key="canvasLocation" x="2570" y="1816"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -707,7 +707,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="MT8-Li-XFm" kind="relationship" relationship="viewControllers" id="4rM-a1-w1V"/>
-                        <segue destination="OAW-Y2-Rlp" kind="relationship" relationship="viewControllers" id="Acs-I2-TLe"/>
+                        <segue destination="KV2-Uv-VZ7" kind="relationship" relationship="viewControllers" id="Nwy-pL-qUC"/>
                         <segue destination="dE9-9P-Pv0" kind="relationship" relationship="viewControllers" id="BFe-2Y-QWg"/>
                     </connections>
                 </tabBarController>
@@ -744,7 +744,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SymptomCell" rowHeight="80" id="PD0-m1-1rq" customClass="SymptomTableViewCell" customModule="Vision_Project" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="80"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PD0-m1-1rq" id="lI8-nl-4Ce">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
@@ -812,32 +812,19 @@
                     <navigationItem key="navigationItem" title="Symptoms" id="mHc-YH-sJw">
                         <barButtonItem key="leftBarButtonItem" title="Send" id="uaa-Js-CXs">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="sendButtonPressed" destination="18g-Ke-mlY" id="K6r-zh-eHU"/>
-                            </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Add" id="bKS-P9-Ho5">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="newSymptom:" destination="18g-Ke-mlY" id="Gt1-JX-Dwa"/>
-                                </connections>
                             </barButtonItem>
                             <barButtonItem title="Flip" id="tU0-dv-dNv"/>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue destination="Iaq-0j-DbV" kind="presentation" identifier="NewSymptom" id="qK1-BF-HjE"/>
-                        <segue destination="Iaq-0j-DbV" kind="presentation" identifier="EditSymptom" id="KWi-Xz-1wh"/>
-                        <segue destination="agH-gZ-RIO" kind="popoverPresentation" identifier="SendSymptomPopover" popoverAnchorBarButtonItem="uaa-Js-CXs" id="SbA-8k-vyr">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lal-o7-qNo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1659" y="378"/>
+            <point key="canvasLocation" x="1753" y="706"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="l8X-o7-A4C">
@@ -882,24 +869,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNJ-ne-rJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1677" y="1855"/>
+            <point key="canvasLocation" x="1771" y="2183"/>
         </scene>
         <!--Medication Glossary-->
         <scene sceneID="5kD-hP-fU4">
             <objects>
-                <tableViewController id="4UE-PP-Fbh" sceneMemberID="viewController">
+                <tableViewController id="4UE-PP-Fbh" customClass="GlossaryTableViewController" customModule="Vision_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="eeI-mb-Emd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MedGlossaryCell" id="6fE-Of-wHn">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="GlossaryCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="GlossaryCell" id="6fE-Of-wHn" customClass="GlossaryTableViewCell" customModule="Vision_Project" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6fE-Of-wHn" id="nih-QD-yao">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rx8-RA-wB6">
+                                            <rect key="frame" x="23" y="11" width="554" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="rx8-RA-wB6" firstAttribute="centerY" secondItem="nih-QD-yao" secondAttribute="centerY" id="Lg2-Iw-9d1"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="rx8-RA-wB6" secondAttribute="trailing" constant="15" id="Xmr-KC-gXM"/>
+                                        <constraint firstItem="rx8-RA-wB6" firstAttribute="leading" secondItem="nih-QD-yao" secondAttribute="leadingMargin" constant="15" id="kvV-dX-bSb"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="name" destination="rx8-RA-wB6" id="GNf-ec-e3g"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -914,7 +917,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYy-WT-IKw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1692" y="1136"/>
+            <point key="canvasLocation" x="1786" y="1464"/>
         </scene>
         <!--Symptoms-->
         <scene sceneID="7kJ-jJ-uMd">
@@ -927,13 +930,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="18g-Ke-mlY" kind="relationship" relationship="rootViewController" id="teI-f9-M75"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oy6-73-AK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="915" y="372"/>
+            <point key="canvasLocation" x="1009" y="700"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r2a-XC-DwG">
@@ -1187,9 +1187,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EbP-ZC-0XM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2912" y="-128"/>
+            <point key="canvasLocation" x="3872" y="96"/>
         </scene>
-        <!--Symptom Split View Controller-->
+        <!--Symptoms-->
         <scene sceneID="JdH-Pd-k0b">
             <objects>
                 <viewController id="1mr-73-Tqe" customClass="SymptomSplitViewController" customModule="Vision_Project" customModuleProvider="target" sceneMemberID="viewController">
@@ -1198,20 +1198,20 @@
                         <viewControllerLayoutGuide type="bottom" id="WAx-VA-Afc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="n0y-be-DlL">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9XC-OD-7Fv">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="340"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="Lkl-o1-phA"/>
+                                    <constraint firstAttribute="height" constant="340" id="Lkl-o1-phA"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="K15-vc-dOW" kind="embed" identifier="SymptomCalendarEmbed" id="nXa-tp-WPp"/>
+                                    <segue destination="K15-vc-dOW" kind="embed" id="qfQ-gl-7Ol"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qe9-85-ubq">
-                                <rect key="frame" x="0.0" y="400" width="600" height="200"/>
+                                <rect key="frame" x="0.0" y="340" width="600" height="196"/>
                                 <connections>
                                     <segue destination="iEQ-qi-vGs" kind="embed" identifier="SymptomTableEmbed" id="M20-rA-shG"/>
                                 </connections>
@@ -1220,18 +1220,52 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="9XC-OD-7Fv" secondAttribute="trailing" constant="-20" id="1dp-Tw-FuR"/>
-                            <constraint firstItem="qe9-85-ubq" firstAttribute="top" secondItem="9XC-OD-7Fv" secondAttribute="bottom" id="2rj-Br-h8e"/>
+                            <constraint firstItem="qe9-85-ubq" firstAttribute="top" secondItem="9XC-OD-7Fv" secondAttribute="bottom" priority="500" id="2rj-Br-h8e"/>
                             <constraint firstItem="9XC-OD-7Fv" firstAttribute="leading" secondItem="n0y-be-DlL" secondAttribute="leadingMargin" constant="-20" id="HF6-dr-KJj"/>
                             <constraint firstItem="WAx-VA-Afc" firstAttribute="top" secondItem="qe9-85-ubq" secondAttribute="bottom" id="LDh-F3-XUt"/>
+                            <constraint firstItem="qe9-85-ubq" firstAttribute="top" secondItem="00Z-xv-jKg" secondAttribute="bottom" priority="400" id="cDv-C7-M4X"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qe9-85-ubq" secondAttribute="trailing" constant="-20" id="sHc-fk-IZg"/>
                             <constraint firstItem="qe9-85-ubq" firstAttribute="leading" secondItem="n0y-be-DlL" secondAttribute="leadingMargin" constant="-20" id="sfU-6Y-WBc"/>
                             <constraint firstItem="9XC-OD-7Fv" firstAttribute="top" secondItem="n0y-be-DlL" secondAttribute="topMargin" id="xk2-Fc-nIW"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Symptoms" id="mZq-Qw-Q1Y">
+                        <barButtonItem key="leftBarButtonItem" title="Send" id="eX0-Ys-nkg">
+                            <connections>
+                                <action selector="sendButtonPressed" destination="1mr-73-Tqe" id="aSH-AM-KdX"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Add" id="vpl-ga-sjf">
+                                <connections>
+                                    <action selector="newSymptom:" destination="1mr-73-Tqe" id="iW0-LK-ZS3"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Flip" id="ktZ-Rx-uOD">
+                                <connections>
+                                    <action selector="flip" destination="1mr-73-Tqe" id="nYE-2Z-Uer"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="calendarContainer" destination="9XC-OD-7Fv" id="SPS-bY-0rh"/>
+                        <outlet property="symptomsContainer" destination="qe9-85-ubq" id="qNe-s2-v1C"/>
+                        <outlet property="symptomsContainerTopConstraintCalendar" destination="2rj-Br-h8e" id="erx-Iy-BlH"/>
+                        <outlet property="symptomsContainerTopConstraintLayout" destination="cDv-C7-M4X" id="vdq-go-Tfy"/>
+                        <segue destination="Iaq-0j-DbV" kind="presentation" identifier="NewSymptom" id="KXQ-Ar-jcA"/>
+                        <segue destination="agH-gZ-RIO" kind="popoverPresentation" identifier="SendSymptomPopover" popoverAnchorBarButtonItem="eX0-Ys-nkg" id="qtD-Dh-5NI">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                        <segue destination="Iaq-0j-DbV" kind="presentation" identifier="EditSymptom" id="SXI-cG-t6b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3uD-CC-7R0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3520" y="-156"/>
+            <point key="canvasLocation" x="1760" y="-220"/>
         </scene>
         <!--Symptom-->
         <scene sceneID="6WW-qr-Fsa">
@@ -1508,7 +1542,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqw-mv-6Gb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3200" y="853"/>
+            <point key="canvasLocation" x="3294" y="1181"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hRL-Rq-1xk">
@@ -1526,7 +1560,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Wn-eJ-i1J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2462" y="678"/>
+            <point key="canvasLocation" x="2556" y="1006"/>
         </scene>
         <!--Glossary-->
         <scene sceneID="aeN-pG-SP5">
@@ -1545,7 +1579,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vVd-0f-9ma" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="880" y="1136"/>
+            <point key="canvasLocation" x="974" y="1464"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tae-5G-v9g">
@@ -1565,19 +1599,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJ7-vE-4ky" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2426" y="-128"/>
+            <point key="canvasLocation" x="3386" y="96"/>
         </scene>
         <!--Symptom Calendar View Controller-->
         <scene sceneID="74z-cs-8p5">
             <objects>
                 <viewController id="K15-vc-dOW" customClass="SymptomCalendarViewController" customModule="Vision_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IEH-3m-Zww"/>
+                        <viewControllerLayoutGuide type="bottom" id="eYR-qK-gfz"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LCt-NN-iyb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="294"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZYe-TS-DDK">
-                                <rect key="frame" x="0.0" y="41" width="600" height="253"/>
+                                <rect key="frame" x="125" y="41" width="350" height="253"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="K5Q-KP-ew3"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="pjt-Rl-rBm">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1599,7 +1640,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmJ-Zw-8ih">
                                                     <rect key="frame" x="20" y="14" width="11" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1627,12 +1668,26 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2k-Iq-VAQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKp-iC-1ix">
+                                                            <rect key="frame" x="22" y="36" width="6" height="6"/>
+                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="6" id="Jl0-Ec-1BS"/>
+                                                                <constraint firstAttribute="height" constant="6" id="axN-H4-XkS"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="lKp-iC-1ix" firstAttribute="centerX" secondItem="t2k-Iq-VAQ" secondAttribute="centerX" id="Ifn-fm-Vfo"/>
+                                                        <constraint firstAttribute="bottom" secondItem="lKp-iC-1ix" secondAttribute="bottom" constant="8" id="r7A-yg-m6N"/>
+                                                    </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FwE-j0-ZWs">
                                                     <rect key="frame" x="15" y="14" width="21" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1648,6 +1703,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="dayLabel" destination="FwE-j0-ZWs" id="XlJ-nr-sYS"/>
+                                            <outlet property="indicatorView" destination="lKp-iC-1ix" id="pf1-5D-oEg"/>
                                             <outlet property="view" destination="t2k-Iq-VAQ" id="QKd-Gz-T1N"/>
                                         </connections>
                                     </collectionViewCell>
@@ -1660,17 +1716,16 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvd-cs-rnC">
                                 <rect key="frame" x="277" y="10" width="47" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yvd-cs-rnC" firstAttribute="top" secondItem="LCt-NN-iyb" secondAttribute="topMargin" constant="10" id="AWL-NN-eGw"/>
-                            <constraint firstAttribute="trailing" secondItem="ZYe-TS-DDK" secondAttribute="trailing" id="LXL-0f-TTq"/>
-                            <constraint firstItem="ZYe-TS-DDK" firstAttribute="leading" secondItem="LCt-NN-iyb" secondAttribute="leading" id="XZM-2h-zGG"/>
                             <constraint firstAttribute="bottom" secondItem="ZYe-TS-DDK" secondAttribute="bottom" id="bhK-cN-oGc"/>
                             <constraint firstItem="ZYe-TS-DDK" firstAttribute="top" secondItem="yvd-cs-rnC" secondAttribute="bottom" constant="8" id="ia0-cZ-mbv"/>
+                            <constraint firstItem="ZYe-TS-DDK" firstAttribute="centerX" secondItem="LCt-NN-iyb" secondAttribute="centerX" id="iv8-bZ-1bA"/>
                             <constraint firstItem="yvd-cs-rnC" firstAttribute="centerX" secondItem="LCt-NN-iyb" secondAttribute="centerX" id="wPV-ia-Mfp"/>
                         </constraints>
                     </view>
@@ -1678,21 +1733,19 @@
                     <size key="freeformSize" width="600" height="294"/>
                     <connections>
                         <outlet property="calendar" destination="ZYe-TS-DDK" id="q6K-J3-A2y"/>
-                        <outlet property="calendarLeadingConstraint" destination="XZM-2h-zGG" id="x3T-uf-Ypz"/>
-                        <outlet property="calendarTrailingConstraint" destination="LXL-0f-TTq" id="BBr-dC-CHt"/>
                         <outlet property="monthLabel" destination="yvd-cs-rnC" id="F6F-Bb-xAB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tdC-go-Deo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4415" y="-388"/>
+            <point key="canvasLocation" x="2655" y="-452"/>
         </scene>
         <!--Symptom Split Table View Controller-->
         <scene sceneID="342-Rq-Rf4">
             <objects>
                 <tableViewController id="iEQ-qi-vGs" customClass="SymptomSplitTableViewController" customModule="Vision_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0il-3m-ml3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="196"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1736,7 +1789,7 @@
                                             </constraints>
                                             <state key="normal" image="edit_pencil"/>
                                             <connections>
-                                                <action selector="editSymptom:" destination="yDc-OE-Fd2" eventType="touchUpInside" id="ZRU-8h-9Ym"/>
+                                                <action selector="editSymptom:" destination="yDc-OE-Fd2" eventType="touchUpInside" id="gUC-oQ-7z3"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -1764,7 +1817,26 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sHB-da-l4g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4406" y="110"/>
+            <point key="canvasLocation" x="2646" y="46"/>
+        </scene>
+        <!--Symptoms-->
+        <scene sceneID="h10-tD-lwD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KV2-Uv-VZ7" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Symptoms" image="stethoscope" id="qjm-g7-1St"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZwX-4c-VuP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1mr-73-Tqe" kind="relationship" relationship="rootViewController" id="w1S-jV-yPE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TdX-uO-94d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="948" y="-220"/>
         </scene>
     </scenes>
     <resources>
@@ -1778,8 +1850,8 @@
         <image name="stethoscope" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VlI-bn-K0L"/>
         <segue reference="YYj-ep-A0P"/>
-        <segue reference="KWi-Xz-1wh"/>
+        <segue reference="VlI-bn-K0L"/>
+        <segue reference="SXI-cG-t6b"/>
     </inferredMetricsTieBreakers>
 </document>

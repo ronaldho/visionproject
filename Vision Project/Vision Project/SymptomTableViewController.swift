@@ -31,6 +31,7 @@ SymptomCellDelegate, InputViewDelegate {
             svc.symptom = (sender as! SymptomTableViewCell).symptom!;
             svc.delegate = self;
             svc.newMode = false;
+            print("EditSymptom segue in SymptomTableViewController.prepareForSeque()");
         } else if (segue.identifier == "SendSymptomPopover"){
             let navCtrl = segue.destinationViewController as! UINavigationController;
             let sendvc: SendViewController = navCtrl.viewControllers[0] as! SendViewController;
@@ -72,9 +73,9 @@ SymptomCellDelegate, InputViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool){
-        symptoms.symptoms = Data.getAllSymptoms();
-        symptoms.sort();
-        self.tableView.reloadData();
+//        symptoms.symptoms = Data.getAllSymptoms();
+//        symptoms.sort();
+//        self.tableView.reloadData();
         
     }
     
@@ -114,6 +115,8 @@ SymptomCellDelegate, InputViewDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("SymptomCell", forIndexPath: indexPath) as! SymptomTableViewCell;
         cell.delegate = self;
         let symptom = symptoms.symptoms[indexPath.row];
+        
+        cell.backgroundColor = UIColor.visionTanColor();
         cell.symptom = symptom;
         cell.dateLabel.text = symptom.getDateString();
         cell.symptomTextLabel.text = symptom.text;

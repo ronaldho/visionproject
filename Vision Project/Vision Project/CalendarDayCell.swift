@@ -11,6 +11,7 @@ import UIKit
 class CalendarDayCell: UICollectionViewCell {
     @IBOutlet var dayLabel: UILabel!;
     @IBOutlet var view: UIView!;
+    @IBOutlet var indicatorView: UIView!;
     
     var date: NSDate!;
 }

@@ -14,7 +14,9 @@ class SymptomCalendarViewController: UIViewController {
     @IBOutlet var calendar: UICollectionView!;
     @IBOutlet weak var calendarLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var calendarTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet var calendarWidthConstraint: NSLayoutConstraint!;
     
+    var symptoms: Symptoms = Symptoms();
     var delegate: CalendarViewDelegate?;
     var selectedCell: CalendarDayCell?;
 //    var currentMonth: Calendar.Month;
@@ -79,8 +81,8 @@ class SymptomCalendarViewController: UIViewController {
         let spacerCellCount = getWeekdayOfDate(getFirstDayOfMonth()) - 1;
 
         let screenSize: CGRect = UIScreen.mainScreen().bounds;
-        calendarLeadingConstraint.constant = CGFloat(Int((screenSize.width - 350) / 2));
-        calendarTrailingConstraint.constant = screenSize.width - calendarLeadingConstraint.constant - 350;
+        calendarLeadingConstraint.constant = CGFloat(Int((screenSize.width - 342) / 2));
+        calendarTrailingConstraint.constant = screenSize.width - calendarLeadingConstraint.constant - 342;
 
         if (indexPath.row < 7){
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CalendarHeaderCell", forIndexPath: indexPath) as! CalendarHeaderCell;
@@ -108,20 +110,21 @@ class SymptomCalendarViewController: UIViewController {
             cell.view.layer.borderWidth = 1
             cell.view.layer.borderColor = UIColor.blackColor().CGColor
             
-            print("screenSize: " + String(screenSize));
-            print("calendarLeadingConstraint: " + String(calendarLeadingConstraint.constant));
-            print("calendarTrailingConstraint: " + String(calendarTrailingConstraint.constant));
-            print(cell.bounds.width)
+//            print("screenSize: " + String(screenSize));
+//            print("calendarLeadingConstraint: " + String(calendarLeadingConstraint.constant));
+//            print("calendarTrailingConstraint: " + String(calendarTrailingConstraint.constant));
+//            print(cell.bounds.width)
             
             return cell
             
         } else if (indexPath.row >= 7 && indexPath.row < 7 + spacerCellCount) {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CalendarDayCell", forIndexPath: indexPath) as! CalendarDayCell;
             cell.dayLabel.text = "";
-            
+            cell.backgroundColor = UIColor.whiteColor();
             cell.userInteractionEnabled = false;
             cell.view.layer.borderWidth = 1
             cell.view.layer.borderColor = UIColor.blackColor().CGColor
+            cell.indicatorView.hidden = true;
             
             return cell
             
@@ -135,9 +138,24 @@ class SymptomCalendarViewController: UIViewController {
             
             
             cell.dayLabel.text = String(indexPath.row - 6 - spacerCellCount);
-            
+            cell.backgroundColor = UIColor.whiteColor();
             cell.view.layer.borderWidth = 1
             cell.view.layer.borderColor = UIColor.blackColor().CGColor
+            
+            var indicatorState = false;
+            for symptom in symptoms.symptoms
+            {
+                print("cell.date: " + String(cell.date) + ", symptom.date: " + String(symptom.date));
+                if (symptom.date.sameDate(cell.date)){
+                    indicatorState = true;
+                    print("indicatorState true");
+                }
+            }
+            if indicatorState {
+                cell.indicatorView.hidden = false;
+            } else {
+                cell.indicatorView.hidden = true;
+            }
             
             return cell
         }
@@ -147,17 +165,36 @@ class SymptomCalendarViewController: UIViewController {
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if (indexPath.row < 7){
+            return getHeaderCellSize()
+        } else {
+            return getDayCellSize();
+        }
+    }
+    
+    func getHeaderCellSize() -> CGSize {
+        if (UIScreen.mainScreen().bounds.width < 350){
+            return CGSize(width: 40, height: 20)
+        } else {
             return CGSize(width: 50, height: 25)
+        }
+    }
+    
+    func getDayCellSize() -> CGSize {
+        if (UIScreen.mainScreen().bounds.width < 350){
+            return CGSize(width: 40, height: 40)
         } else {
             return CGSize(width: 50, height: 50)
         }
     }
+
 
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        monthLabel.text = getFirstDayOfMonth().monthYearFormat();
+        self.view.backgroundColor = UIColor.visionTanColor();
         // Do any additional setup after loading the view.
     }
 
