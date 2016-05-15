@@ -38,6 +38,7 @@
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="SymptomTag" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="enabled" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -46,6 +47,6 @@
         <element name="MyMedication" positionX="-63" positionY="-18" width="128" height="225"/>
         <element name="MyMedicationHistory" positionX="-63" positionY="54" width="128" height="240"/>
         <element name="Symptom" positionX="-63" positionY="117" width="128" height="135"/>
-        <element name="SymptomTag" positionX="-63" positionY="117" width="128" height="90"/>
+        <element name="SymptomTag" positionX="-63" positionY="117" width="128" height="105"/>
     </elements>
 </model>

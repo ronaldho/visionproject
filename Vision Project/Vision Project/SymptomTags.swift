@@ -11,14 +11,17 @@ import UIKit
 class SymptomTags: NSObject {
 
     var tags: [SymptomTag]!;
+    var enabledTags: [SymptomTag]!;
+    
     
     override init(){
-        tags = [];
-        tags.append(SymptomTag(withId: "0", andColor: UIColor.redColor(), andName: "Red"));
-        tags.append(SymptomTag(withId: "1", andColor: UIColor.orangeColor(), andName: "Orange"));
-        tags.append(SymptomTag(withId: "2", andColor: UIColor.yellowColor(), andName: "Yellow"));
-        tags.append(SymptomTag(withId: "3", andColor: UIColor.greenColor(), andName: "Green"));
-        tags.append(SymptomTag(withId: "4", andColor: UIColor.blueColor(), andName: "Blue"));
-        tags.append(SymptomTag(withId: "5", andColor: UIColor.purpleColor(), andName: "Purple"));
+        tags = Data.getAllSymptomTags();
+        enabledTags = [];
+        for tag in tags {
+            if tag.enabled {
+                enabledTags.append(tag);
+            }
+        }
     }
+    
 }

@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        saveDefaultSymptomTags();
         return true
     }
 
@@ -104,7 +105,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-
+    
+    func saveDefaultSymptomTags(){
+        let symptomTags: [SymptomTag] = Data.getAllSymptomTags();
+        
+        if symptomTags.count == 0 {
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.redColor(), andName: "Red", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.orangeColor(), andName: "Orange", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.yellowColor(), andName: "Yellow", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.greenColor(), andName: "Green", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.blueColor(), andName: "Blue", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.purpleColor(), andName: "Purple", andEnabled: true));
+        }
+    }
 }
 

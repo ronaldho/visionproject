@@ -28,4 +28,8 @@ class SymptomTag: NSObject {
         self.enabled = enabled;
     }
     
+    func toString() -> String {
+        return "SymptomTag {id: \(id), name: \(name), color: \(color), enabled: \(enabled)}"
+    }
+    
 }

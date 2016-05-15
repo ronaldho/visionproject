@@ -526,10 +526,10 @@ class Data: NSObject {
                 for i in 0 ... symptomTags.count-1 {
                     let id = symptomTags[i].valueForKey("id") as! String;
                     let name = symptomTags[i].valueForKey("name") as! String;
-                    let color = symptomTags[i].valueForKey("color") as! String;
+                    let colorString = symptomTags[i].valueForKey("color") as! String;
                     let enabled = symptomTags[i].valueForKey("enabled") as! Bool;
 
-                    let temp: SymptomTag = SymptomTag(withId: id, andColor: UIColor.getColorFromString(color), andName: name, andEnabled: enabled);
+                    let temp: SymptomTag = SymptomTag(withId: id, andColor: UIColor.getColorFromString(colorString), andName: name, andEnabled: enabled);
                     
                     symptomTagArray.append(temp);
                 }

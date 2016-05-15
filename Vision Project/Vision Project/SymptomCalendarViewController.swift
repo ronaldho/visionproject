@@ -29,11 +29,9 @@ class SymptomCalendarViewController: UIViewController {
     var selectedCell: CalendarDayCell?;
     
     override func viewWillAppear(animated: Bool) {
-        print("viewWillAppear");
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
-        print("didSelectItemAtIndexPath");
         let cell: CalendarDayCell = collectionView.cellForItemAtIndexPath(indexPath)! as! CalendarDayCell;
         
         if (selectedCell != nil){
@@ -58,7 +56,6 @@ class SymptomCalendarViewController: UIViewController {
     }
     
     func changeCurrentMonth(monthsToIncreaseBy: Int){
-        print("changeCurrentMonth");
         let nsCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let dateComponents = NSDateComponents()
         dateComponents.month = monthsToIncreaseBy
@@ -77,7 +74,6 @@ class SymptomCalendarViewController: UIViewController {
     }
     
     func selectAppropriateDayCell() {
-        print("selectAppropriateDayCell");
         // select first day of month, or current day
         
         var indexPathToSelect: NSIndexPath?;
@@ -131,7 +127,6 @@ class SymptomCalendarViewController: UIViewController {
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        print("cellForItemAtIndexPath")
         
         let spacerCellCount = getWeekdayOfDate(currentMonth) - 1;
 
@@ -201,7 +196,6 @@ class SymptomCalendarViewController: UIViewController {
     func collectionView(collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        print("sizeForItemAtIndexPath");
         if (indexPath.row < 7){
             return getHeaderCellSize()
         } else {
@@ -218,7 +212,6 @@ class SymptomCalendarViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        print("viewDidLoad");
         super.viewDidLoad()
         
         currentMonth = getFirstDayOfMonth(NSDate());

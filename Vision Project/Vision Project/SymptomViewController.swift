@@ -17,10 +17,13 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     @IBOutlet weak var detailsText: UITextView!
     @IBOutlet weak var symptomTagsCollection: UICollectionView!
     @IBOutlet weak var collectionHeight: NSLayoutConstraint!
+    @IBOutlet weak var tagLabelSpacerViewWidth: NSLayoutConstraint!
+    
     
     var delegate: InputViewDelegate?;
     var savedApptId: String = "";
     var symptom: Symptom = Symptom();
+    var symptomTags: [SymptomTag]?;
     
     
     func toggleSymptomTag(sender: SymptomTagCollectionViewCell) {
@@ -50,13 +53,13 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
 
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return SymptomTags().tags.count;
+        return SymptomTags().enabledTags.count;
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SymptomTagCell", forIndexPath: indexPath) as! SymptomTagCollectionViewCell
         
-        let symptomTag = SymptomTags().tags[indexPath.row];
+        let symptomTag = symptomTags![indexPath.row];
         cell.delegate = self;
         cell.symptomTag = symptomTag;
         if (symptom.hasTagID(symptomTag.id)){
@@ -72,6 +75,12 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         collectionHeight.constant = collectionView.contentSize.height;
         
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            return CGSize(width: collectionView.bounds.width, height: 41)
     }
 
     
@@ -89,6 +98,11 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
             textView.text = "Instructions"
             textView.textColor = UIColor.greyPlaceholderColor()
         }
+    }
+    
+    
+    @IBAction func editSymptomTags(sender: UIButton) {
+        performSegueWithIdentifier("EditSymptomTags", sender: sender)
     }
     
     @IBAction func deleteSymptom(){
@@ -122,9 +136,19 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        print(UIScreen.mainScreen().bounds.width)
+        print(mainStackView!.bounds.width)
+        print((mainStackView!.bounds.width-50)/2)
+        tagLabelSpacerViewWidth.constant = (mainStackView!.bounds.width-50)/2;
+        
+    }
+    
     override func viewDidLoad() {
         addPhotoButton!.hidden = true;
         photoContainer!.hidden = true;
+        
+        symptomTags = SymptomTags().enabledTags;
         
         if (newMode){
             self.title = "New Symptom"
@@ -132,7 +156,8 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         } else {
             self.title = "Edit Symptom"
         }
-        
+
+
         loadFields();
         
         if (detailsText != nil){
@@ -149,6 +174,11 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         }
         
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        symptomTags = SymptomTags().enabledTags;
+        symptomTagsCollection.reloadData();
     }
     
     override func loadFields(){

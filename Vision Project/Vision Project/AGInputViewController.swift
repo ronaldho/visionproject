@@ -17,6 +17,7 @@ UINavigationControllerDelegate, UITextViewDelegate  {
     @IBOutlet var addPhotoButton: UIButton?;
     @IBOutlet var photoContainer: UIView?;
     @IBOutlet var deleteButton: UIButton?;
+    @IBOutlet var mainStackView: UIStackView?;
     
     var datePicker: UIDatePicker?;
     var date: NSDate = StaticDates.sharedInstance.defaultDate;
@@ -90,6 +91,7 @@ UINavigationControllerDelegate, UITextViewDelegate  {
         presentViewController(alertController, animated: true, completion: nil)
         
     }
+    
     @IBAction func deletePhoto(sender: UIButton){
         photo!.image = nil;
         photoContainer!.hidden = true;

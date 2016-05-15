@@ -23,6 +23,7 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
     var startDate: NSDate?;
     var endDate: NSDate?
     var tagIDs: [String]!;
+    var symptomTags: [SymptomTag]?;
     
     var ms: MailSender?;
     
@@ -174,13 +175,14 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return SymptomTags().tags.count;
+        return SymptomTags().enabledTags.count;
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SymptomTagCell", forIndexPath: indexPath) as! SymptomTagCollectionViewCell
         
-        let symptomTag = SymptomTags().tags[indexPath.row];
+        let symptomTag = symptomTags![indexPath.row];
+        tagIDs.append(symptomTag.id);
         cell.delegate = self;
         cell.symptomTag = symptomTag;
         cell.switchy.setOn(true, animated: false);
@@ -195,10 +197,18 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 41)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tagIDs = ["0","1","2","3","4","5"];
+//        tagIDs = ["0","1","2","3","4","5"];
+        symptomTags = SymptomTags().enabledTags;
+        tagIDs = [];
         
         sendEmailButton.backgroundColor = UIColor.mailBlueColor();
         
