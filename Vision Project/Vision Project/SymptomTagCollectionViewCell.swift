@@ -12,6 +12,7 @@ class SymptomTagCollectionViewCell: UICollectionViewCell {
     @IBOutlet var switchy: UISwitch!;
     @IBOutlet var colorView: UIView!;
     @IBOutlet var nameLabel: UILabel!;
+    @IBOutlet var nameField: UITextField?;
     @IBOutlet var stackView: UIStackView!;
     
     var symptomTag: SymptomTag?;

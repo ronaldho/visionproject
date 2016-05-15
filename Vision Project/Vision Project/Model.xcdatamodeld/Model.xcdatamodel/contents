@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
     <entity name="MyMedication" syncable="YES">
         <attribute name="bed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="breakfast" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -37,9 +37,15 @@
         <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="SymptomTag" syncable="YES">
+        <attribute name="enabled" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="MyMedication" positionX="-63" positionY="-18" width="128" height="225"/>
         <element name="MyMedicationHistory" positionX="-63" positionY="54" width="128" height="240"/>
         <element name="Symptom" positionX="-63" positionY="117" width="128" height="135"/>
+        <element name="SymptomTag" positionX="-63" positionY="117" width="128" height="90"/>
     </elements>
 </model>

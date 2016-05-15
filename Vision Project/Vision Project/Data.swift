@@ -495,7 +495,131 @@ class Data: NSObject {
                     managedContext.deleteObject(info[0]);
                     
                 } else {
-                    print("Error: trying to deleteMedicationHistory(), but more or less than 1 object was found with the id");
+                    print("Error: trying to deleteSymptom(), but more or less than 1 object was found with the id");
+                }
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
+        }
+        
+        do {
+            try managedContext.save()
+            //5
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+    
+    
+    static func getAllSymptomTags() -> [SymptomTag]{
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "SymptomTag")
+        
+        var symptomTagArray: [SymptomTag] = [SymptomTag]();
+        do {
+            let results =
+                try managedContext.executeFetchRequest(fetchRequest)
+            let symptomTags = results as! [NSManagedObject]
+            if (symptomTags.count > 0){
+                for i in 0 ... symptomTags.count-1 {
+                    let id = symptomTags[i].valueForKey("id") as! String;
+                    let name = symptomTags[i].valueForKey("name") as! String;
+                    let color = symptomTags[i].valueForKey("color") as! String;
+                    let enabled = symptomTags[i].valueForKey("enabled") as! Bool;
+
+                    let temp: SymptomTag = SymptomTag(withId: id, andColor: UIColor.getColorFromString(color), andName: name, andEnabled: enabled);
+                    
+                    symptomTagArray.append(temp);
+                }
+            } else {
+                // No MedicationHistories in Core Data
+            }
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        return symptomTagArray;
+    }
+    
+    static func saveSymptomTag(symptomTag: SymptomTag) -> String{
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        var id = NSUUID().UUIDString
+        
+        if (symptomTag.id == "0"){
+            let entity =  NSEntityDescription.entityForName("SymptomTag",
+                                                            inManagedObjectContext:managedContext)
+            
+            let symptomTagNew = NSManagedObject(entity: entity!,
+                                             insertIntoManagedObjectContext: managedContext)
+            
+            symptomTagNew.setValue(id, forKey: "id")
+            symptomTagNew.setValue(symptomTag.name, forKey: "name")
+            symptomTagNew.setValue(symptomTag.enabled, forKey: "enabled")
+            symptomTagNew.setValue(symptomTag.color.getStringFromColor(), forKey: "color")
+            
+        } else {
+            id = symptomTag.id
+            
+            let fetchRequest = NSFetchRequest(entityName: "SymptomTag")
+            fetchRequest.predicate = NSPredicate(format: "id=%@", symptomTag.id);
+            
+            do {
+                let results =
+                    try managedContext.executeFetchRequest(fetchRequest)
+                let info = results as! [NSManagedObject]
+                if (info.count == 1){
+                    info[0].setValue(symptomTag.name, forKey: "name")
+                    info[0].setValue(symptomTag.enabled, forKey: "enabled")
+                    info[0].setValue(symptomTag.color.getStringFromColor(), forKey: "color")
+                    
+                    
+                    
+                } else {
+                    print("Error: trying to saveSymptomTag(), but more or less than 1 object was found with the id");
+                }
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
+        }
+        
+        do {
+            try managedContext.save()
+            //5
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+        
+        return id
+    }
+    
+    
+    static func deleteSymptomTag(symptomTag: SymptomTag){
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        if (symptomTag.id == "0"){
+            print("Error: trying to delete symptomTag with id == 0");
+            
+        } else {
+            let fetchRequest = NSFetchRequest(entityName: "SymptomTag")
+            fetchRequest.predicate = NSPredicate(format: "id=%@", symptomTag.id);
+            
+            do {
+                let results =
+                    try managedContext.executeFetchRequest(fetchRequest)
+                let info = results as! [NSManagedObject]
+                if (info.count == 1){
+                    
+                    managedContext.deleteObject(info[0]);
+                    
+                } else {
+                    print("Error: trying to deleteSymptomTag(), but more or less than 1 object was found with the id");
                 }
             } catch let error as NSError {
                 print("Could not fetch \(error), \(error.userInfo)")

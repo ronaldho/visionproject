@@ -64,6 +64,8 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UIColor.blueColor().getStringFromColor();
+        
         self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController!.navigationBar.barTintColor = UIColor.visionDarkGreenColor();

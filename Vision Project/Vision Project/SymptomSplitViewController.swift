@@ -9,7 +9,8 @@
 import UIKit
 
 protocol CalendarViewDelegate {
-    func dateChanged(date: NSDate);
+    func dateChanged(calendarSelectedDate: NSDate?);
+    func setCalendarContainerHeight(height: CGFloat);
 }
 
 protocol SymptomTableDelegate {
@@ -17,19 +18,19 @@ protocol SymptomTableDelegate {
 }
 
 class SymptomSplitViewController: UIViewController, CalendarViewDelegate, SymptomTableDelegate, InputViewDelegate {
+    
 
-    var symptoms: Symptoms = Symptoms();
-    
-    func editSymptom(cell: SymptomTableViewCell){
-        performSegueWithIdentifier("EditSymptom", sender: cell)
-    }
-    
     @IBOutlet var calendar: SymptomCalendarViewController!;
     @IBOutlet var calendarContainer: UIView!;
     @IBOutlet var symptomsTable: SymptomSplitTableViewController!;
     @IBOutlet var symptomsContainer: UIView!;
     @IBOutlet var symptomsContainerTopConstraintLayout: NSLayoutConstraint!;
     @IBOutlet var symptomsContainerTopConstraintCalendar: NSLayoutConstraint!;
+    @IBOutlet var calendarHeightConstraint: NSLayoutConstraint!;
+    
+    var calendarSelectedDate: NSDate?
+    var symptoms: Symptoms = Symptoms();
+    var selectedDaySymptoms: Symptoms?;
     
     @IBAction func sendButtonPressed(){
         let ms: MailSender? = MailSender(parentVC: self);
@@ -53,30 +54,70 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
     }
     
     @IBAction func flip(){
-
-//        if calendarContainer.frame.size.height == 0 {
-//            UIView.animateWithDuration(0.5, animations: { () -> Void in
-//                self.calendarContainer.frame.size.height = 340
-//            })
-//        } else {
-//            UIView.animateWithDuration(0.5, animations: { () -> Void in
-//                self.calendarContainer.frame.size.height = 0
-//            })
-//        }
         
         if calendarContainer.hidden == true {
             calendarContainer.hidden = false;
             symptomsContainerTopConstraintLayout.priority = 400;
-//            NSLayoutConstraint.activateConstraints([symptomsContainerTopConstraintLayout]);
-//            NSLayoutConstraint.deactivateConstraints([symptomsContainerTopConstraintCalendar]);
+            
+            if (calendar.selectedCell != nil){
+                selectedDaySymptoms = Symptoms();
+                selectedDaySymptoms = getSymptomsWithDate(calendar.selectedCell!.date)
+            }
         } else {
             calendarContainer.hidden = true;
             symptomsContainerTopConstraintLayout.priority = 600;
+
+            selectedDaySymptoms = nil;
         }
+
+        reloadSymptoms();
     }
     
-    func dateChanged(date: NSDate){
-        print("dateChanged " + String(date));
+    func reloadSymptoms(){
+        if selectedDaySymptoms != nil {
+            symptomsTable.symptoms = self.selectedDaySymptoms!;
+        } else {
+            symptomsTable.symptoms = self.symptoms;
+        }
+        
+        symptomsTable.tableView.reloadData();
+    }
+    
+    func getSymptomsWithDate(date: NSDate) -> Symptoms{
+        let temp = Symptoms();
+        temp.symptoms = Data.getAllSymptoms();
+        
+        if (temp.symptoms.count > 0){
+            for i in (0...(temp.symptoms.count-1)).reverse() {
+                if !temp.symptoms[i].date.sameDate(date){
+                    temp.symptoms.removeAtIndex(i);
+                }
+            }
+        }
+
+        return temp;
+    }
+    
+    func setCalendarContainerHeight(height: CGFloat){
+        calendarHeightConstraint.constant = height;
+    }
+    
+    func editSymptom(cell: SymptomTableViewCell){
+        performSegueWithIdentifier("EditSymptom", sender: cell)
+    }
+    
+    
+    func dateChanged(calendarSelectedDate: NSDate?){
+        
+        if (selectedDaySymptoms == nil){
+            selectedDaySymptoms = Symptoms();
+        }
+        
+        selectedDaySymptoms! = getSymptomsWithDate(calendarSelectedDate!);
+        
+        if symptomsTable != nil {
+            reloadSymptoms();
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -91,8 +132,12 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
             let sstvc = segue.destinationViewController as! SymptomSplitTableViewController;
             sstvc.delegate = self;
             symptomsTable = sstvc;
-            sstvc.symptoms = self.symptoms;
-            sstvc.tableView.reloadData();
+
+//            if calendarSelectedDate != nil {
+//                sstvc.showSymptomsWithDate(calendarSelectedDate!);
+//            } else {
+//                sstvc.showAllSymptoms();
+//            }
         }
         
         if (segue.identifier == "NewSymptom"){
@@ -108,6 +153,7 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
             svc.delegate = self;
             svc.newMode = false;
             print("EditSymptom segue in SymptomSplitViewController.prepareForSeque()");
+            
         } else if (segue.identifier == "SendSymptomPopover"){
             let navCtrl = segue.destinationViewController as! UINavigationController;
             let sendvc: SendViewController = navCtrl.viewControllers[0] as! SendViewController;
@@ -123,7 +169,7 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
             calendar.calendar.reloadData();
         }
         if (symptomsTable != nil){
-            symptomsTable.symptoms = self.symptoms;
+            symptomsTable.symptoms = selectedDaySymptoms!;
             symptomsTable.tableView.reloadData();
         }
     }

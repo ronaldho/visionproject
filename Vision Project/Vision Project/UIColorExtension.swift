@@ -52,4 +52,28 @@ extension UIColor{
         return UIColor(red: 234/255, green: 0/255, blue: 0/255, alpha: 1.0)
     }
     //#EA0000
+    
+    class func getColorFromString(colorString: String) -> UIColor {
+        let colorArray: [String] = colorString.componentsSeparatedByString("|");
+        return UIColor(red: CGFloat(NSNumberFormatter().numberFromString(colorArray[0])!),
+                       green: CGFloat(NSNumberFormatter().numberFromString(colorArray[1])!),
+                       blue: CGFloat(NSNumberFormatter().numberFromString(colorArray[2])!),
+                       alpha: CGFloat(NSNumberFormatter().numberFromString(colorArray[3])!));
+    }
+    
+    func getStringFromColor() -> String {
+//        var _:(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat);
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        if self.getRed(&r, green: &g, blue: &b, alpha: &a) {
+            let colorString: String = String(r) + "|" + String(g) + "|" + String(b) + "|" + String(a);
+            print(colorString);
+            return colorString;
+
+        } else {
+            print("Error getStringFromColor");
+            return "";
+        }
+    }
+    
+    
 }
