@@ -17,7 +17,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
         saveDefaultSymptomTags();
+        
+        // Get latest Medication Data from API
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let lastUpdateDate = defaults.objectForKey("lastUpdateDate") as? NSDate;
+        
+        if lastUpdateDate == nil {
+            let meds: [Medication] = Data.getAllMedications()
+            for med in meds {
+                Data.deleteMedication(med)
+            }
+            
+            let url = NSURL(string: "http://vision-rest.herokuapp.com/drugs")
+            let request = NSURLRequest(URL: url!)
+            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+            let session = NSURLSession(configuration: config)
+            
+            let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+                // Callback when response received
+                
+                var json: [[String: AnyObject]] = [[:]];
+                do {
+                    json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as! [[String:AnyObject]];
+                } catch {
+                    print(error)
+                }
+                
+                for medication in json{
+                    //                print ("medication: \(medication)");
+                    if let name = medication["name"] as? String{
+                        Data.saveMedication(Medication(withName: name, andImage: nil, andCroppedImage: nil, andInfo: "", andId: "0"));
+                    }
+                }
+            });
+            
+            // Send request
+            task.resume()
+
+        }
+        
+        
         return true
     }
 

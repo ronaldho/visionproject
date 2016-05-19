@@ -62,15 +62,11 @@ extension UIColor{
     }
     
     func getStringFromColor() -> String {
-//        var _:(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat);
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         if self.getRed(&r, green: &g, blue: &b, alpha: &a) {
             let colorString: String = String(r) + "|" + String(g) + "|" + String(b) + "|" + String(a);
-            print(colorString);
             return colorString;
-
         } else {
-            print("Error getStringFromColor");
             return "";
         }
     }

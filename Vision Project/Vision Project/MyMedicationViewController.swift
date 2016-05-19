@@ -111,6 +111,10 @@ class MyMedicationViewController: AGInputViewController {
     }
     
     override func viewDidLoad() {
+        medList.medications = Data.getAllMedications()
+        
+        medInstructions!.delegate = self
+        
         addPhotoButton!.hidden = true;
         photoContainer!.hidden = true;
         addFromGlossaryButton.hidden = true;
@@ -131,7 +135,7 @@ class MyMedicationViewController: AGInputViewController {
         loadFields();
         
         if (medInstructions != nil){
-            medInstructions!.delegate = self
+            
             medInstructions!.layer.cornerRadius = 5;
             medInstructions!.layer.borderColor = UIColor.greyTextFieldBorderColor().CGColor;
             medInstructions!.layer.borderWidth = 0.5;
@@ -219,15 +223,15 @@ class MyMedicationViewController: AGInputViewController {
                 medInstructions!.textColor = UIColor.blackColor()
             }
             
-            if (med.image != nil){
-                medImage!.fullImage = med.image;
-                medImage!.image = med.croppedImage;
-                photoContainer!.hidden = false;
-                addPhotoButton!.hidden = true;
-            } else {
-                photoContainer!.hidden = true;
-                addPhotoButton!.hidden = false;
-            }
+//            if (med.image != nil){
+//                medImage!.fullImage = med.image;
+//                medImage!.image = med.croppedImage;
+//                photoContainer!.hidden = false;
+//                addPhotoButton!.hidden = true;
+//            } else {
+//                photoContainer!.hidden = true;
+//                addPhotoButton!.hidden = false;
+//            }
         } else {
             // No MyMedication to Load, probably New view
         }
@@ -236,6 +240,9 @@ class MyMedicationViewController: AGInputViewController {
     @IBAction func save(sender: UIButton){
         
         Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: nil, andCroppedImage: nil, andInfo: "", andInstructions: medInstructions.text!, andId: med.id, andBreakfast: med.breakfast, andLunch: med.lunch, andDinner: med.dinner, andBed: med.bed, andDate: med.date, andDiscontinued: med.discontinued));
+        
+        delegate!.itemSaved = true;
+        
         self.dismissViewControllerAnimated(true, completion: nil)
 
         

@@ -137,9 +137,6 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     }
     
     override func viewDidLayoutSubviews() {
-        print(UIScreen.mainScreen().bounds.width)
-        print(mainStackView!.bounds.width)
-        print((mainStackView!.bounds.width-50)/2)
         tagLabelSpacerViewWidth.constant = (mainStackView!.bounds.width-50)/2;
         
     }

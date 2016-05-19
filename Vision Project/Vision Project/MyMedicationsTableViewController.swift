@@ -19,12 +19,14 @@ protocol MyMedicationCellDelegate {
 protocol InputViewDelegate {
 //    var itemToScrollToId: String? {get set};
 //    func autoscroll();
+    var itemSaved: Bool {get set};
 }
 
 class MyMedicationsTableViewController: UITableViewController, FilterCellDelegate,
     MyMedicationCellDelegate, InputViewDelegate {
 
     var myMedications: MyMedications = MyMedications();
+    var itemSaved = false;
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "NewMyMedication"){
@@ -58,13 +60,23 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
     override func viewWillAppear(animated: Bool){
         myMedications.meds = Data.getAllMyMedications();
         self.tableView.reloadData();
-
+        
+//        if (itemSaved){
+//            itemSaved = false;
+//            OverlayView.shared.createOverlay(self.view,text: "Medication Saved");
+//            
+//            _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(MyMedicationsTableViewController.hideOverlay), userInfo: nil, repeats: false)
+//        }
+        
+        
     }
+    
+//    func hideOverlay(){
+//        OverlayView.shared.hideOverlayView();
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UIColor.blueColor().getStringFromColor();
         
         self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]

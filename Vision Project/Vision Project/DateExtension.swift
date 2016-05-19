@@ -21,4 +21,23 @@ extension NSDate{
     func sameDate(dateToCompareWith: NSDate) -> Bool {
         return NSCalendar.currentCalendar().compareDate(self, toDate:dateToCompareWith, toUnitGranularity: .Day) == NSComparisonResult.OrderedSame;
     }
+    
+    static func getMonthFromMonth(month: NSDate, monthsToIncreaseBy: Int) -> NSDate{
+        let nsCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let dateComponents = NSDateComponents()
+        dateComponents.month = monthsToIncreaseBy
+        
+        let newMonthComponent = nsCalendar.dateByAddingComponents(dateComponents, toDate: month, options: [])!
+        let components = nsCalendar.components([.Year, .Month], fromDate: newMonthComponent);
+        
+        return nsCalendar.dateFromComponents(components)!
+    }
+    
+    static func getFirstDayOfMonth(date: NSDate) -> NSDate {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let components = calendar.components([.Year, .Month], fromDate: date)
+        let startOfMonth = calendar.dateFromComponents(components)!
+        
+        return startOfMonth;
+    }
 }
