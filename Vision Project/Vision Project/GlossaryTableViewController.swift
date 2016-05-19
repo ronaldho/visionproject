@@ -15,61 +15,64 @@ class GlossaryTableViewController: UITableViewController {
     var medications: Medications = Medications();
     
     override func viewWillAppear(animated: Bool){
-        print("glossary viewWillAppear");
-        // Clear current data
-        medications = Medications();
-        self.tableView.reloadData();
         
-        // Block UI and tell user to wait
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .Alert)
+        medications.medications = Data.getAllMedications();
+        self.tableView.reloadData()
         
-        alert.view.tintColor = UIColor.blackColor()
-        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        loadingIndicator.startAnimating();
-        
-        alert.view.addSubview(loadingIndicator)
-        presentViewController(alert, animated: true, completion: nil)
-        
-        // Prepare request
-        let url = NSURL(string: "http://vision-rest.herokuapp.com/drugs")
-        let request = NSURLRequest(URL: url!)
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config)
-        
-        
-        let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
-            // Callback when response received
-            print("task callback");
-            
-            var json: [[String: AnyObject]] = [[:]];
-            do {
-                json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as! [[String:AnyObject]];
-            } catch {
-                print(error)
-            }
-            
-            print(json);
-            print("json count: \(json.count)");
-            
-            for medication in json{
-                //                print ("medication: \(medication)");
-                if let name = medication["name"] as? String{
-                    self.medications.medications.append(Medication(withName: name, andImage: nil, andCroppedImage: nil,
-                        andInfo: "", andId: ""));
-                }
-            }
-            
-            self.tableView.performSelectorOnMainThread(#selector(self.tableView.reloadData), withObject: nil, waitUntilDone: true)
-            
-            // Unblock UI
-            alert.dismissViewControllerAnimated(false, completion: nil)
-            
-        });
-        
-        // Send request
-        task.resume()
+//        print("glossary viewWillAppear");
+//        // Clear current data
+//        medications = Medications();
+//        self.tableView.reloadData();
+//        
+//        // Block UI and tell user to wait
+//        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .Alert)
+//        
+//        alert.view.tintColor = UIColor.blackColor()
+//        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+//        loadingIndicator.hidesWhenStopped = true
+//        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+//        loadingIndicator.startAnimating();
+//        
+//        alert.view.addSubview(loadingIndicator)
+//        presentViewController(alert, animated: true, completion: nil)
+//        
+//        // Prepare request
+//        let url = NSURL(string: "http://vision-rest.herokuapp.com/drugs")
+//        let request = NSURLRequest(URL: url!)
+//        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+//        let session = NSURLSession(configuration: config)
+//        
+//        let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+//            // Callback when response received
+//            print("task callback");
+//            
+//            var json: [[String: AnyObject]] = [[:]];
+//            do {
+//                json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as! [[String:AnyObject]];
+//            } catch {
+//                print(error)
+//            }
+//            
+//            print(json);
+//            print("json count: \(json.count)");
+//            
+//            for medication in json{
+//                //                print ("medication: \(medication)");
+//                if let name = medication["name"] as? String{
+//                    self.medications.medications.append(Medication(withName: name, andImage: nil, andCroppedImage: nil,
+//                        andInfo: "", andId: ""));
+//                }
+//            }
+//            
+//            self.tableView.performSelectorOnMainThread(#selector(self.tableView.reloadData), withObject: nil, waitUntilDone: true)
+//            
+//            // Unblock UI
+//            alert.dismissViewControllerAnimated(false, completion: nil)
+//            
+//        });
+//        
+//        // Send request
+//        task.resume()
     }
     
     override func viewDidLoad() {

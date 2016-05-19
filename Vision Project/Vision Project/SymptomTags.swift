@@ -24,4 +24,13 @@ class SymptomTags: NSObject {
         }
     }
     
+    func getSymptomTagFromID(tagID: String) -> SymptomTag? {
+        for tag in tags {
+            if tag.id == tagID {
+                return tag
+            }
+        }
+        return nil
+    }
+    
 }

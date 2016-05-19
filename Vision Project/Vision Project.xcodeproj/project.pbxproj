@@ -12,9 +12,11 @@
 		492337D21CE45C4100A15AE2 /* SymptomSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492337D11CE45C4100A15AE2 /* SymptomSplitViewController.swift */; };
 		492337D41CE45D3C00A15AE2 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492337D31CE45D3C00A15AE2 /* CalendarDayCell.swift */; };
 		492337D61CE45D5000A15AE2 /* CalendarHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492337D51CE45D5000A15AE2 /* CalendarHeaderCell.swift */; };
-		492337D81CE58D8000A15AE2 /* CalendarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492337D71CE58D8000A15AE2 /* CalendarLayout.swift */; };
 		492337DA1CE5977100A15AE2 /* SymptomSplitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492337D91CE5977100A15AE2 /* SymptomSplitTableViewController.swift */; };
 		492337DC1CE5A86A00A15AE2 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492337DB1CE5A86A00A15AE2 /* DateExtension.swift */; };
+		496CFB511CEAD45800CCC5D9 /* DiscontinuedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496CFB501CEAD45800CCC5D9 /* DiscontinuedTableViewController.swift */; };
+		496CFB531CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496CFB521CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift */; };
+		4993E92E1CE8513B0069B8B7 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993E92D1CE8513B0069B8B7 /* OverlayView.swift */; };
 		49B8434A1CCF4A1500F7D81E /* MyMedicationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */; };
 		49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */; };
 		49D6D5FF1CD4809F00EBDA7B /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */; };
@@ -63,9 +65,11 @@
 		492337D11CE45C4100A15AE2 /* SymptomSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymptomSplitViewController.swift; sourceTree = "<group>"; };
 		492337D31CE45D3C00A15AE2 /* CalendarDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
 		492337D51CE45D5000A15AE2 /* CalendarHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarHeaderCell.swift; sourceTree = "<group>"; };
-		492337D71CE58D8000A15AE2 /* CalendarLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarLayout.swift; sourceTree = "<group>"; };
 		492337D91CE5977100A15AE2 /* SymptomSplitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymptomSplitTableViewController.swift; sourceTree = "<group>"; };
 		492337DB1CE5A86A00A15AE2 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		496CFB501CEAD45800CCC5D9 /* DiscontinuedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscontinuedTableViewController.swift; sourceTree = "<group>"; };
+		496CFB521CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscontinuedTableViewCell.swift; sourceTree = "<group>"; };
+		4993E92D1CE8513B0069B8B7 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayView.swift; path = ../OverlayView.swift; sourceTree = "<group>"; };
 		49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationsTableViewController.swift; sourceTree = "<group>"; };
 		49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationTableViewCell.swift; sourceTree = "<group>"; };
 		49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
@@ -129,13 +133,14 @@
 				49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */,
 				49E424501CD9D16500CFCA22 /* HistoryTableViewController.swift */,
 				49E424541CD9D6B300CFCA22 /* HistoryTableViewCell.swift */,
+				496CFB501CEAD45800CCC5D9 /* DiscontinuedTableViewController.swift */,
+				496CFB521CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift */,
 				49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */,
 				49E4245A1CDD9D0700CFCA22 /* SymptomTableViewController.swift */,
 				49E4245C1CDD9D2100CFCA22 /* SymptomTableViewCell.swift */,
 				492337D11CE45C4100A15AE2 /* SymptomSplitViewController.swift */,
 				492337CF1CE45C2000A15AE2 /* SymptomCalendarViewController.swift */,
 				492337D91CE5977100A15AE2 /* SymptomSplitTableViewController.swift */,
-				492337D71CE58D8000A15AE2 /* CalendarLayout.swift */,
 				492337D31CE45D3C00A15AE2 /* CalendarDayCell.swift */,
 				492337D51CE45D5000A15AE2 /* CalendarHeaderCell.swift */,
 				49E4245E1CDD9D5B00CFCA22 /* SymptomViewController.swift */,
@@ -149,6 +154,7 @@
 				49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */,
 				49D6D60F1CD5341300EBDA7B /* AGImageView.swift */,
 				49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */,
+				4993E92D1CE8513B0069B8B7 /* OverlayView.swift */,
 				49D6D6161CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift */,
 			);
 			name = Views;
@@ -307,6 +313,7 @@
 				49E424611CDDA6AA00CFCA22 /* SymptomTagViewController.swift in Sources */,
 				49D6D6101CD5341300EBDA7B /* AGImageView.swift in Sources */,
 				49DA89E51CC9C4E00027CF21 /* Medication.swift in Sources */,
+				4993E92E1CE8513B0069B8B7 /* OverlayView.swift in Sources */,
 				49E424571CDB1DE500CFCA22 /* Symptom.swift in Sources */,
 				49E4245B1CDD9D0700CFCA22 /* SymptomTableViewController.swift in Sources */,
 				49DA89EB1CC9C8080027CF21 /* MyMedication.swift in Sources */,
@@ -317,7 +324,6 @@
 				49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */,
 				49E4246F1CE07A3B00CFCA22 /* AGTableViewController.swift in Sources */,
 				49E424531CD9D23200CFCA22 /* MyMedicationHistory.swift in Sources */,
-				492337D81CE58D8000A15AE2 /* CalendarLayout.swift in Sources */,
 				49E424691CDFDC2900CFCA22 /* MailSender.swift in Sources */,
 				49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */,
 				49D6D6091CD5337800EBDA7B /* UIColorExtension.swift in Sources */,
@@ -329,6 +335,7 @@
 				492337D41CE45D3C00A15AE2 /* CalendarDayCell.swift in Sources */,
 				49E4245D1CDD9D2100CFCA22 /* SymptomTableViewCell.swift in Sources */,
 				49E424591CDB1E2800CFCA22 /* SymptomTag.swift in Sources */,
+				496CFB531CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift in Sources */,
 				49E4246D1CE07A2200CFCA22 /* GlossaryTableViewController.swift in Sources */,
 				49D6D5FF1CD4809F00EBDA7B /* FilterTableViewCell.swift in Sources */,
 				49B8434A1CCF4A1500F7D81E /* MyMedicationsTableViewController.swift in Sources */,
@@ -341,6 +348,7 @@
 				49D6D6141CD5346600EBDA7B /* UITextField+Shake.swift in Sources */,
 				49DA89E81CC9C5950027CF21 /* Model.xcdatamodeld in Sources */,
 				49E424631CDDC12800CFCA22 /* Symptoms.swift in Sources */,
+				496CFB511CEAD45800CCC5D9 /* DiscontinuedTableViewController.swift in Sources */,
 				49D6D6051CD532C700EBDA7B /* AGInputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

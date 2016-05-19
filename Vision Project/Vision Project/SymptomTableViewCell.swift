@@ -15,6 +15,8 @@ class SymptomTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var symptomTextLabel: UILabel!
     
+    @IBOutlet weak var symptomTagStack: UIStackView!
+    
     var symptom: Symptom?;
     var delegate: SymptomCellDelegate?;
     

@@ -17,6 +17,7 @@ class SymptomTableViewController: UITableViewController,
 SymptomCellDelegate, InputViewDelegate {
     
     var symptoms: Symptoms = Symptoms();
+    var itemSaved = false;
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "NewSymptom"){
@@ -32,15 +33,12 @@ SymptomCellDelegate, InputViewDelegate {
             svc.delegate = self;
             svc.newMode = false;
             print("EditSymptom segue in SymptomTableViewController.prepareForSeque()");
+            
         } else if (segue.identifier == "SendSymptomPopover"){
             let navCtrl = segue.destinationViewController as! UINavigationController;
             let sendvc: SendViewController = navCtrl.viewControllers[0] as! SendViewController;
             sendvc.allSymptoms = self.symptoms;
         }
-    }
-    
-    @IBAction func flip(){
-        performSegueWithIdentifier("SymptomSplitView", sender: self)
     }
     
     @IBAction func sendButtonPressed(){
@@ -120,6 +118,26 @@ SymptomCellDelegate, InputViewDelegate {
         cell.symptom = symptom;
         cell.dateLabel.text = symptom.getDateString();
         cell.symptomTextLabel.text = symptom.text;
+        
+        cell.symptomTagStack.subviews.forEach({ $0.removeFromSuperview() })
+        
+        let symptomTags = SymptomTags()
+        for tagID in symptom.tagIDs {
+            let tag = symptomTags.getSymptomTagFromID(tagID);
+            
+            if (tag != nil){
+                let tagView = UIView()
+            
+                
+                tagView.backgroundColor = tag!.color;
+                tagView.heightAnchor.constraintEqualToConstant(10).active = true;
+                tagView.widthAnchor.constraintEqualToConstant(10).active = true;
+                tagView.layer.cornerRadius = 5
+                
+                cell.symptomTagStack.addArrangedSubview(tagView)
+            }
+
+        }
         
         return cell
         
