@@ -11,6 +11,7 @@ import UIKit
 protocol CalendarViewDelegate {
     func setCalendarContainerHeight()
     func dateChanged(date: NSDate)
+    func goToToday()
 }
 
 protocol SymptomTableDelegate {
@@ -272,6 +273,8 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
     
     func dateChanged(date: NSDate){
         
+        calendarSelectedDate = date
+        
         if (selectedDaySymptoms == nil){
             selectedDaySymptoms = Symptoms();
         }
@@ -282,5 +285,26 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
             reloadSymptoms();
         }
     }
-
+    
+    func goToToday(){
+        if NSDate.getFirstDayOfMonth(NSDate()) == calendar.month {
+            // Month is right, just select day cell
+            self.calendar.selectAppropriateDayCell()
+            
+        } else {
+            // Change month
+            let direction: UIPageViewControllerNavigationDirection!;
+            
+            if NSDate().compare(calendarSelectedDate!) == NSComparisonResult.OrderedDescending {
+                direction = UIPageViewControllerNavigationDirection.Forward
+            } else {
+                direction = UIPageViewControllerNavigationDirection.Reverse
+            }
+            
+            self.calendar = calendarForMonth(NSDate.getFirstDayOfMonth(NSDate()))
+            self.pageViewController.setViewControllers([calendar], direction: direction, animated: true, completion: nil)
+            
+            self.calendar.firstLoad = true;
+        }
+    }
 }

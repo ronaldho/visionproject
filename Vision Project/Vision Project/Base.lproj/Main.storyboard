@@ -1518,8 +1518,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZYe-TS-DDK">
-                                <rect key="frame" x="25" y="41" width="350" height="309"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZYe-TS-DDK">
+                                <rect key="frame" x="25" y="58" width="350" height="292"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="K5Q-KP-ew3"/>
@@ -1638,12 +1638,6 @@
                                     <outlet property="delegate" destination="K15-vc-dOW" id="Tz5-wk-cyd"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvd-cs-rnC">
-                                <rect key="frame" x="177" y="10" width="47" height="23"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yqy-P1-opB">
                                 <rect key="frame" x="-800" y="349" width="2000" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1652,16 +1646,37 @@
                                     <constraint firstAttribute="width" constant="2000" id="DY2-YT-O4u"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCD-lU-h3K">
+                                <rect key="frame" x="25" y="20" width="350" height="33"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvd-cs-rnC">
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zd-Qd-T29">
+                                        <rect key="frame" x="303" y="0.0" width="47" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Today"/>
+                                        <connections>
+                                            <action selector="todayButtonPressed:" destination="K15-vc-dOW" eventType="touchUpInside" id="mKS-EN-ep9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="yvd-cs-rnC" firstAttribute="top" secondItem="LCt-NN-iyb" secondAttribute="topMargin" constant="10" id="AWL-NN-eGw"/>
+                            <constraint firstItem="XCD-lU-h3K" firstAttribute="leading" secondItem="ZYe-TS-DDK" secondAttribute="leading" id="Cb1-aS-C8m"/>
+                            <constraint firstItem="XCD-lU-h3K" firstAttribute="trailing" secondItem="ZYe-TS-DDK" secondAttribute="trailing" id="D8M-Ze-c3m"/>
                             <constraint firstItem="eYR-qK-gfz" firstAttribute="top" secondItem="Yqy-P1-opB" secondAttribute="bottom" id="FqT-UH-UMe"/>
+                            <constraint firstItem="XCD-lU-h3K" firstAttribute="width" secondItem="ZYe-TS-DDK" secondAttribute="width" id="INj-De-kaL"/>
+                            <constraint firstItem="XCD-lU-h3K" firstAttribute="top" secondItem="IEH-3m-Zww" secondAttribute="bottom" id="JNF-BB-gAM"/>
+                            <constraint firstItem="ZYe-TS-DDK" firstAttribute="top" secondItem="yvd-cs-rnC" secondAttribute="bottom" constant="8" id="LJP-ZM-yg9"/>
                             <constraint firstAttribute="bottom" secondItem="ZYe-TS-DDK" secondAttribute="bottom" id="bhK-cN-oGc"/>
-                            <constraint firstItem="ZYe-TS-DDK" firstAttribute="top" secondItem="yvd-cs-rnC" secondAttribute="bottom" constant="8" id="ia0-cZ-mbv"/>
                             <constraint firstItem="ZYe-TS-DDK" firstAttribute="centerX" secondItem="LCt-NN-iyb" secondAttribute="centerX" id="iv8-bZ-1bA"/>
-                            <constraint firstItem="yvd-cs-rnC" firstAttribute="centerX" secondItem="LCt-NN-iyb" secondAttribute="centerX" id="wPV-ia-Mfp"/>
                             <constraint firstItem="Yqy-P1-opB" firstAttribute="centerX" secondItem="LCt-NN-iyb" secondAttribute="centerX" id="woz-f2-vvE"/>
                         </constraints>
                         <connections>

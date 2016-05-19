@@ -20,8 +20,12 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
     var month: NSDate!;
     var selectedCell: CalendarDayCell?;
     
+    @IBAction func todayButtonPressed(sender: AnyObject) {
+        delegate!.goToToday()
+    }
+    
     override func viewWillAppear(animated: Bool) {
-        
+        self.firstLoad = true;
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
