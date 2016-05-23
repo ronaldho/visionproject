@@ -10,7 +10,8 @@ import UIKit
 
 class GlossaryTableViewCell: UITableViewCell {
 
-    @IBOutlet var name: UILabel!;
+    @IBOutlet var nameLabel: UILabel!;
+    @IBOutlet var medImageView: UIImageView!;
     
     var medication: Medication?;
     

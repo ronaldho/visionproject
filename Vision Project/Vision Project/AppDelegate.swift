@@ -46,14 +46,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 
                 for medication in json{
-                    //                print ("medication: \(medication)");
-                    if let name = medication["name"] as? String{
-                        Data.saveMedication(Medication(withName: name, andImage: nil, andCroppedImage: nil, andInfo: "", andId: "0"));
-                    }
-                }
-            });
+//                    print ("medication: \(medication)");
+                    if let name = medication["name"] as? String {
+                        if let pageUrl = medication["page"] as? String {
+                            
+                            
+                            if let imageUrlString = medication["image"] as? String {
+                                
+                                // Get image if api returns image url
+                                let imageUrl = NSURL(string: imageUrlString)
+                                let request = NSURLRequest(URL: imageUrl!)
+                                let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+                                let session = NSURLSession(configuration: config)
+                                
+                                let imageTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+                                    
+                                    if let data = data where error == nil {
+                                        
+                                        // Save med with image if it downloads correctly
+                                        print("Download \(name) finished")
+                                        
+                                        let medImage = UIImage(data: data)
+                                        let croppedImage = ImageUtils.cropToSquare(ImageUtils.fixOrientation(medImage!));
+                                        
+                                        if NSThread.currentThread().isMainThread {
+                                            Data.saveMedication(Medication(withName: name, andImage: medImage!, andCroppedImage: croppedImage, andId: "0", andImageUrl: imageUrlString, andPageUrl: pageUrl));
+                                        } else {
+                                            dispatch_async(dispatch_get_main_queue()){
+                                                Data.saveMedication(Medication(withName: name, andImage: medImage!, andCroppedImage: croppedImage, andId: "0", andImageUrl: imageUrlString, andPageUrl: pageUrl));
+                                            }
+                                        }
+                                        
+                                        
+                                    } else {
+                                        
+                                        // Save med without image if failure downloading from image url
+                                        if NSThread.currentThread().isMainThread {
+                                            Data.saveMedication(Medication(withName: name, andImage: nil, andCroppedImage: nil, andId: "0", andImageUrl: imageUrlString, andPageUrl: pageUrl));
+                                        } else {
+                                            dispatch_async(dispatch_get_main_queue()){
+                                                Data.saveMedication(Medication(withName: name, andImage: nil, andCroppedImage: nil, andId: "0", andImageUrl: imageUrlString, andPageUrl: pageUrl));
+                                            }
+                                        }
+                                        
+                                    }
+                                    
+                                }); // End image callback
+                                
+                                // Send image request
+                                imageTask.resume()
+                                
+                            } else {
+                                
+                                // Save med without image if api doesn't return image url
+                                if NSThread.currentThread().isMainThread {
+                                    Data.saveMedication(Medication(withName: name, andImage: nil, andCroppedImage: nil, andId: "0", andImageUrl: nil, andPageUrl: pageUrl));
+                                } else {
+                                    dispatch_async(dispatch_get_main_queue()){
+                                        Data.saveMedication(Medication(withName: name, andImage: nil, andCroppedImage: nil, andId: "0", andImageUrl: nil, andPageUrl: pageUrl));
+                                    }
+                                }
+
+                            } // End if image url exists in json
+                        } //End if page url exists in json
+                    } // End if med name exists in json
+                } // End med json loop
+            }); // End med callback
             
-            // Send request
+            // Send med request
             task.resume()
 
         }

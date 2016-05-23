@@ -39,10 +39,9 @@
 		49DA89E51CC9C4E00027CF21 /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89E41CC9C4E00027CF21 /* Medication.swift */; };
 		49DA89E81CC9C5950027CF21 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89E61CC9C5950027CF21 /* Model.xcdatamodeld */; };
 		49DA89EB1CC9C8080027CF21 /* MyMedication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA89EA1CC9C8080027CF21 /* MyMedication.swift */; };
+		49DC221D1CF11F35004F9ED0 /* MedPageHTMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC221C1CF11F35004F9ED0 /* MedPageHTMLViewController.swift */; };
 		49E4244F1CD9C68B00CFCA22 /* Tablet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49E4244E1CD9C68B00CFCA22 /* Tablet.jpg */; };
-		49E424511CD9D16500CFCA22 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424501CD9D16500CFCA22 /* HistoryTableViewController.swift */; };
 		49E424531CD9D23200CFCA22 /* MyMedicationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424521CD9D23200CFCA22 /* MyMedicationHistory.swift */; };
-		49E424551CD9D6B300CFCA22 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424541CD9D6B300CFCA22 /* HistoryTableViewCell.swift */; };
 		49E424571CDB1DE500CFCA22 /* Symptom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424561CDB1DE500CFCA22 /* Symptom.swift */; };
 		49E424591CDB1E2800CFCA22 /* SymptomTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424581CDB1E2800CFCA22 /* SymptomTag.swift */; };
 		49E4245B1CDD9D0700CFCA22 /* SymptomTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4245A1CDD9D0700CFCA22 /* SymptomTableViewController.swift */; };
@@ -57,6 +56,7 @@
 		49E4246D1CE07A2200CFCA22 /* GlossaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */; };
 		49E4246F1CE07A3B00CFCA22 /* AGTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */; };
 		49E424711CE0F8C100CFCA22 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E424701CE0F8C100CFCA22 /* SendViewController.swift */; };
+		49FA10F21CF040A400702701 /* MedHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FA10F11CF040A400702701 /* MedHistoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,10 +94,9 @@
 		49DA89E41CC9C4E00027CF21 /* Medication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medication.swift; sourceTree = "<group>"; };
 		49DA89E71CC9C5950027CF21 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		49DA89EA1CC9C8080027CF21 /* MyMedication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedication.swift; sourceTree = "<group>"; };
+		49DC221C1CF11F35004F9ED0 /* MedPageHTMLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedPageHTMLViewController.swift; sourceTree = "<group>"; };
 		49E4244E1CD9C68B00CFCA22 /* Tablet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Tablet.jpg; sourceTree = "<group>"; };
-		49E424501CD9D16500CFCA22 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		49E424521CD9D23200CFCA22 /* MyMedicationHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationHistory.swift; sourceTree = "<group>"; };
-		49E424541CD9D6B300CFCA22 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		49E424561CDB1DE500CFCA22 /* Symptom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symptom.swift; sourceTree = "<group>"; };
 		49E424581CDB1E2800CFCA22 /* SymptomTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymptomTag.swift; sourceTree = "<group>"; };
 		49E4245A1CDD9D0700CFCA22 /* SymptomTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymptomTableViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +111,7 @@
 		49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryTableViewController.swift; sourceTree = "<group>"; };
 		49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTableViewController.swift; sourceTree = "<group>"; };
 		49E424701CE0F8C100CFCA22 /* SendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
+		49FA10F11CF040A400702701 /* MedHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedHistoryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +131,6 @@
 				49B843491CCF4A1500F7D81E /* MyMedicationsTableViewController.swift */,
 				49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */,
 				49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */,
-				49E424501CD9D16500CFCA22 /* HistoryTableViewController.swift */,
-				49E424541CD9D6B300CFCA22 /* HistoryTableViewCell.swift */,
 				496CFB501CEAD45800CCC5D9 /* DiscontinuedTableViewController.swift */,
 				496CFB521CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift */,
 				49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */,
@@ -145,17 +143,19 @@
 				492337D51CE45D5000A15AE2 /* CalendarHeaderCell.swift */,
 				49E4245E1CDD9D5B00CFCA22 /* SymptomViewController.swift */,
 				49E424641CDDD1F000CFCA22 /* SymptomTagCollectionViewCell.swift */,
+				49FA10F11CF040A400702701 /* MedHistoryTableViewCell.swift */,
 				49E424601CDDA6AA00CFCA22 /* SymptomTagViewController.swift */,
 				49E424701CE0F8C100CFCA22 /* SendViewController.swift */,
-				49D6D6061CD5330C00EBDA7B /* AGViewController.swift */,
-				49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */,
 				49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */,
 				4922D3751CE70F41006BD3ED /* GlossaryTableViewCell.swift */,
-				49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */,
-				49D6D60F1CD5341300EBDA7B /* AGImageView.swift */,
+				49DC221C1CF11F35004F9ED0 /* MedPageHTMLViewController.swift */,
 				49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */,
 				4993E92D1CE8513B0069B8B7 /* OverlayView.swift */,
 				49D6D6161CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift */,
+				49D6D6061CD5330C00EBDA7B /* AGViewController.swift */,
+				49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */,
+				49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */,
+				49D6D60F1CD5341300EBDA7B /* AGImageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -309,7 +309,6 @@
 				49D6D6171CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift in Sources */,
 				49D6D6121CD5343500EBDA7B /* FullImageViewController.swift in Sources */,
 				49D6D6011CD4819700EBDA7B /* MyMedications.swift in Sources */,
-				49E424511CD9D16500CFCA22 /* HistoryTableViewController.swift in Sources */,
 				49E424611CDDA6AA00CFCA22 /* SymptomTagViewController.swift in Sources */,
 				49D6D6101CD5341300EBDA7B /* AGImageView.swift in Sources */,
 				49DA89E51CC9C4E00027CF21 /* Medication.swift in Sources */,
@@ -320,7 +319,6 @@
 				492337D21CE45C4100A15AE2 /* SymptomSplitViewController.swift in Sources */,
 				49E4246B1CE04DEA00CFCA22 /* Medications.swift in Sources */,
 				492337D61CE45D5000A15AE2 /* CalendarHeaderCell.swift in Sources */,
-				49E424551CD9D6B300CFCA22 /* HistoryTableViewCell.swift in Sources */,
 				49DA89CF1CC9C49A0027CF21 /* AppDelegate.swift in Sources */,
 				49E4246F1CE07A3B00CFCA22 /* AGTableViewController.swift in Sources */,
 				49E424531CD9D23200CFCA22 /* MyMedicationHistory.swift in Sources */,
@@ -333,12 +331,14 @@
 				49DA89E31CC9C4CB0027CF21 /* Data.swift in Sources */,
 				49D6D60E1CD5340000EBDA7B /* ImageUtils.swift in Sources */,
 				492337D41CE45D3C00A15AE2 /* CalendarDayCell.swift in Sources */,
+				49DC221D1CF11F35004F9ED0 /* MedPageHTMLViewController.swift in Sources */,
 				49E4245D1CDD9D2100CFCA22 /* SymptomTableViewCell.swift in Sources */,
 				49E424591CDB1E2800CFCA22 /* SymptomTag.swift in Sources */,
 				496CFB531CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift in Sources */,
 				49E4246D1CE07A2200CFCA22 /* GlossaryTableViewController.swift in Sources */,
 				49D6D5FF1CD4809F00EBDA7B /* FilterTableViewCell.swift in Sources */,
 				49B8434A1CCF4A1500F7D81E /* MyMedicationsTableViewController.swift in Sources */,
+				49FA10F21CF040A400702701 /* MedHistoryTableViewCell.swift in Sources */,
 				492337DA1CE5977100A15AE2 /* SymptomSplitTableViewController.swift in Sources */,
 				49D6D6031CD519C600EBDA7B /* MyMedicationViewController.swift in Sources */,
 				492337D01CE45C2000A15AE2 /* SymptomCalendarViewController.swift in Sources */,

@@ -28,6 +28,7 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
     @IBOutlet var symptomsContainerTopConstraintLayout: NSLayoutConstraint!;
     @IBOutlet var symptomsContainerTopConstraintCalendar: NSLayoutConstraint!;
     @IBOutlet var calendarHeightConstraint: NSLayoutConstraint!;
+    @IBOutlet var calendarButton: UIBarButtonItem!;
     
     var calendarSelectedDate: NSDate?
     var symptoms: Symptoms = Symptoms();
@@ -62,6 +63,7 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
     @IBAction func flip(){
         
         if calendarContainer.hidden == true {
+            calendarButton.tintColor = UIColor.whiteColor()
             calendarContainer.hidden = false;
             symptomsContainerTopConstraintLayout.priority = 400;
             
@@ -70,14 +72,21 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
                 selectedDaySymptoms = getSymptomsWithDate(calendar.selectedCell!.date)
             }
         } else {
+            // Create view to get default tint color (blue)
+            let view = UIView()
+            calendarButton.tintColor = view.tintColor
             calendarContainer.hidden = true;
             symptomsContainerTopConstraintLayout.priority = 600;
             
             selectedDaySymptoms = nil;
         }
         
+        UIView.animateWithDuration(0.3, animations:  {
+            self.view.layoutIfNeeded()
+        });
+        
         reloadSymptoms();
-        calendar.selectAppropriateDayCell();
+        
     }
     
     

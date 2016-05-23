@@ -12,7 +12,7 @@ class Symptom: NSObject {
     var id: String!;
     var date: NSDate!;
     var text: String!;
-    var tagIDs: [String]!;
+    var symptomTags: [SymptomTag]!;
     var image: UIImage?;
     var croppedImage: UIImage?;
     
@@ -20,14 +20,14 @@ class Symptom: NSObject {
         id = "0"
         date = NSDate();
         text = "";
-        tagIDs = [];
+        symptomTags = [];
     }
     
-    init(withId id:String, andDate date:NSDate, andText text:String, andTagIDs tagIDs: [String], andImage image: UIImage?, andCroppedImage croppedImage: UIImage?){
+    init(withId id:String, andDate date:NSDate, andText text:String, andSymptomTags symptomTags: [SymptomTag], andImage image: UIImage?, andCroppedImage croppedImage: UIImage?){
         self.id = id;
         self.date = date;
         self.text = text;
-        self.tagIDs = tagIDs;
+        self.symptomTags = symptomTags;
         self.image = image;
         self.croppedImage = croppedImage;
     }
@@ -54,26 +54,32 @@ class Symptom: NSObject {
         return dateFormatter.stringFromDate(date)
     }
     
-    func tagIDsToString() -> String{
+    func symptomTagsToString() -> String{
         var stringOutput: String = "";
         var count = 0;
-        for tagID in tagIDs {
+        for symptomTag in self.symptomTags {
             if (count != 0){
                 stringOutput = stringOutput + "|"
             }
-            stringOutput = stringOutput + tagID
+            stringOutput = stringOutput + symptomTag.id
             count += 1;
         }
         return stringOutput;
     }
     
-    func tagIDsFromString(tagString: String){
-        self.tagIDs = tagString.componentsSeparatedByString("|");
+    func symptomTagsFromString(tagString: String){
+        let tagIDs = tagString.componentsSeparatedByString("|");
+        let symptomTagsClass = SymptomTags()
+        if tagIDs[0] != "" {
+            for tagID in tagIDs {
+                self.symptomTags.append(symptomTagsClass.getSymptomTagFromID(tagID)!)
+            }
+        }
     }
     
-    func hasTagID(tagIDinput: String) -> Bool {
-        for tagID in tagIDs {
-            if (tagID == tagIDinput){
+    func hasSymptomTag(symptomTagInput: SymptomTag) -> Bool {
+        for symptomTag in self.symptomTags {
+            if (symptomTag.id == symptomTagInput.id){
                 return true;
             }
         }

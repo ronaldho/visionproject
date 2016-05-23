@@ -94,6 +94,7 @@ UINavigationControllerDelegate, UITextViewDelegate  {
     
     @IBAction func deletePhoto(sender: UIButton){
         photo!.image = nil;
+        photo!.fullImage = nil;
         photoContainer!.hidden = true;
         addPhotoButton!.hidden = false;
     }

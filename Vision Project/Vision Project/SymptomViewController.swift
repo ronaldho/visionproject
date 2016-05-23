@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SymptomTagCellDelegate{
-    func toggleSymptomTag(sender: SymptomTagCollectionViewCell);
+//    func toggleSymptomTag(sender: SymptomTagCollectionViewCell);
 }
 
 class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
@@ -19,31 +19,30 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     @IBOutlet weak var collectionHeight: NSLayoutConstraint!
     @IBOutlet weak var tagLabelSpacerViewWidth: NSLayoutConstraint!
     
-    
     var delegate: InputViewDelegate?;
     var savedApptId: String = "";
     var symptom: Symptom = Symptom();
     var symptomTags: [SymptomTag]?;
     
     
-    func toggleSymptomTag(sender: SymptomTagCollectionViewCell) {
-        var indexToRemove: Int = -1;
-        var found: Bool = false;
-        if (symptom.tagIDs.count > 0){
-            for i in 0...symptom.tagIDs.count-1 {
-                if (symptom.tagIDs[i] == sender.symptomTag!.id){
-                    indexToRemove = i;
-                    found = true;
-                }
-            }
-        }
-        if (indexToRemove != -1){
-            symptom.tagIDs.removeAtIndex(indexToRemove);
-        }
-        if (!found){
-            symptom.tagIDs.append(sender.symptomTag!.id);
-        }
-    }
+//    func toggleSymptomTag(sender: SymptomTagCollectionViewCell) {
+//        var indexToRemove: Int = -1;
+//        var found: Bool = false;
+//        if (symptom.tagIDs.count > 0){
+//            for i in 0...symptom.tagIDs.count-1 {
+//                if (symptom.tagIDs[i] == sender.symptomTag!.id){
+//                    indexToRemove = i;
+//                    found = true;
+//                }
+//            }
+//        }
+//        if (indexToRemove != -1){
+//            symptom.tagIDs.removeAtIndex(indexToRemove);
+//        }
+//        if (!found){
+//            symptom.tagIDs.append(sender.symptomTag!.id);
+//        }
+//    }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         let cell: SymptomTagCollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)! as! SymptomTagCollectionViewCell;
@@ -62,7 +61,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         let symptomTag = symptomTags![indexPath.row];
         cell.delegate = self;
         cell.symptomTag = symptomTag;
-        if (symptom.hasTagID(symptomTag.id)){
+        if (symptom.hasSymptomTag(symptomTag)){
             cell.switchy.setOn(true, animated: false);
         } else {
             cell.switchy.setOn(false, animated: false);
@@ -95,7 +94,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     func textViewDidEndEditing(textView: UITextView) {
         let trimmedString = textView.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         if (trimmedString == ""){
-            textView.text = "Instructions"
+            textView.text = "Details"
             textView.textColor = UIColor.greyPlaceholderColor()
         }
     }
@@ -144,16 +143,14 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     override func viewDidLoad() {
         addPhotoButton!.hidden = true;
         photoContainer!.hidden = true;
-        
-        symptomTags = SymptomTags().enabledTags;
-        
         if (newMode){
             self.title = "New Symptom"
             self.deleteButton!.hidden = true;
         } else {
             self.title = "Edit Symptom"
         }
-
+        
+        symptomTags = SymptomTags().enabledTags;
 
         loadFields();
         
@@ -163,7 +160,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
             detailsText!.layer.borderColor = UIColor.greyTextFieldBorderColor().CGColor;
             detailsText!.layer.borderWidth = 0.5;
             if (detailsText!.text == ""){
-                detailsText!.text = "Instructions"
+                detailsText!.text = "Details"
                 detailsText!.textColor = UIColor.greyPlaceholderColor()
             } else {
                 detailsText!.textColor = UIColor.blackColor()
@@ -185,7 +182,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
             dateField!.text = symptom.getDateString();
             
             if (detailsText!.text == ""){
-                detailsText!.text = "Instructions"
+                detailsText!.text = "Details"
                 detailsText!.textColor = UIColor.greyPlaceholderColor()
             } else {
                 detailsText!.textColor = UIColor.blackColor()
@@ -206,8 +203,16 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     }
     
     @IBAction func save(sender: UIButton){
+        var selectedSymptomTags: [SymptomTag] = []
+        for view in symptomTagsCollection.subviews {
+            if let cell = view as? SymptomTagCollectionViewCell {
+                if cell.switchy.on {
+                    selectedSymptomTags.append(cell.symptomTag!)
+                }
+            }
+        }
         
-        Data.saveSymptom(Symptom(withId: symptom.id, andDate: date, andText: detailsText.text, andTagIDs: symptom.tagIDs, andImage: symptom.image, andCroppedImage: symptom.croppedImage));
+        Data.saveSymptom(Symptom(withId: symptom.id, andDate: date, andText: detailsText.text, andSymptomTags: selectedSymptomTags, andImage: symptom.image, andCroppedImage: symptom.croppedImage));
         self.dismissViewControllerAnimated(true, completion: nil)
         
         

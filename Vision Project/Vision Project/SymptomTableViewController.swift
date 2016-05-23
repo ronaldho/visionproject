@@ -121,22 +121,16 @@ SymptomCellDelegate, InputViewDelegate {
         
         cell.symptomTagStack.subviews.forEach({ $0.removeFromSuperview() })
         
-        let symptomTags = SymptomTags()
-        for tagID in symptom.tagIDs {
-            let tag = symptomTags.getSymptomTagFromID(tagID);
+        for symptomTag in symptom.symptomTags {
+            let tagView = UIView()
             
-            if (tag != nil){
-                let tagView = UIView()
+            tagView.backgroundColor = symptomTag.color;
+            tagView.heightAnchor.constraintEqualToConstant(10).active = true;
+            tagView.widthAnchor.constraintEqualToConstant(10).active = true;
+            tagView.layer.cornerRadius = 5
             
-                
-                tagView.backgroundColor = tag!.color;
-                tagView.heightAnchor.constraintEqualToConstant(10).active = true;
-                tagView.widthAnchor.constraintEqualToConstant(10).active = true;
-                tagView.layer.cornerRadius = 5
-                
-                cell.symptomTagStack.addArrangedSubview(tagView)
-            }
-
+            cell.symptomTagStack.addArrangedSubview(tagView)
+            
         }
         
         return cell

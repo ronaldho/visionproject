@@ -13,7 +13,7 @@ class MyMedicationTableViewCell: UITableViewCell {
     var delegate: MyMedicationCellDelegate!;
     var myMedication: MyMedication!;
     
-    @IBOutlet var medImage: UIImageView!;
+    @IBOutlet var medImage: AGImageView!;
     @IBOutlet var medName: UILabel!;
     @IBOutlet var breakfastImage: UIImageView!;
     @IBOutlet var lunchImage: UIImageView!;

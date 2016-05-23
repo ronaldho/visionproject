@@ -13,7 +13,7 @@ import UIKit
 class Data: NSObject {
     
     //
-    // Medication
+    // MARK: Medication
     //
     static func getAllMedications() -> [Medication]{
         let appDelegate =
@@ -31,8 +31,9 @@ class Data: NSObject {
                     let name = medications[i].valueForKey("name") as! String;
                     let imageData = medications[i].valueForKey("image") as! NSData?;
                     let croppedImageData = medications[i].valueForKey("croppedImage") as! NSData?;
-                    let info = medications[i].valueForKey("info") as! String;
                     let id = medications[i].valueForKey("id") as! String;
+                    let imageUrl = medications[i].valueForKey("imageUrl") as! String?;
+                    let pageUrl = medications[i].valueForKey("pageUrl") as! String?;
                     
                     var image: UIImage?;
                     var croppedImage: UIImage?;
@@ -42,7 +43,7 @@ class Data: NSObject {
                         croppedImage = UIImage(data: croppedImageData!);
                     }
                     
-                    let temp: Medication = Medication(withName: name, andImage: image, andCroppedImage: croppedImage, andInfo: info, andId: id)
+                    let temp: Medication = Medication(withName: name, andImage: image, andCroppedImage: croppedImage, andId: id, andImageUrl: imageUrl, andPageUrl: pageUrl)
                     
                     medicationArray.append(temp);
                 }
@@ -79,10 +80,11 @@ class Data: NSObject {
                 medicationNew.setNilValueForKey("image");
                 medicationNew.setNilValueForKey("croppedImage");
             }
-            
+
             medicationNew.setValue(id, forKey: "id")
             medicationNew.setValue(med.name, forKey: "name")
-            medicationNew.setValue(med.info, forKey: "info")
+            medicationNew.setValue(med.imageUrl, forKey: "imageUrl")
+            medicationNew.setValue(med.pageUrl, forKey: "pageUrl")
             
         } else {
             id = med.id
@@ -96,7 +98,8 @@ class Data: NSObject {
                 let info = results as! [NSManagedObject]
                 if (info.count == 1){
                     info[0].setValue(med.name, forKey: "name")
-                    info[0].setValue(med.info, forKey: "info")
+                    info[0].setValue(med.imageUrl, forKey: "imageUrl")
+                    info[0].setValue(med.pageUrl, forKey: "pageUrl")
                     
                     if (med.image != nil){
                         let imageData = UIImageJPEGRepresentation(med.image!, 1)
@@ -167,7 +170,7 @@ class Data: NSObject {
     
     
     //
-    // MyMedication
+    // MARK: MyMedication
     //
     static func getAllMyMedications() -> [MyMedication]{
         let appDelegate =
@@ -189,7 +192,6 @@ class Data: NSObject {
                     let lunch = medications[i].valueForKey("lunch") as! Bool;
                     let dinner = medications[i].valueForKey("dinner") as! Bool;
                     let bed = medications[i].valueForKey("bed") as! Bool;
-                    let info = medications[i].valueForKey("info") as! String;
                     let id = medications[i].valueForKey("id") as! String;
                     let instructions = medications[i].valueForKey("instructions") as! String;
                     let date = medications[i].valueForKey("date") as! NSDate;
@@ -203,7 +205,7 @@ class Data: NSObject {
                         croppedImage = UIImage(data: croppedImageData!);
                     }
                     
-                    let temp: MyMedication = MyMedication(withName: name, andImage: image, andCroppedImage: croppedImage, andInfo: info, andInstructions: instructions, andId: id, andBreakfast: breakfast, andLunch: lunch, andDinner: dinner, andBed: bed, andDate: date, andDiscontinued: discontinued);
+                    let temp: MyMedication = MyMedication(withName: name, andImage: image, andCroppedImage: croppedImage, andInstructions: instructions, andId: id, andBreakfast: breakfast, andLunch: lunch, andDinner: dinner, andBed: bed, andDate: date, andDiscontinued: discontinued);
                     
                     medicationArray.append(temp);
                 }
@@ -243,7 +245,6 @@ class Data: NSObject {
             
             medicationNew.setValue(id, forKey: "id")
             medicationNew.setValue(med.name, forKey: "name")
-            medicationNew.setValue(med.info, forKey: "info")
             medicationNew.setValue(med.instructions, forKey: "instructions")
             medicationNew.setValue(NSDate(), forKey: "date")
             medicationNew.setValue(med.discontinued, forKey: "discontinued")
@@ -267,7 +268,6 @@ class Data: NSObject {
                 let info = results as! [NSManagedObject]
                 if (info.count == 1){
                     info[0].setValue(med.name, forKey: "name")
-                    info[0].setValue(med.info, forKey: "info")
                     info[0].setValue(med.instructions, forKey: "instructions")
                     info[0].setValue(med.date, forKey: "date")
                     info[0].setValue(med.discontinued, forKey: "discontinued")
@@ -347,13 +347,14 @@ class Data: NSObject {
     
     
     //
-    // MyMedicationHistory
+    // MARK: MyMedicationHistory
     //
-    static func getAllMyMedicationHistory() -> [MyMedicationHistory]{
+    static func getMyMedicationHistory(medIdToGet: String) -> [MyMedicationHistory]{
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "MyMedicationHistory")
+        fetchRequest.predicate = NSPredicate(format: "medId== %@", medIdToGet)
         
         var medicationHistoryArray: [MyMedicationHistory] = [MyMedicationHistory]();
         do {
@@ -362,32 +363,15 @@ class Data: NSObject {
             let medicationHistories = results as! [NSManagedObject]
             if (medicationHistories.count > 0){
                 for i in 0...medicationHistories.count-1 {
-                    let name = medicationHistories[i].valueForKey("name") as! String;
-                    let imageData = medicationHistories[i].valueForKey("image") as! NSData?;
-                    let croppedImageData = medicationHistories[i].valueForKey("croppedImage") as! NSData?;
-                    let breakfast = medicationHistories[i].valueForKey("breakfast") as! Bool;
-                    let lunch = medicationHistories[i].valueForKey("lunch") as! Bool;
-                    let dinner = medicationHistories[i].valueForKey("dinner") as! Bool;
-                    let bed = medicationHistories[i].valueForKey("bed") as! Bool;
-                    let info = medicationHistories[i].valueForKey("info") as! String;
                     let id = medicationHistories[i].valueForKey("id") as! String;
-                    let instructions = medicationHistories[i].valueForKey("instructions") as! String;
-                    let date = medicationHistories[i].valueForKey("date") as! NSDate;
-                    let version = medicationHistories[i].valueForKey("version") as! Int;
                     let medId = medicationHistories[i].valueForKey("medId") as! String;
-                    let discontinued = medicationHistories[i].valueForKey("discontinued") as! Bool;
+                    let date = medicationHistories[i].valueForKey("date") as! NSDate;
+                    let text = medicationHistories[i].valueForKey("text") as! String;
                     
-                    var image: UIImage?;
-                    var croppedImage: UIImage?;
+                    let temp: MyMedicationHistory = MyMedicationHistory(withId: id, andMedId: medId, andDate: date, andText: text)
                     
-                    if (imageData != nil){
-                        image = UIImage(data: imageData!);
-                        croppedImage = UIImage(data: croppedImageData!);
-                    }
-                    
-                    let temp: MyMedicationHistory = MyMedicationHistory(withName: name, andImage: image, andCroppedImage: croppedImage, andInfo: info, andInstructions: instructions, andId: id, andBreakfast: breakfast, andLunch: lunch, andDinner: dinner, andBed: bed, andDate: date, andDiscontinued: discontinued, andMedId: medId, andVersion: version);
-                    
-                    medicationHistoryArray.append(temp);
+                    // Insert instead of append so that latest history is at beginning of array
+                    medicationHistoryArray.insert(temp, atIndex: 0);
                 }
             } else {
                 // No MedicationHistories in Core Data
@@ -399,68 +383,39 @@ class Data: NSObject {
         return medicationHistoryArray;
     }
     
-    static func saveMyMedicationHistory(med: MyMedicationHistory) -> String{
+    static func saveMyMedicationHistory(medHistory: MyMedicationHistory) -> String{
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
         var id = NSUUID().UUIDString
         
-        if (med.id == "0"){
+        if (medHistory.id == "0"){
             let entity =  NSEntityDescription.entityForName("MyMedicationHistory",
                 inManagedObjectContext:managedContext)
             
             let medicationHistoryNew = NSManagedObject(entity: entity!,
                 insertIntoManagedObjectContext: managedContext)
             
-            if (med.image != nil){
-                let imageData = UIImageJPEGRepresentation(med.image!, 1)
-                medicationHistoryNew.setValue(imageData, forKey: "image")
-                let croppedImageData = UIImageJPEGRepresentation(med.croppedImage!, 1)
-                medicationHistoryNew.setValue(croppedImageData, forKey: "croppedImage")
-            } else {
-                medicationHistoryNew.setNilValueForKey("image");
-                medicationHistoryNew.setNilValueForKey("croppedImage");
-            }
-            
-            medicationHistoryNew.setValue(med.name, forKey: "name")
-            medicationHistoryNew.setValue(med.info, forKey: "info")
+            medicationHistoryNew.setValue(medHistory.medId, forKey: "medId")
+            medicationHistoryNew.setValue(medHistory.date, forKey: "date")
             medicationHistoryNew.setValue(id, forKey: "id")
-            medicationHistoryNew.setValue(med.instructions, forKey: "instructions")
-            medicationHistoryNew.setValue(med.breakfast, forKey: "breakfast")
-            medicationHistoryNew.setValue(med.lunch, forKey: "lunch")
-            medicationHistoryNew.setValue(med.dinner, forKey: "dinner")
-            medicationHistoryNew.setValue(med.bed, forKey: "bed")
+            medicationHistoryNew.setValue(medHistory.text, forKey: "text")
             
         } else {
-            id = med.id
+            id = medHistory.id
             
             let fetchRequest = NSFetchRequest(entityName: "MyMedicationHistory")
-            fetchRequest.predicate = NSPredicate(format: "id=%@", med.id);
+            fetchRequest.predicate = NSPredicate(format: "id=%@", medHistory.id);
             
             do {
                 let results =
                 try managedContext.executeFetchRequest(fetchRequest)
                 let info = results as! [NSManagedObject]
                 if (info.count == 1){
-                    info[0].setValue(med.name, forKey: "name")
-                    info[0].setValue(med.info, forKey: "info")
-                    info[0].setValue(med.instructions, forKey: "instructions")
-                    info[0].setValue(med.breakfast, forKey: "breakfast")
-                    info[0].setValue(med.lunch, forKey: "lunch")
-                    info[0].setValue(med.dinner, forKey: "dinner")
-                    info[0].setValue(med.bed, forKey: "bed")
-                    
-                    if (med.image != nil){
-                        let imageData = UIImageJPEGRepresentation(med.image!, 1)
-                        info[0].setValue(imageData, forKey: "image")
-                        let croppedImageData = UIImageJPEGRepresentation(med.croppedImage!, 1)
-                        info[0].setValue(croppedImageData, forKey: "croppedImage")
-                    } else {
-                        info[0].setNilValueForKey("image")
-                        info[0].setNilValueForKey("croppedImage")
-                    }
-                    
+                    info[0].setValue(medHistory.medId, forKey: "medId")
+                    info[0].setValue(medHistory.date, forKey: "date")
+                    info[0].setValue(medHistory.text, forKey: "text")
                     
                 } else {
                     print("Error: trying to saveMedicationHistory(), but more or less than 1 object was found with the id");
@@ -481,17 +436,17 @@ class Data: NSObject {
     }
     
     
-    static func deleteMyMedicationHistory(med: MyMedicationHistory){
+    static func deleteMyMedicationHistory(medHistory: MyMedicationHistory){
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        if (med.id == "0"){
+        if (medHistory.id == "0"){
             print("Error: trying to delete medicationHistory with id == 0");
             
         } else {
             let fetchRequest = NSFetchRequest(entityName: "MyMedicationHistory")
-            fetchRequest.predicate = NSPredicate(format: "id=%@", med.id);
+            fetchRequest.predicate = NSPredicate(format: "id=%@", medHistory.id);
             
             do {
                 let results =
@@ -521,7 +476,7 @@ class Data: NSObject {
     
     
     //
-    // Symptoms
+    // MARK: Symptoms
     //
     static func getAllSymptoms() -> [Symptom]{
         let appDelegate =
@@ -551,8 +506,8 @@ class Data: NSObject {
                         croppedImage = UIImage(data: croppedImageData!);
                     }
                     
-                    let temp: Symptom = Symptom(withId: id, andDate: date, andText: text, andTagIDs: [], andImage: image, andCroppedImage: croppedImage);
-                    temp.tagIDsFromString(tagIDString);
+                    let temp: Symptom = Symptom(withId: id, andDate: date, andText: text, andSymptomTags: [], andImage: image, andCroppedImage: croppedImage);
+                    temp.symptomTagsFromString(tagIDString);
                     
                     symptomArray.append(temp);
                 }
@@ -593,7 +548,7 @@ class Data: NSObject {
             symptomNew.setValue(id, forKey: "id")
             symptomNew.setValue(symptom.date, forKey: "date")
             symptomNew.setValue(symptom.text, forKey: "text")
-            symptomNew.setValue(symptom.tagIDsToString(), forKey: "tags")
+            symptomNew.setValue(symptom.symptomTagsToString(), forKey: "tags")
             
         } else {
             id = symptom.id
@@ -608,7 +563,7 @@ class Data: NSObject {
                 if (info.count == 1){
                     info[0].setValue(symptom.date, forKey: "date")
                     info[0].setValue(symptom.text, forKey: "text")
-                    info[0].setValue(symptom.tagIDsToString(), forKey: "tags")
+                    info[0].setValue(symptom.symptomTagsToString(), forKey: "tags")
                     
                     if (symptom.image != nil){
                         let imageData = UIImageJPEGRepresentation(symptom.image!, 1)

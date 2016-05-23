@@ -12,27 +12,28 @@ class Medication: NSObject {
     var name: String;
     var image: UIImage?;
     var croppedImage: UIImage?;
-    var info: String;
     var id: String;
+    var imageUrl: String?;
+    var pageUrl: String?;
     
     override init(){
         self.name = "";
-        self.info = "";
         self.id = "0";
         super.init();
     };
     
-    init(withName name:String, andImage image: UIImage?, andCroppedImage croppedImage: UIImage?, andInfo info:String, andId id:String){
+    init(withName name:String, andImage image: UIImage?, andCroppedImage croppedImage: UIImage?, andId id:String, andImageUrl imageUrl: String?, andPageUrl pageUrl: String?){
         self.name = name;
         self.image = image;
         self.croppedImage = croppedImage;
-        self.info = info;
         self.id = id;
+        self.imageUrl = imageUrl;
+        self.pageUrl = pageUrl;
         super.init();
     }
     
     func toString() -> String{
-        return "Medication: { Name: \(name), Info : \(info), Id: \(id) }";
+        return "Medication: { Name: \(name), Id: \(id) }";
     }
     
 }

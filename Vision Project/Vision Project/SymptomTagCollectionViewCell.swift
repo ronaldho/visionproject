@@ -24,7 +24,7 @@ class SymptomTagCollectionViewCell: UICollectionViewCell {
         } else {
             switchy.setOn(true, animated: true);
         }
-        delegate!.toggleSymptomTag(self);
+//        delegate!.toggleSymptomTag(self);
     }
     
     

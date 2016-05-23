@@ -30,7 +30,7 @@ class MyMedication: Medication {
         super.init();
     };
     
-    init(withName name: String, andImage image: UIImage?, andCroppedImage croppedImage: UIImage?, andInfo info: String, andInstructions instructions: String, andId id: String, andBreakfast breakfast: Bool, andLunch lunch: Bool, andDinner dinner:Bool, andBed bed: Bool, andDate date: NSDate, andDiscontinued discontinued: Bool){
+    init(withName name: String, andImage image: UIImage?, andCroppedImage croppedImage: UIImage?, andInstructions instructions: String, andId id: String, andBreakfast breakfast: Bool, andLunch lunch: Bool, andDinner dinner:Bool, andBed bed: Bool, andDate date: NSDate, andDiscontinued discontinued: Bool){
         self.instructions = instructions;
         self.breakfast = breakfast;
         self.lunch = lunch;
@@ -39,11 +39,11 @@ class MyMedication: Medication {
         self.date = date;
         self.discontinued = discontinued;
         
-        super.init(withName: name, andImage: image, andCroppedImage: croppedImage, andInfo: info, andId: id);
+        super.init(withName: name, andImage: image, andCroppedImage: croppedImage, andId: id, andImageUrl: nil, andPageUrl: nil);
     }
     
     override func toString() -> String{
-        return "My Medication: { Name: \(name), Info : \(info), Notes: \(instructions) }";
+        return "My Medication: { Name: \(name), Notes: \(instructions) }";
     }
     
 }

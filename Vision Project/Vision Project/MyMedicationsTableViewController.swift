@@ -42,11 +42,18 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
             mmvc.delegate = self;
             mmvc.newMode = false;
             
+        } else if (segue.identifier == "FullImageFromMyMeds") {
+            let fivc = segue.destinationViewController as! FullImageViewController;
+            fivc.image = ((sender as! UITapGestureRecognizer).view as! AGImageView).fullImage
         }
     }
     
     @IBAction func newMyMedication(button: UIButton){
         performSegueWithIdentifier("NewMyMedication", sender: button)
+    }
+    
+    func imageTapped(sender: UITapGestureRecognizer){
+        performSegueWithIdentifier("FullImageFromMyMeds", sender: sender)
     }
     
     func editMed(cell: MyMedicationTableViewCell){
@@ -148,12 +155,17 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
             }
             
             if (med.image != nil){
-                cell.medImage.image = med.image;
+                cell.medImage.image = med.croppedImage;
+                cell.medImage.fullImage = med.image;
+                cell.medImage.userInteractionEnabled = true;
             } else {
-                cell.medImage.image = UIImage(named: "tablet");
+                cell.medImage.image = UIImage(named: "pill-thumb");
+                cell.medImage.userInteractionEnabled = false;
             }
-            
-            
+        
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MyMedicationsTableViewController.imageTapped(_:)))
+            cell.medImage.addGestureRecognizer(tapRecognizer);
+        
             return cell
 //        }
 

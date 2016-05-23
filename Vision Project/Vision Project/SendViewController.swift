@@ -29,15 +29,22 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
     
     func filteredSymptoms() -> Symptoms {
         if allSymptoms != nil {
+            var selectedSymptomTags: [SymptomTag] = []
+            for view in symptomTagsCollection.subviews {
+                if let cell = view as? SymptomTagCollectionViewCell {
+                    selectedSymptomTags.append(cell.symptomTag!)
+                }
+            }
+            
             let filteredSymptoms: Symptoms = Symptoms();
             for symptom in allSymptoms!.symptoms {
                 if startDate == nil || NSCalendar.currentCalendar().compareDate(startDate!, toDate:symptom.date, toUnitGranularity: .Day) == NSComparisonResult.OrderedAscending {
                     
                     if endDate == nil || NSCalendar.currentCalendar().compareDate(endDate!, toDate:symptom.date, toUnitGranularity: .Day) == NSComparisonResult.OrderedDescending {
                         
-                        if tagIDs.count > 0 {
-                            for tagID in tagIDs {
-                                if symptom.hasTagID(tagID){
+                        if selectedSymptomTags.count > 0 {
+                            for symptomTag in selectedSymptomTags {
+                                if symptom.hasSymptomTag(symptomTag){
                                     if !filteredSymptoms.symptoms.contains(symptom){
                                         filteredSymptoms.symptoms.append(symptom);
                                     }
