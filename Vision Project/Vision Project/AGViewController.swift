@@ -17,9 +17,9 @@ class AGViewController: UIViewController {
         
         self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.barTintColor = UIColor.visionDarkGreenColor();
+        self.navigationController!.navigationBar.barTintColor = UIColor.EMITDarkGreenColor();
         
-        self.view.backgroundColor = UIColor.visionTanColor();
+        self.view.backgroundColor = UIColor.EMITTanColor();
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: #selector(AGViewController.adjustForKeyboard(_:)), name: UIKeyboardWillHideNotification, object: nil)

@@ -1,7 +1,7 @@
 
 //
 //  SymptomTableViewCell.swift
-//  Vision Project
+//  EMIT Project
 //
 //  Created by Andrew on 6/05/16.
 //  Copyright © 2016 Andrew. All rights reserved.

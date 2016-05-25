@@ -1,7 +1,7 @@
 
 //
 //  Medications.swift
-//  Vision Project
+//  EMIT Project
 //
 //  Created by Andrew on 8/05/16.
 //  Copyright © 2016 Andrew. All rights reserved.

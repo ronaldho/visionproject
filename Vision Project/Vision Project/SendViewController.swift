@@ -1,6 +1,6 @@
 //
 //  SendViewController.swift
-//  Vision Project
+//  EMIT Project
 //
 //  Created by Andrew on 9/05/16.
 //  Copyright © 2016 Andrew. All rights reserved.
@@ -22,7 +22,6 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
     var allSymptoms: Symptoms?;
     var startDate: NSDate?;
     var endDate: NSDate?
-    var tagIDs: [String]!;
     var symptomTags: [SymptomTag]?;
     
     var ms: MailSender?;
@@ -32,9 +31,13 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
             var selectedSymptomTags: [SymptomTag] = []
             for view in symptomTagsCollection.subviews {
                 if let cell = view as? SymptomTagCollectionViewCell {
-                    selectedSymptomTags.append(cell.symptomTag!)
+                    if cell.switchy.on {
+                        selectedSymptomTags.append(cell.symptomTag!)
+                        print("\(cell.symptomTag!.name) enabled")
+                    }
                 }
             }
+            
             
             let filteredSymptoms: Symptoms = Symptoms();
             for symptom in allSymptoms!.symptoms {
@@ -154,26 +157,6 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
     }
     
     
-    func toggleSymptomTag(sender: SymptomTagCollectionViewCell) {
-        var indexToRemove: Int = -1;
-        var found: Bool = false;
-        if (tagIDs.count > 0){
-            for i in 0...tagIDs.count-1 {
-                if (tagIDs[i] == sender.symptomTag!.id){
-                    indexToRemove = i;
-                    found = true;
-                }
-            }
-        }
-        if (indexToRemove != -1){
-            tagIDs.removeAtIndex(indexToRemove);
-        }
-        if (!found){
-            tagIDs.append(sender.symptomTag!.id);
-        }
-    }
-    
-    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         let cell: SymptomTagCollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)! as! SymptomTagCollectionViewCell;
         
@@ -189,7 +172,6 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SymptomTagCell", forIndexPath: indexPath) as! SymptomTagCollectionViewCell
         
         let symptomTag = symptomTags![indexPath.row];
-        tagIDs.append(symptomTag.id);
         cell.delegate = self;
         cell.symptomTag = symptomTag;
         cell.switchy.setOn(true, animated: false);
@@ -213,10 +195,8 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        tagIDs = ["0","1","2","3","4","5"];
         symptomTags = SymptomTags().enabledTags;
-        tagIDs = [];
-        
+
         sendEmailButton.backgroundColor = UIColor.mailBlueColor();
         
         ms = MailSender(parentVC: self);
@@ -226,24 +206,10 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
         } else {
             sendGmailButton.hidden = true;
         }
-        
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

@@ -84,7 +84,7 @@
 		49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		49D6D6131CD5346600EBDA7B /* UITextField+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Shake.swift"; sourceTree = "<group>"; };
 		49D6D6161CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextMedicationTimerCircle.swift; sourceTree = "<group>"; };
-		49DA89CB1CC9C49A0027CF21 /* Vision Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vision Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DA89CB1CC9C49A0027CF21 /* EMIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DA89D51CC9C49A0027CF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49DA89D71CC9C49A0027CF21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 		49DA89C21CC9C49A0027CF21 = {
 			isa = PBXGroup;
 			children = (
-				49DA89CD1CC9C49A0027CF21 /* Vision Project */,
+				49DA89CD1CC9C49A0027CF21 /* EMIT */,
 				49DA89CC1CC9C49A0027CF21 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -192,12 +192,12 @@
 		49DA89CC1CC9C49A0027CF21 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				49DA89CB1CC9C49A0027CF21 /* Vision Project.app */,
+				49DA89CB1CC9C49A0027CF21 /* EMIT.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		49DA89CD1CC9C49A0027CF21 /* Vision Project */ = {
+		49DA89CD1CC9C49A0027CF21 /* EMIT */ = {
 			isa = PBXGroup;
 			children = (
 				49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */,
@@ -212,6 +212,7 @@
 				49D6D60A1CD5338900EBDA7B /* Utilities */,
 				49D6D6151CD5347B00EBDA7B /* Third Party */,
 			);
+			name = EMIT;
 			path = "Vision Project";
 			sourceTree = "<group>";
 		};
@@ -235,9 +236,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		49DA89CA1CC9C49A0027CF21 /* Vision Project */ = {
+		49DA89CA1CC9C49A0027CF21 /* EMIT */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 49DA89DF1CC9C49A0027CF21 /* Build configuration list for PBXNativeTarget "Vision Project" */;
+			buildConfigurationList = 49DA89DF1CC9C49A0027CF21 /* Build configuration list for PBXNativeTarget "EMIT" */;
 			buildPhases = (
 				49DA89C71CC9C49A0027CF21 /* Sources */,
 				49DA89C81CC9C49A0027CF21 /* Frameworks */,
@@ -247,9 +248,9 @@
 			);
 			dependencies = (
 			);
-			name = "Vision Project";
+			name = EMIT;
 			productName = "Vision Project";
-			productReference = 49DA89CB1CC9C49A0027CF21 /* Vision Project.app */;
+			productReference = 49DA89CB1CC9C49A0027CF21 /* EMIT.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -264,10 +265,11 @@
 				TargetAttributes = {
 					49DA89CA1CC9C49A0027CF21 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 5EAQKVSX3X;
 					};
 				};
 			};
-			buildConfigurationList = 49DA89C61CC9C49A0027CF21 /* Build configuration list for PBXProject "Vision Project" */;
+			buildConfigurationList = 49DA89C61CC9C49A0027CF21 /* Build configuration list for PBXProject "EMIT" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -280,7 +282,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				49DA89CA1CC9C49A0027CF21 /* Vision Project */,
+				49DA89CA1CC9C49A0027CF21 /* EMIT */,
 			);
 		};
 /* End PBXProject section */
@@ -411,7 +413,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -450,7 +452,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -462,10 +464,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Vision Project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.4ndrew.Vision-Project";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = EMIT;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -473,17 +478,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Vision Project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.4ndrew.Vision-Project";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = EMIT;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		49DA89C61CC9C49A0027CF21 /* Build configuration list for PBXProject "Vision Project" */ = {
+		49DA89C61CC9C49A0027CF21 /* Build configuration list for PBXProject "EMIT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				49DA89DD1CC9C49A0027CF21 /* Debug */,
@@ -492,7 +500,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		49DA89DF1CC9C49A0027CF21 /* Build configuration list for PBXNativeTarget "Vision Project" */ = {
+		49DA89DF1CC9C49A0027CF21 /* Build configuration list for PBXNativeTarget "EMIT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				49DA89E01CC9C49A0027CF21 /* Debug */,

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Vision Project
+//  EMIT Project
 //
 //  Created by Andrew on 21/04/16.
 //  Copyright © 2016 Andrew. All rights reserved.
@@ -40,7 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 var json: [[String: AnyObject]] = [[:]];
                 do {
-                    json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as! [[String:AnyObject]];
+                    if data != nil {
+                            json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as! [[String:AnyObject]];
+                    } else {
+                        print("Data nil in server call");
+                    }
+
                 } catch {
                     print(error)
                 }
@@ -211,12 +216,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let symptomTags: [SymptomTag] = Data.getAllSymptomTags();
         
         if symptomTags.count == 0 {
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.redColor(), andName: "Red", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.orangeColor(), andName: "Orange", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.yellowColor(), andName: "Yellow", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.greenColor(), andName: "Green", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.blueColor(), andName: "Blue", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.purpleColor(), andName: "Purple", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.redColor(), andName: "Pain", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.redOrangeColor(), andName: "", andEnabled: false));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.orangeColor(), andName: "Mood", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.orangeYellowColor(), andName: "", andEnabled: false));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.yellowColor(), andName: "Nausea", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.yellowGreenColor(), andName: "", andEnabled: false));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.greenColor(), andName: "Blood Pressure", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.greenBlueColor(), andName: "", andEnabled: false));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.blueColor(), andName: "Blood Sugars", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.bluePurpleColor(), andName: "", andEnabled: false));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.purpleColor(), andName: "Diarrhea", andEnabled: true));
+            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.purpleRedColor(), andName: "", andEnabled: false));
+            
         }
     }
 }

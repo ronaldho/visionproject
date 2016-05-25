@@ -18,30 +18,38 @@ extension UIColor{
         return UIColor.grayColor().colorWithAlphaComponent(0.5)
     }
     
-    class func visionTanColor() -> UIColor {
+    class func EMITTanColor() -> UIColor {
         return UIColor(red: 239/255, green: 234/255, blue: 219/255, alpha: 1.0)
     }
     
-    class func visionDarkGreenColor() -> UIColor {
+    class func EMITDarkGreenColor() -> UIColor {
         return UIColor(red: 47/255, green: 92/255, blue: 29/255, alpha: 1.0)
     }
     //#2F5C1D
     
-    class func visionLightGreenColor() -> UIColor {
+    class func EMITLightGreenColor() -> UIColor {
         return UIColor(red: 98/255, green: 169/255, blue: 69/255, alpha: 1.0)
     }
     
-    class func visionBlueColor() -> UIColor {
+    class func EMITBlueColor() -> UIColor {
         return UIColor(red: 22/255, green: 70/255, blue: 143/255, alpha: 1.0)
     }
     //#16468F
     
-    class func visionPurpleColor() -> UIColor {
+    class func EMITPurpleColor() -> UIColor {
         return UIColor(red: 155/255, green: 20/255, blue: 89/255, alpha: 1.0)
     }
     //#9B1459
     
+    class func EMITDarkYellowColor() -> UIColor {
+        return UIColor(red: 195/255, green: 159/255, blue: 60/255, alpha: 1.0)
+    }
+    //#C39F3C
     
+    class func EMITRedColor() -> UIColor {
+        return UIColor(red: 195/255, green: 64/255, blue: 50/255, alpha: 1.0)
+    }
+    //#C34032
     
     class func mailBlueColor() -> UIColor {
         return UIColor(red: 30/255, green: 90/255, blue: 239/255, alpha: 1.0)
@@ -52,6 +60,42 @@ extension UIColor{
         return UIColor(red: 234/255, green: 0/255, blue: 0/255, alpha: 1.0)
     }
     //#EA0000
+    
+    class func lightLightGrayColor() -> UIColor {
+        return UIColor(red: 221/255, green: 221/255, blue: 221/255, alpha: 1.0)
+    }
+    //#DDDDDD
+    
+    class func redOrangeColor() -> UIColor {
+        return UIColor(red: 255/255, green: 69/255, blue: 0/255, alpha: 1.0)
+    }
+    //#FF4500
+    
+    class func orangeYellowColor() -> UIColor {
+        return UIColor(red: 255/255, green: 165/255, blue: 0/255, alpha: 1.0)
+    }
+    //#FFA500
+    
+    class func yellowGreenColor() -> UIColor {
+        return UIColor(red: 127/255, green: 255/255, blue: 0/255, alpha: 1.0)
+    }
+    //#
+    
+    class func greenBlueColor() -> UIColor {
+        return UIColor(red: 64/255, green: 224/255, blue: 208/255, alpha: 1.0)
+    }
+    //#
+    
+    class func bluePurpleColor() -> UIColor {
+        return UIColor(red: 106/255, green: 90/255, blue: 205/255, alpha: 1.0)
+    }
+    //#
+    
+    class func purpleRedColor() -> UIColor {
+        return UIColor(red: 208/255, green: 32/255, blue: 144/255, alpha: 1.0)
+    }
+    //#D02090
+    
     
     class func getColorFromString(colorString: String) -> UIColor {
         let colorArray: [String] = colorString.componentsSeparatedByString("|");

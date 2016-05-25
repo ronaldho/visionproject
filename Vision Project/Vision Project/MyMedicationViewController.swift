@@ -1,6 +1,6 @@
 //
 //  MyMedicationViewController.swift
-//  Vision Project
+//  EMIT Project
 //
 //  Created by Andrew on 30/04/16.
 //  Copyright © 2016 Andrew. All rights reserved.
@@ -111,14 +111,14 @@ class MyMedicationViewController: AGInputViewController {
         if med.discontinued == false {
             med.discontinued = true
             UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.discontinueButton.backgroundColor = UIColor.visionBlueColor();
+                self.discontinueButton.backgroundColor = UIColor.EMITBlueColor();
                 self.discontinueButton.setTitle("Restart", forState: UIControlState.Normal)
             })
             
         } else {
             med.discontinued = false
             UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.discontinueButton.backgroundColor = UIColor.visionPurpleColor();
+                self.discontinueButton.backgroundColor = UIColor.EMITPurpleColor();
                 self.discontinueButton.setTitle("Discontinue", forState: UIControlState.Normal)
             })
             
@@ -176,17 +176,24 @@ class MyMedicationViewController: AGInputViewController {
         self.medHistoryTable.layer.cornerRadius = 5;
         self.medHistoryTable.layer.borderColor = UIColor.greyTextFieldBorderColor().CGColor;
         self.medHistoryTable.layer.borderWidth = 0.5;
-//        self.medHistoryTable.scrollEnabled = false;
-        
+
         medList.medications = Data.getAllMedications()
         medHistories = []
         
-        medInstructions!.delegate = self
-        
-//        addPhotoButton!.hidden = true;
-//        photoContainer!.hidden = true;
         addFromGlossaryButton.hidden = true;
         medInfoButton.hidden = true;
+        
+        // Time Icons
+        let breakfastIcon: UIImage = UIImage(named: "coffee")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let lunchIcon: UIImage = UIImage(named: "sun")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let dinnerIcon: UIImage = UIImage(named: "restaurant")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let bedIcon: UIImage = UIImage(named: "moon")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        
+        breakfastButton.setImage(breakfastIcon, forState: UIControlState.Normal)
+        lunchButton.setImage(lunchIcon, forState: UIControlState.Normal)
+        dinnerButton.setImage(dinnerIcon, forState: UIControlState.Normal)
+        bedButton.setImage(bedIcon, forState: UIControlState.Normal)
+        
         
         if (newMode){
             self.title = "New My Medication"
@@ -197,7 +204,7 @@ class MyMedicationViewController: AGInputViewController {
         } else {
             self.title = "Edit My Medication"
             if (med.discontinued){
-                self.discontinueButton.backgroundColor = UIColor.visionBlueColor();
+                self.discontinueButton.backgroundColor = UIColor.EMITBlueColor();
                 self.discontinueButton.setTitle("Restart", forState: UIControlState.Normal);
             }
         }
@@ -208,7 +215,7 @@ class MyMedicationViewController: AGInputViewController {
             setMedFromGlossary()
         }
         
-        
+        medInstructions!.delegate = self
         if (medInstructions != nil){
             medInstructions!.layer.cornerRadius = 5;
             medInstructions!.layer.borderColor = UIColor.greyTextFieldBorderColor().CGColor;
@@ -227,40 +234,40 @@ class MyMedicationViewController: AGInputViewController {
     @IBAction func toggleBreakfast(){
         if (breakfastButtonSelected){
             breakfastButtonSelected = false;
-            breakfastButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
+            breakfastButton.tintColor = UIColor.lightLightGrayColor();
         } else {
             breakfastButtonSelected = true;
-            breakfastButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
+            breakfastButton.tintColor = UIColor.EMITLightGreenColor();
         }
     }
     
     @IBAction func toggleLunch(){
         if (lunchButtonSelected){
             lunchButtonSelected = false;
-            lunchButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
+            lunchButton.tintColor = UIColor.lightLightGrayColor();
         } else {
             lunchButtonSelected = true;
-            lunchButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
+            lunchButton.tintColor = UIColor.EMITDarkYellowColor();
         }
     }
     
     @IBAction func toggleDinner(){
         if (dinnerButtonSelected){
             dinnerButtonSelected = false;
-            dinnerButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
+            dinnerButton.tintColor = UIColor.lightLightGrayColor();
         } else {
             dinnerButtonSelected = true;
-            dinnerButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
+            dinnerButton.tintColor = UIColor.EMITRedColor();
         }
     }
     
     @IBAction func toggleBed(){
         if (bedButtonSelected){
             bedButtonSelected = false;
-            bedButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
+            bedButton.tintColor = UIColor.lightLightGrayColor();
         } else {
             bedButtonSelected = true;
-            bedButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
+            bedButton.tintColor = UIColor.EMITBlueColor();
         }
     }
     
@@ -277,34 +284,35 @@ class MyMedicationViewController: AGInputViewController {
             addPhotoButton!.hidden = false;
         }
         
+        if (med.breakfast){
+            breakfastButtonSelected = true;
+            breakfastButton.tintColor = UIColor.EMITLightGreenColor();
+        } else {
+            breakfastButton.tintColor = UIColor.lightLightGrayColor();
+        }
+        if (med.lunch){
+            lunchButtonSelected = true;
+            lunchButton.tintColor = UIColor.EMITDarkYellowColor();
+        } else {
+            lunchButton.tintColor = UIColor.lightLightGrayColor();
+        }
+        if (med.dinner){
+            dinnerButtonSelected = true;
+            dinnerButton.tintColor = UIColor.EMITRedColor();
+        } else {
+            dinnerButton.tintColor = UIColor.lightLightGrayColor();
+        }
+        if (med.bed){
+            bedButtonSelected = true;
+            bedButton.tintColor = UIColor.EMITBlueColor();
+        } else {
+            bedButton.tintColor = UIColor.lightLightGrayColor();
+        }
+        
         if (med.id != "0"){
             medName.text = med.name;
             medInstructions.text = med.instructions;
             
-            if (med.breakfast){
-                breakfastButtonSelected = true;
-                breakfastButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
-            } else {
-                breakfastButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
-            }
-            if (med.lunch){
-                lunchButtonSelected = true;
-                lunchButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
-            } else {
-                lunchButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
-            }
-            if (med.dinner){
-                dinnerButtonSelected = true;
-                dinnerButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
-            } else {
-                dinnerButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
-            }
-            if (med.bed){
-                bedButtonSelected = true;
-                bedButton.setImage(UIImage(named: "blueCircle"), forState: UIControlState.Normal);
-            } else {
-                bedButton.setImage(UIImage(named: "lightGreyCircle"), forState: UIControlState.Normal);
-            }
             
             if (medInstructions!.text == ""){
                 medInstructions!.text = "Instructions"
@@ -331,69 +339,61 @@ class MyMedicationViewController: AGInputViewController {
     
     @IBAction func save(sender: UIButton){
         
-        // Prevent saving placeholder text as instructions data
-        var instructions = medInstructions.text
-        if medInstructions!.textColor == UIColor.greyPlaceholderColor() {
-            instructions = "";
-        }
-        
-        let medIdFromSave = Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: photo!.fullImage, andCroppedImage: photo!.image, andInstructions: instructions, andId: med.id, andBreakfast: breakfastButtonSelected, andLunch: lunchButtonSelected, andDinner: dinnerButtonSelected, andBed: bedButtonSelected, andDate: med.date, andDiscontinued: med.discontinued));
-        
-        
-        var historyText: String = "";
-        var timeChanged = false;
-        
-        if (med.breakfast != breakfastButtonSelected){
-            historyText += "Breakfast time \(getAddedOrRemoved(breakfastButtonSelected))"
-            timeChanged = true;
-        }
-        if (med.lunch != lunchButtonSelected){
-            if (timeChanged) {
-                historyText += ", "
+        if (medName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) != ""){
+            
+            // Prevent saving placeholder text as instructions data
+            var instructions = medInstructions.text
+            if medInstructions!.textColor == UIColor.greyPlaceholderColor() {
+                instructions = "";
             }
-            historyText += "Lunch time \(getAddedOrRemoved(lunchButtonSelected))"
-            timeChanged = true;
-        }
-        if (med.dinner != dinnerButtonSelected){
-            if (timeChanged) {
-                historyText += ", "
+            
+            let medIdFromSave = Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: photo!.fullImage, andCroppedImage: photo!.image, andInstructions: instructions, andId: med.id, andBreakfast: breakfastButtonSelected, andLunch: lunchButtonSelected, andDinner: dinnerButtonSelected, andBed: bedButtonSelected, andDate: med.date, andDiscontinued: med.discontinued));
+            
+            
+            // Prepare text for history table
+            var historyText: String = "";
+            var timeChanged = false;
+            
+            if (med.breakfast != breakfastButtonSelected){
+                historyText += "Breakfast time \(getAddedOrRemoved(breakfastButtonSelected))"
+                timeChanged = true;
             }
-            historyText += "Dinner time \(getAddedOrRemoved(dinnerButtonSelected))"
-            timeChanged = true;
-        }
-        if (med.bed != bedButtonSelected){
-            if (timeChanged) {
-                historyText += ", "
+            if (med.lunch != lunchButtonSelected){
+                if (timeChanged) {
+                    historyText += ", "
+                }
+                historyText += "Lunch time \(getAddedOrRemoved(lunchButtonSelected))"
+                timeChanged = true;
             }
-            historyText += "Bed time \(getAddedOrRemoved(bedButtonSelected))"
-        }
-        
-        if (medInstructions.text != med.instructions){
-            if (timeChanged) {
-                historyText += "\n"
+            if (med.dinner != dinnerButtonSelected){
+                if (timeChanged) {
+                    historyText += ", "
+                }
+                historyText += "Dinner time \(getAddedOrRemoved(dinnerButtonSelected))"
+                timeChanged = true;
             }
-            historyText += medInstructions.text;
+            if (med.bed != bedButtonSelected){
+                if (timeChanged) {
+                    historyText += ", "
+                }
+                historyText += "Bed time \(getAddedOrRemoved(bedButtonSelected))"
+            }
+            
+            if (medInstructions.text != med.instructions){
+                if (timeChanged) {
+                    historyText += "\n"
+                }
+                historyText += medInstructions.text;
+            }
+            if (historyText != ""){
+                Data.saveMyMedicationHistory(MyMedicationHistory(withId: "0", andMedId: medIdFromSave, andDate: NSDate(), andText: historyText))
+            }
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+        } else {
+            medName!.shake(10, delta: 10, speed: 0.1);
         }
-        if (historyText != ""){
-            Data.saveMyMedicationHistory(MyMedicationHistory(withId: "0", andMedId: medIdFromSave, andDate: NSDate(), andText: historyText))
-        }
-        
-        
-        //delegate!.itemSaved = true;
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-
-        
-//        if (date != StaticDates.sharedInstance.defaultDate){
-////            let notes: String = (notesField!.textColor == UIColor.greyPlaceholderColor()) ? "" : notesField!.text;
-////            let myMedicationId: String =
-//
-//            
-////            delegate?.itemToScrollToId = myMedicationId
-//            
-//        } else {
-//            dateField!.shake(10, delta: 10, speed: 0.1);
-//        }
     }
     
     override func configureDatePicker(inout picker: UIDatePicker){

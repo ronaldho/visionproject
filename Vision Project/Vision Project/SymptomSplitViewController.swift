@@ -1,6 +1,6 @@
 //
 //  SymptomSplitViewController.swift
-//  Vision Project
+//  EMIT Project
 //
 //  Created by Andrew on 11/05/16.
 //  Copyright © 2016 Andrew. All rights reserved.
@@ -159,7 +159,7 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
         
         self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.barTintColor = UIColor.visionDarkGreenColor();
+        self.navigationController!.navigationBar.barTintColor = UIColor.EMITDarkGreenColor();
         
         // Do any additional setup after loading the view.
     }
@@ -180,7 +180,7 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds;
         if screenSize.width < 350 {
-            scvc.calendarWidthConstraint.constant = 280
+            scvc.calendarWidth = 280
         }
         
         return scvc;
@@ -195,25 +195,29 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
         // Make calendar area bigger if necessary
         let currentSize = calendar.view.bounds.height
         let newSize = calendarMonth.calendar.contentSize.height + 41;
+        print("1 currentSize: \(currentSize), newSize: \(newSize)");
         if (newSize > currentSize){
+            
             self.setCalendarContainerHeight(calendarMonth.calendar.contentSize.height + 41);
         }
     }
     
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
-        self.calendar = pageViewController.viewControllers![0] as! SymptomCalendarViewController
-        let previousMonth = previousViewControllers[0] as! SymptomCalendarViewController
         
-        // Make calendar smaller if necessary
-        let currentSize = calendar.view.bounds.height
-        let newSize = calendar.calendar.contentSize.height + 41;
-        if (newSize < currentSize){
-            self.setCalendarContainerHeight(calendar.calendar.contentSize.height + 41);
-        }
-        
-        // Get selected date of new month if transitionCompleted
         if completed {
+            self.calendar = pageViewController.viewControllers![0] as! SymptomCalendarViewController
+            let previousMonth = previousViewControllers[0] as! SymptomCalendarViewController
+            
+            // Make calendar smaller if necessary
+            let currentSize = calendar.view.bounds.height
+            let newSize = calendar.calendar.contentSize.height + 41;
+            print("2 currentSize: \(currentSize), newSize: \(newSize)");
+            if (newSize < currentSize){
+                self.setCalendarContainerHeight(calendar.calendar.contentSize.height + 41);
+            }
+            
+            // Get selected date of new month
             previousMonth.unselectDay()
             calendar.selectAppropriateDayCell()
             calendarSelectedDate = calendar.selectedCell?.date;
@@ -269,7 +273,9 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
     
     func setCalendarContainerHeight(height: CGFloat){
         self.view.layoutIfNeeded()
+        print("setCalendarHeight(\(height))")
         self.calendarHeightConstraint.constant = height;
+        self.view.layoutIfNeeded()
 //        UIView.animateWithDuration(0.3, animations:  {
 //            self.view.layoutIfNeeded()
 //        });

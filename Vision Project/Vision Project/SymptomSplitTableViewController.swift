@@ -1,6 +1,6 @@
 //
 //  SymptomSplitTableViewController.swift
-//  Vision Project
+//  EMIT Project
 //
 //  Created by Andrew on 12/05/16.
 //  Copyright © 2016 Andrew. All rights reserved.

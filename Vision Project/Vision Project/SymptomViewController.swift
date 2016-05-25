@@ -1,6 +1,6 @@
 //
 //  SymptomViewController.swift
-//  Vision Project
+//  EMIT Project
 //
 //  Created by Andrew on 6/05/16.
 //  Copyright © 2016 Andrew. All rights reserved.
@@ -203,29 +203,30 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     }
     
     @IBAction func save(sender: UIButton){
-        var selectedSymptomTags: [SymptomTag] = []
-        for view in symptomTagsCollection.subviews {
-            if let cell = view as? SymptomTagCollectionViewCell {
-                if cell.switchy.on {
-                    selectedSymptomTags.append(cell.symptomTag!)
+        
+        if (dateField!.text != ""){
+            if (detailsText.textColor != UIColor.greyPlaceholderColor() &&
+                detailsText.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) != "") {
+                
+                var selectedSymptomTags: [SymptomTag] = []
+                for view in symptomTagsCollection.subviews {
+                    if let cell = view as? SymptomTagCollectionViewCell {
+                        if cell.switchy.on {
+                            selectedSymptomTags.append(cell.symptomTag!)
+                        }
+                    }
                 }
+                
+                Data.saveSymptom(Symptom(withId: symptom.id, andDate: date, andText: detailsText.text, andSymptomTags: selectedSymptomTags, andImage: symptom.image, andCroppedImage: symptom.croppedImage));
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
+            } else {
+                detailsText.shake(10, delta: 10, speed: 0.1)
             }
+            
+        } else {
+            dateField!.shake(10, delta: 10, speed: 0.1);
         }
-        
-        Data.saveSymptom(Symptom(withId: symptom.id, andDate: date, andText: detailsText.text, andSymptomTags: selectedSymptomTags, andImage: symptom.image, andCroppedImage: symptom.croppedImage));
-        self.dismissViewControllerAnimated(true, completion: nil)
-        
-        
-        //        if (date != StaticDates.sharedInstance.defaultDate){
-        ////            let notes: String = (notesField!.textColor == UIColor.greyPlaceholderColor()) ? "" : notesField!.text;
-        ////            let myMedicationId: String =
-        //
-        //
-        ////            delegate?.itemToScrollToId = myMedicationId
-        //
-        //        } else {
-        //            dateField!.shake(10, delta: 10, speed: 0.1);
-        //        }
     }
     
     override func configureDatePicker(inout picker: UIDatePicker){

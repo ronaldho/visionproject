@@ -1,6 +1,6 @@
 //
 //  SymptomCalendarViewController.swift
-//  Vision Project
+//  EMIT Project
 //
 //  Created by Andrew on 11/05/16.
 //  Copyright © 2016 Andrew. All rights reserved.
@@ -19,13 +19,17 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
     var delegate: CalendarViewDelegate?;
     var month: NSDate!;
     var selectedCell: CalendarDayCell?;
+    var calendarWidth: CGFloat?;
     
     @IBAction func todayButtonPressed(sender: AnyObject) {
         delegate!.goToToday()
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.firstLoad = true;
+//        self.firstLoad = true;        
+        if (calendarWidth != nil) {
+            calendarWidthConstraint.constant = calendarWidth!
+        }
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
@@ -38,7 +42,7 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
             }
             
             selectedCell = cell;
-            cell.backgroundColor = UIColor.visionLightGreenColor();
+            cell.backgroundColor = UIColor.EMITLightGreenColor();
             cell.dayLabel.textColor = UIColor.whiteColor();
             cell.dayLabel.font = UIFont.boldSystemFontOfSize(17.0)
             cell.indicatorView.backgroundColor = UIColor.whiteColor()
@@ -220,7 +224,9 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
         monthLabel.text = month.monthYearFormat();
         self.view.backgroundColor = UIColor.whiteColor();
         
-
+        if (calendarWidth != nil) {
+            calendarWidthConstraint.constant = calendarWidth!
+        }
         
         // Do any additional setup after loading the view.
     }

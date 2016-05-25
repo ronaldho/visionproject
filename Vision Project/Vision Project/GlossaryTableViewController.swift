@@ -1,6 +1,6 @@
 //
 //  GlossaryTableViewController.swift
-//  Vision Project
+//  EMIT Project
 //
 //  Created by Andrew on 9/05/16.
 //  Copyright © 2016 Andrew. All rights reserved.
@@ -80,13 +80,13 @@ class GlossaryTableViewController: UITableViewController {
 
         self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.barTintColor = UIColor.visionDarkGreenColor();
+        self.navigationController!.navigationBar.barTintColor = UIColor.EMITDarkGreenColor();
         
 //        self.tableView.allowsSelection = false;
         
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 25;
-        self.tableView.backgroundColor = UIColor.visionTanColor();
+        self.tableView.backgroundColor = UIColor.EMITTanColor();
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,7 +115,7 @@ class GlossaryTableViewController: UITableViewController {
             print("image nil for \(medication.name)")
         }
         cell.medImageView.image = medication.image;
-        cell.backgroundColor = UIColor.visionTanColor();
+        cell.backgroundColor = UIColor.EMITTanColor();
 
         return cell
     }
