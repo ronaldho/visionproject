@@ -29,10 +29,6 @@ class MedPageHTMLViewController: UIViewController, UIWebViewDelegate {
 
     
     override func viewDidLoad(){
-        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.barTintColor = UIColor.EMITDarkGreenColor();
-
         
         webView.delegate = self;
 

@@ -80,12 +80,6 @@ SymptomCellDelegate, InputViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (!self.isKindOfClass(SymptomSplitTableViewController)){
-            self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
-            self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-            self.navigationController!.navigationBar.barTintColor = UIColor.EMITDarkGreenColor();
-        }
-        
         self.tableView.allowsSelection = false;
         
         self.tableView.rowHeight = UITableViewAutomaticDimension;

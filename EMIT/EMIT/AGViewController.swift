@@ -15,10 +15,6 @@ class AGViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.barTintColor = UIColor.EMITDarkGreenColor();
-        
         self.view.backgroundColor = UIColor.EMITTanColor();
         
         let notificationCenter = NSNotificationCenter.defaultCenter()

@@ -31,7 +31,7 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
             var selectedSymptomTags: [SymptomTag] = []
             for view in symptomTagsCollection.subviews {
                 if let cell = view as? SymptomTagCollectionViewCell {
-                    if cell.switchy.on {
+                    if cell.tagSelected! {
                         selectedSymptomTags.append(cell.symptomTag!)
                         print("\(cell.symptomTag!.name) enabled")
                     }
@@ -145,7 +145,7 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
         //let toRecipents = ["foo@bar.com"]
         
         if (sender == self.sendGmailButton){
-            let gmailString: String = String(format: "googlegmail:///co?subject=%@&body=%@", title, messageBody);
+            let gmailString: String = String("googlegmail:///co?subject=\(title)&body=\(messageBody)");
             let urlString = gmailString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet());
             let gmailURL: NSURL = NSURL(string: urlString!)!;
             
@@ -160,7 +160,7 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         let cell: SymptomTagCollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)! as! SymptomTagCollectionViewCell;
         
-        cell.toggleSymptomTag(self);
+        cell.selectSymptomTag(self);
     }
     
     
@@ -174,11 +174,10 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
         let symptomTag = symptomTags![indexPath.row];
         cell.delegate = self;
         cell.symptomTag = symptomTag;
-        cell.switchy.setOn(true, animated: false);
+        cell.backgroundSelectedView!.backgroundColor = UIColor.EMITLightGreenColor()
+        cell.tagSelected = true;
         
-        cell.switchy.userInteractionEnabled = false;
-        
-        cell.nameLabel.text = symptomTag.name;
+        cell.nameLabel!.text = symptomTag.name;
         cell.colorView.backgroundColor = symptomTag.color;
         
         collectionHeight.constant = collectionView.contentSize.height;

@@ -19,6 +19,9 @@
 		4993E92E1CE8513B0069B8B7 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993E92D1CE8513B0069B8B7 /* OverlayView.swift */; };
 		49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */; };
 		49CB87D41CF583860077F67C /* MyMedicationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87D31CF583860077F67C /* MyMedicationsTableViewController.swift */; };
+		49CB87D61CF610B40077F67C /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87D51CF610B40077F67C /* MainTabBarViewController.swift */; };
+		49CB87D81CF611E00077F67C /* EMITNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87D71CF611E00077F67C /* EMITNavigationViewController.swift */; };
+		49CB87DA1CF614840077F67C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87D91CF614840077F67C /* SettingsViewController.swift */; };
 		49D6D5FF1CD4809F00EBDA7B /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */; };
 		49D6D6011CD4819700EBDA7B /* MyMedications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6001CD4819700EBDA7B /* MyMedications.swift */; };
 		49D6D6031CD519C600EBDA7B /* MyMedicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */; };
@@ -71,6 +74,9 @@
 		4993E92D1CE8513B0069B8B7 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayView.swift; path = ../OverlayView.swift; sourceTree = "<group>"; };
 		49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationTableViewCell.swift; sourceTree = "<group>"; };
 		49CB87D31CF583860077F67C /* MyMedicationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationsTableViewController.swift; sourceTree = "<group>"; };
+		49CB87D51CF610B40077F67C /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		49CB87D71CF611E00077F67C /* EMITNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMITNavigationViewController.swift; sourceTree = "<group>"; };
+		49CB87D91CF614840077F67C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		49D6D6001CD4819700EBDA7B /* MyMedications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedications.swift; sourceTree = "<group>"; };
 		49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +153,7 @@
 				49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */,
 				4922D3751CE70F41006BD3ED /* GlossaryTableViewCell.swift */,
 				49DC221C1CF11F35004F9ED0 /* MedPageHTMLViewController.swift */,
+				49CB87D91CF614840077F67C /* SettingsViewController.swift */,
 				49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */,
 				4993E92D1CE8513B0069B8B7 /* OverlayView.swift */,
 				49D6D6161CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift */,
@@ -202,6 +209,8 @@
 				49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */,
 				49DA89E61CC9C5950027CF21 /* Model.xcdatamodeld */,
 				49DA89D41CC9C49A0027CF21 /* Main.storyboard */,
+				49CB87D51CF610B40077F67C /* MainTabBarViewController.swift */,
+				49CB87D71CF611E00077F67C /* EMITNavigationViewController.swift */,
 				49DA89D71CC9C49A0027CF21 /* Assets.xcassets */,
 				49DA89D91CC9C49A0027CF21 /* LaunchScreen.storyboard */,
 				49DA89DC1CC9C49A0027CF21 /* Info.plist */,
@@ -312,6 +321,7 @@
 				4993E92E1CE8513B0069B8B7 /* OverlayView.swift in Sources */,
 				49E424571CDB1DE500CFCA22 /* Symptom.swift in Sources */,
 				49CB87D41CF583860077F67C /* MyMedicationsTableViewController.swift in Sources */,
+				49CB87D61CF610B40077F67C /* MainTabBarViewController.swift in Sources */,
 				49E4245B1CDD9D0700CFCA22 /* SymptomTableViewController.swift in Sources */,
 				49DA89EB1CC9C8080027CF21 /* MyMedication.swift in Sources */,
 				492337D21CE45C4100A15AE2 /* SymptomSplitViewController.swift in Sources */,
@@ -330,6 +340,7 @@
 				49D6D60E1CD5340000EBDA7B /* ImageUtils.swift in Sources */,
 				492337D41CE45D3C00A15AE2 /* CalendarDayCell.swift in Sources */,
 				49DC221D1CF11F35004F9ED0 /* MedPageHTMLViewController.swift in Sources */,
+				49CB87DA1CF614840077F67C /* SettingsViewController.swift in Sources */,
 				49E4245D1CDD9D2100CFCA22 /* SymptomTableViewCell.swift in Sources */,
 				49E424591CDB1E2800CFCA22 /* SymptomTag.swift in Sources */,
 				496CFB531CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift in Sources */,
@@ -339,6 +350,7 @@
 				492337DA1CE5977100A15AE2 /* SymptomSplitTableViewController.swift in Sources */,
 				49D6D6031CD519C600EBDA7B /* MyMedicationViewController.swift in Sources */,
 				492337D01CE45C2000A15AE2 /* SymptomCalendarViewController.swift in Sources */,
+				49CB87D81CF611E00077F67C /* EMITNavigationViewController.swift in Sources */,
 				4922D3761CE70F41006BD3ED /* GlossaryTableViewCell.swift in Sources */,
 				49D6D60C1CD533B600EBDA7B /* StaticDates.swift in Sources */,
 				492337DC1CE5A86A00A15AE2 /* DateExtension.swift in Sources */,

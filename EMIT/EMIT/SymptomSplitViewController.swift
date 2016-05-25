@@ -157,10 +157,6 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
         
         self.currentMonth = NSDate.getFirstDayOfMonth(NSDate())
         
-        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor();
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.barTintColor = UIColor.EMITDarkGreenColor();
-        
         // Do any additional setup after loading the view.
     }
     

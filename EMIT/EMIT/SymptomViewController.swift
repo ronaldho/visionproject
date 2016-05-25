@@ -47,7 +47,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         let cell: SymptomTagCollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)! as! SymptomTagCollectionViewCell;
         
-        cell.toggleSymptomTag(self);
+        cell.selectSymptomTag(self);
     }
 
     
@@ -62,13 +62,14 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         cell.delegate = self;
         cell.symptomTag = symptomTag;
         if (symptom.hasSymptomTag(symptomTag)){
-            cell.switchy.setOn(true, animated: false);
+            cell.backgroundSelectedView!.backgroundColor = UIColor.EMITLightGreenColor()
+            cell.tagSelected = true;
         } else {
-            cell.switchy.setOn(false, animated: false);
+            cell.backgroundSelectedView!.backgroundColor = UIColor.clearColor()
+            cell.tagSelected = false;
         }
-        cell.switchy.userInteractionEnabled = false;
-        
-        cell.nameLabel.text = symptomTag.name;
+
+        cell.nameLabel!.text = symptomTag.name;
         cell.colorView.backgroundColor = symptomTag.color;
         
         collectionHeight.constant = collectionView.contentSize.height;
@@ -211,7 +212,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
                 var selectedSymptomTags: [SymptomTag] = []
                 for view in symptomTagsCollection.subviews {
                     if let cell = view as? SymptomTagCollectionViewCell {
-                        if cell.switchy.on {
+                        if cell.tagSelected! {
                             selectedSymptomTags.append(cell.symptomTag!)
                         }
                     }

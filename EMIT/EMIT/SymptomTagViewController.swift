@@ -19,28 +19,23 @@ class SymptomTagViewController: AGInputViewController, SymptomTagCellDelegate {
         super.viewDidLoad()
 
         symptomTags = SymptomTags().tags;
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func save(sender: UIButton){
         
         for subview in symptomTagsCollection.subviews {
             if let symptomTagCell = subview as? SymptomTagCollectionViewCell{
-                Data.saveSymptomTag(SymptomTag(withId: symptomTagCell.symptomTag!.id, andColor: symptomTagCell.symptomTag!.color, andName: symptomTagCell.nameField!.text!, andEnabled: symptomTagCell.switchy.on));
+                Data.saveSymptomTag(SymptomTag(withId: symptomTagCell.symptomTag!.id, andColor: symptomTagCell.symptomTag!.color, andName: symptomTagCell.nameField!.text!, andEnabled: symptomTagCell.switchy!.on));
             }
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func toggleSymptomTag(sender: SymptomTagCollectionViewCell){
-        //Nothing to do?
-    }
-    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         let cell: SymptomTagCollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)! as! SymptomTagCollectionViewCell;
         
-        cell.toggleSymptomTag(self);
+        cell.enableOrDisableSymptomTag(self);
     }
     
     
@@ -55,13 +50,11 @@ class SymptomTagViewController: AGInputViewController, SymptomTagCellDelegate {
         cell.delegate = self;
         cell.symptomTag = symptomTag;
         if (symptomTag.enabled) {
-            cell.switchy.setOn(true, animated: false);
+            cell.switchy!.setOn(true, animated: false);
         } else {
-            cell.switchy.setOn(false, animated: false);
+            cell.switchy!.setOn(false, animated: false);
         }
-        
-        cell.switchy.userInteractionEnabled = false;
-        
+
         cell.nameField!.text = symptomTag.name;
         cell.colorView.backgroundColor = symptomTag.color;
         
