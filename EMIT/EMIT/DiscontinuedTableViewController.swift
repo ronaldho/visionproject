@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DiscontinuedTableViewController: UITableViewController, InputViewDelegate {
+class DiscontinuedTableViewController: AGTableViewController, InputViewDelegate {
 
     var discontinuedMeds: MyMedications?
     var itemSaved = false;
@@ -60,7 +60,8 @@ class DiscontinuedTableViewController: UITableViewController, InputViewDelegate 
 
         let med: MyMedication = discontinuedMeds!.meds[indexPath.row];
         
-        
+        cell.backgroundColor = UIColor.EMITTanColor()
+        cell.nameLabel.textColor = UIColor.EMITRedColor()
         cell.nameLabel.text = med.name
         cell.med = med
         

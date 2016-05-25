@@ -38,6 +38,7 @@ class MyMedicationViewController: AGInputViewController {
     var lunchButtonSelected = false;
     var dinnerButtonSelected = false;
     var bedButtonSelected = false;
+    var discontinued = false;
     
     @IBAction func addMedFromGlossaryButtonPressed(sender: AnyObject) {
         if medToAdd != nil {
@@ -108,15 +109,15 @@ class MyMedicationViewController: AGInputViewController {
     }
     
     @IBAction func toggleDiscontinue(){
-        if med.discontinued == false {
-            med.discontinued = true
+        if discontinued == false {
+            discontinued = true
             UIView.animateWithDuration(0.5, animations: { () -> Void in
                 self.discontinueButton.backgroundColor = UIColor.EMITBlueColor();
                 self.discontinueButton.setTitle("Restart", forState: UIControlState.Normal)
             })
             
         } else {
-            med.discontinued = false
+            discontinued = false
             UIView.animateWithDuration(0.5, animations: { () -> Void in
                 self.discontinueButton.backgroundColor = UIColor.EMITPurpleColor();
                 self.discontinueButton.setTitle("Discontinue", forState: UIControlState.Normal)
@@ -139,15 +140,17 @@ class MyMedicationViewController: AGInputViewController {
         alertController.addAction(delete)
         alertController.addAction(cancel)
         
+        alertController.popoverPresentationController?.sourceView = deleteButton;
+        alertController.popoverPresentationController?.sourceRect = (deleteButton?.bounds)!
         presentViewController(alertController, animated: true, completion: nil)
     }
     
     override func imageTapped(sender: UITapGestureRecognizer){
-        performSegueWithIdentifier("FullImageFromMyMedication", sender: sender)
+        performSegueWithIdentifier("FullImageFromMyMed", sender: sender)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "FullImageFromMyMedication" {
+        if segue.identifier == "FullImageFromMyMed" {
             let imageCtrl: FullImageViewController = segue.destinationViewController as! FullImageViewController;
             
             imageCtrl.image = photo!.fullImage;
@@ -206,6 +209,7 @@ class MyMedicationViewController: AGInputViewController {
             if (med.discontinued){
                 self.discontinueButton.backgroundColor = UIColor.EMITBlueColor();
                 self.discontinueButton.setTitle("Restart", forState: UIControlState.Normal);
+                self.discontinued = true;
             }
         }
         
@@ -337,6 +341,14 @@ class MyMedicationViewController: AGInputViewController {
         }
     }
     
+    func getDiscontinuedOrRestarted(discontinued: Bool) -> String {
+        if (discontinued) {
+            return "Discontinued"
+        } else {
+            return "Restarted"
+        }
+    }
+    
     @IBAction func save(sender: UIButton){
         
         if (medName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) != ""){
@@ -347,40 +359,43 @@ class MyMedicationViewController: AGInputViewController {
                 instructions = "";
             }
             
-            let medIdFromSave = Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: photo!.fullImage, andCroppedImage: photo!.image, andInstructions: instructions, andId: med.id, andBreakfast: breakfastButtonSelected, andLunch: lunchButtonSelected, andDinner: dinnerButtonSelected, andBed: bedButtonSelected, andDate: med.date, andDiscontinued: med.discontinued));
+            let medIdFromSave = Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: photo!.fullImage, andCroppedImage: photo!.image, andInstructions: instructions, andId: med.id, andBreakfast: breakfastButtonSelected, andLunch: lunchButtonSelected, andDinner: dinnerButtonSelected, andBed: bedButtonSelected, andDate: med.date, andDiscontinued: discontinued));
             
             
             // Prepare text for history table
             var historyText: String = "";
-            var timeChanged = false;
+            
+            if (med.discontinued != discontinued) {
+                historyText += getDiscontinuedOrRestarted(discontinued)
+            }
             
             if (med.breakfast != breakfastButtonSelected){
+                if (historyText != "") {
+                    historyText += ", "
+                }
                 historyText += "Breakfast time \(getAddedOrRemoved(breakfastButtonSelected))"
-                timeChanged = true;
             }
             if (med.lunch != lunchButtonSelected){
-                if (timeChanged) {
+                if (historyText != "") {
                     historyText += ", "
                 }
                 historyText += "Lunch time \(getAddedOrRemoved(lunchButtonSelected))"
-                timeChanged = true;
             }
             if (med.dinner != dinnerButtonSelected){
-                if (timeChanged) {
+                if (historyText != "") {
                     historyText += ", "
                 }
                 historyText += "Dinner time \(getAddedOrRemoved(dinnerButtonSelected))"
-                timeChanged = true;
             }
             if (med.bed != bedButtonSelected){
-                if (timeChanged) {
+                if (historyText != "") {
                     historyText += ", "
                 }
                 historyText += "Bed time \(getAddedOrRemoved(bedButtonSelected))"
             }
             
             if (medInstructions.text != med.instructions){
-                if (timeChanged) {
+                if (historyText != "") {
                     historyText += "\n"
                 }
                 historyText += medInstructions.text;

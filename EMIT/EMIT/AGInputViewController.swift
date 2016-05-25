@@ -18,6 +18,7 @@ UINavigationControllerDelegate, UITextViewDelegate  {
     @IBOutlet var photoContainer: UIView?;
     @IBOutlet var deleteButton: UIButton?;
     @IBOutlet var mainStackView: UIStackView?;
+    @IBOutlet var deletePhotoButton: UIButton?;
     
     var datePicker: UIDatePicker?;
     var date: NSDate = StaticDates.sharedInstance.defaultDate;
@@ -49,6 +50,9 @@ UINavigationControllerDelegate, UITextViewDelegate  {
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
         photo!.fullImage = info[UIImagePickerControllerOriginalImage] as? UIImage;
         photo!.image = ImageUtils.cropToSquare(ImageUtils.fixOrientation(photo!.fullImage!));
+        
+        photoContainer!.hidden = false;
+        addPhotoButton!.hidden = true;
     }
     
     func takePhoto(){
@@ -67,8 +71,6 @@ UINavigationControllerDelegate, UITextViewDelegate  {
         imagePicker.sourceType = .PhotoLibrary
         
         presentViewController(imagePicker, animated: true, completion: nil)
-        photoContainer!.hidden = false;
-        addPhotoButton!.hidden = true;
     }
     
     @IBAction func addPhoto(sender: UIButton){
@@ -88,6 +90,8 @@ UINavigationControllerDelegate, UITextViewDelegate  {
         alertController.addAction(entry)
         alertController.addAction(cancel)
         
+        alertController.popoverPresentationController?.sourceView = addPhotoButton
+        alertController.popoverPresentationController?.sourceRect = (addPhotoButton?.bounds)!
         presentViewController(alertController, animated: true, completion: nil)
         
     }

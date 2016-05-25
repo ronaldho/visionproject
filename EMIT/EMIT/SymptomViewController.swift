@@ -120,6 +120,8 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         alertController.addAction(delete)
         alertController.addAction(cancel)
         
+        alertController.popoverPresentationController?.sourceView = deleteButton
+        alertController.popoverPresentationController?.sourceRect = (deleteButton?.bounds)!
         presentViewController(alertController, animated: true, completion: nil)
     }
     

@@ -22,7 +22,7 @@ protocol InputViewDelegate {
     var itemSaved: Bool {get set};
 }
 
-class MyMedicationsTableViewController: UITableViewController, FilterCellDelegate,
+class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegate,
     MyMedicationCellDelegate, InputViewDelegate {
 
     var myMedications: MyMedications = MyMedications();
@@ -85,10 +85,8 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.allowsSelection = false;
-        
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 130;
-        self.tableView.backgroundColor = UIColor.EMITTanColor();
+        self.navigationItem.backBarButtonItem = UIBarButtonItem.init(title: "Back", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         
         registerLocal(self)
         scheduleLocal(self)
@@ -139,6 +137,7 @@ class MyMedicationsTableViewController: UITableViewController, FilterCellDelegat
         cell.myMedication = med;
         cell.medName.text = med.name;
         cell.medInstructions.text = med.instructions;
+        cell.backgroundColor = UIColor.EMITTanColor()
         
         // Time Icons
         cell.breakfastImage.image = UIImage(named: "coffee")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)

@@ -17,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DiscontinuedCell" id="Bcc-sT-NRQ" customClass="DiscontinuedTableViewCell" customModule="EMIT" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DiscontinuedCell" id="Bcc-sT-NRQ" customClass="DiscontinuedTableViewCell" customModule="EMIT" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="350" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bcc-sT-NRQ" id="qav-Bv-crP">
-                                    <rect key="frame" x="0.0" y="0.0" width="350" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="317" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4WJ-sw-Bib">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4WJ-sw-Bib">
                                             <rect key="frame" x="18" y="11" width="314" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.9742375016" green="0.36992073060000003" blue="0.39060029390000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -103,7 +103,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="37" height="38"/>
                                                                         </imageView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="bottom" secondItem="aBC-YV-S4w" secondAttribute="bottom" id="3mt-27-1Vv"/>
                                                                         <constraint firstItem="aBC-YV-S4w" firstAttribute="top" secondItem="Su7-Ir-Vx0" secondAttribute="top" id="GVg-gh-tme"/>
@@ -113,14 +113,14 @@
                                                                         <constraint firstItem="aBC-YV-S4w" firstAttribute="leading" secondItem="Su7-Ir-Vx0" secondAttribute="leading" id="vw0-pl-qn3"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ggt-jq-r0f">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ggt-jq-r0f" userLabel="LunchView">
                                                                     <rect key="frame" x="47" y="0.0" width="38" height="38"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="VkA-bD-fNX">
                                                                             <rect key="frame" x="2" y="2" width="34" height="34"/>
                                                                         </imageView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="bottom" secondItem="VkA-bD-fNX" secondAttribute="bottom" constant="2" id="Gee-uG-PDO"/>
                                                                         <constraint firstItem="VkA-bD-fNX" firstAttribute="leading" secondItem="Ggt-jq-r0f" secondAttribute="leading" constant="2" id="Pt0-Hk-CjE"/>
@@ -130,14 +130,14 @@
                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="urT-U2-doX"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0Z-1t-TRU">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0Z-1t-TRU" userLabel="DinnerView">
                                                                     <rect key="frame" x="95" y="0.0" width="37" height="38"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="restaurant" translatesAutoresizingMaskIntoConstraints="NO" id="4oG-WM-TxE">
                                                                             <rect key="frame" x="3" y="3" width="31" height="32"/>
                                                                         </imageView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstItem="4oG-WM-TxE" firstAttribute="leading" secondItem="B0Z-1t-TRU" secondAttribute="leading" constant="3" id="5Ou-3i-ww6"/>
                                                                         <constraint firstAttribute="width" secondItem="B0Z-1t-TRU" secondAttribute="height" multiplier="1:1" id="6KY-fA-ZRj"/>
@@ -147,7 +147,7 @@
                                                                         <constraint firstAttribute="bottom" secondItem="4oG-WM-TxE" secondAttribute="bottom" constant="3" id="xql-jJ-Uad"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LM-H1-3cs">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LM-H1-3cs" userLabel="BedView">
                                                                     <rect key="frame" x="142" y="0.0" width="37" height="38"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moon" translatesAutoresizingMaskIntoConstraints="NO" id="aac-rH-r5e">
@@ -157,7 +157,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="bottom" secondItem="aac-rH-r5e" secondAttribute="bottom" constant="3" id="IdF-dE-8Qs"/>
                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="Kyn-pY-Qbt"/>
@@ -624,6 +624,7 @@
                         <outlet property="bedButton" destination="nvt-EN-ne2" id="03C-2q-DES"/>
                         <outlet property="breakfastButton" destination="xHD-B6-qch" id="fnB-Jp-slr"/>
                         <outlet property="deleteButton" destination="Nlo-Sc-M5e" id="rCB-g4-OQv"/>
+                        <outlet property="deletePhotoButton" destination="p2t-BQ-F2I" id="sQh-pK-1QI"/>
                         <outlet property="dinnerButton" destination="bze-kc-Nbo" id="lDY-eW-P2S"/>
                         <outlet property="discontinueButton" destination="caV-pb-EGP" id="NBC-dY-gqx"/>
                         <outlet property="lunchButton" destination="YGK-xO-5Ws" id="KjY-yJ-5Rv"/>
@@ -635,9 +636,10 @@
                         <outlet property="medName" destination="Vwv-Ip-DTE" id="Uk0-0e-IvX"/>
                         <outlet property="photo" destination="lHS-mJ-4tD" id="kth-8c-MOj"/>
                         <outlet property="photoContainer" destination="37T-uP-pqt" id="C5j-A2-mfq"/>
-                        <outlet property="scrollView" destination="H39-2e-dQc" id="E44-rv-Vs2"/>
+                        <outlet property="scrollView" destination="H39-2e-dQc" id="cJC-ls-0DY"/>
                         <outlet property="tableHeight" destination="T5U-rE-tGU" id="IVi-AH-M3m"/>
                         <segue destination="3Iu-EY-T8Z" kind="presentation" identifier="MedInfoFromMyMed" id="BvG-4b-oQq"/>
+                        <segue destination="yHf-Uo-lEi" kind="presentation" identifier="FullImageFromMyMed" id="R2d-pf-f0a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="py5-4c-zZ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1068,7 +1070,7 @@
                         <outlet property="collectionHeight" destination="Uja-99-T3c" id="fa4-Zb-NFC"/>
                         <outlet property="endDateField" destination="RFg-jM-Wxj" id="rW3-8f-WGL"/>
                         <outlet property="mainStackView" destination="9cb-2B-ap2" id="E3z-6z-OAv"/>
-                        <outlet property="scrollView" destination="C7B-wS-g2Q" id="TvQ-hD-5Lt"/>
+                        <outlet property="scrollView" destination="C7B-wS-g2Q" id="FIR-uE-27T"/>
                         <outlet property="sendEmailButton" destination="v9C-Nd-SQV" id="4XT-tX-aNb"/>
                         <outlet property="sendGmailButton" destination="T3X-kE-KNq" id="jdP-c4-cKL"/>
                         <outlet property="startDateField" destination="flL-hU-pw5" id="E15-lA-oB0"/>
@@ -2133,8 +2135,9 @@
         <image name="sun" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IT9-o2-R7o"/>
-        <segue reference="BvG-4b-oQq"/>
         <segue reference="SXI-cG-t6b"/>
+        <segue reference="zfj-WN-8e2"/>
+        <segue reference="BvG-4b-oQq"/>
+        <segue reference="R2d-pf-f0a"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 
-class GlossaryTableViewController: UITableViewController {
+class GlossaryTableViewController: AGTableViewController {
 
     var medications: Medications = Medications();
     
@@ -78,9 +78,7 @@ class GlossaryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 25;
-        self.tableView.backgroundColor = UIColor.EMITTanColor();
     }
 
     override func didReceiveMemoryWarning() {

@@ -12,6 +12,9 @@ class AGTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.backgroundColor = UIColor.EMITTanColor();
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
