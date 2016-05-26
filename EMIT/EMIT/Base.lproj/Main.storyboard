@@ -337,7 +337,7 @@
                                                                     <constraint firstAttribute="width" constant="50" id="LoI-Y3-QGJ"/>
                                                                     <constraint firstAttribute="height" constant="50" id="OO5-ri-eE3"/>
                                                                 </constraints>
-                                                                <state key="normal" image="coffee"/>
+                                                                <state key="normal" image="morning"/>
                                                                 <connections>
                                                                     <action selector="toggleBreakfast" destination="HsG-9c-Nwc" eventType="touchUpInside" id="2Vq-2R-ctA"/>
                                                                 </connections>
@@ -348,7 +348,7 @@
                                                                     <constraint firstAttribute="height" constant="50" id="LQA-aQ-F16"/>
                                                                     <constraint firstAttribute="width" constant="50" id="t7e-M8-l9G"/>
                                                                 </constraints>
-                                                                <state key="normal" image="sun"/>
+                                                                <state key="normal" image="noon"/>
                                                                 <connections>
                                                                     <action selector="toggleLunch" destination="HsG-9c-Nwc" eventType="touchUpInside" id="NpQ-wp-Zgp"/>
                                                                 </connections>
@@ -359,7 +359,7 @@
                                                                     <constraint firstAttribute="height" constant="50" id="9kK-2R-dAX"/>
                                                                     <constraint firstAttribute="width" constant="50" id="9ni-0l-QbX"/>
                                                                 </constraints>
-                                                                <state key="normal" image="restaurant"/>
+                                                                <state key="normal" image="sunset"/>
                                                                 <connections>
                                                                     <action selector="toggleDinner" destination="HsG-9c-Nwc" eventType="touchUpInside" id="wAS-13-PKS"/>
                                                                 </connections>
@@ -370,7 +370,7 @@
                                                                     <constraint firstAttribute="height" constant="50" id="R75-xR-Tng"/>
                                                                     <constraint firstAttribute="width" constant="50" id="Z58-0X-url"/>
                                                                 </constraints>
-                                                                <state key="normal" image="moon"/>
+                                                                <state key="normal" image="moonnew"/>
                                                                 <connections>
                                                                     <action selector="toggleBed" destination="HsG-9c-Nwc" eventType="touchUpInside" id="NwW-fl-fej"/>
                                                                 </connections>
@@ -2128,11 +2128,15 @@
         <image name="ic_delete" width="20" height="20"/>
         <image name="ic_logo_arrow" width="272" height="243"/>
         <image name="moon" width="50" height="50"/>
+        <image name="moonnew" width="50" height="50"/>
+        <image name="morning" width="50" height="50"/>
+        <image name="noon" width="50" height="50"/>
         <image name="pill" width="30" height="30"/>
         <image name="restaurant" width="50" height="50"/>
         <image name="settings" width="30" height="30"/>
         <image name="stethoscope" width="30" height="30"/>
         <image name="sun" width="50" height="50"/>
+        <image name="sunset" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SXI-cG-t6b"/>

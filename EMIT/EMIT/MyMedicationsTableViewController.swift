@@ -139,33 +139,64 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
         cell.medInstructions.text = med.instructions;
         cell.backgroundColor = UIColor.EMITTanColor()
         
+//        // Time Icons
+//        cell.breakfastImage.image = UIImage(named: "coffee")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+//        cell.lunchImage.image = UIImage(named: "sun")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+//        cell.dinnerImage.image = UIImage(named: "restaurant")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+//        cell.bedImage.image = UIImage(named: "moon")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+//
+//
+//        if (med.breakfast){
+//            cell.breakfastImage.tintColor = UIColor.EMITLightGreenColor()
+//        } else {
+//            cell.breakfastImage.tintColor = UIColor.lightLightGrayColor()
+//        }
+//        if (med.lunch){
+//            cell.lunchImage.tintColor = UIColor.EMITDarkYellowColor()
+//        } else {
+//            cell.lunchImage.tintColor = UIColor.lightLightGrayColor()
+//        }
+//        if (med.dinner){
+//            cell.dinnerImage.tintColor = UIColor.EMITRedColor()
+//        } else {
+//            cell.dinnerImage.tintColor = UIColor.lightLightGrayColor()
+//        }
+//        if (med.bed){
+//            cell.bedImage.tintColor = UIColor.EMITBlueColor()
+//        } else {
+//            cell.bedImage.tintColor = UIColor.lightLightGrayColor()
+//        }
+//        
+        
         // Time Icons
-        cell.breakfastImage.image = UIImage(named: "coffee")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        cell.lunchImage.image = UIImage(named: "sun")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        cell.dinnerImage.image = UIImage(named: "restaurant")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        cell.bedImage.image = UIImage(named: "moon")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-
-
+        cell.breakfastImage.image = UIImage(named: "morning")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.lunchImage.image = UIImage(named: "noon")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.dinnerImage.image = UIImage(named: "sunset")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.bedImage.image = UIImage(named: "moonnew")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        
+        
         if (med.breakfast){
-            cell.breakfastImage.tintColor = UIColor.EMITLightGreenColor()
+            cell.breakfastImage.tintColor = UIColor.morningColor()
         } else {
             cell.breakfastImage.tintColor = UIColor.lightLightGrayColor()
         }
         if (med.lunch){
-            cell.lunchImage.tintColor = UIColor.EMITDarkYellowColor()
+            cell.lunchImage.tintColor = UIColor.noonColor()
         } else {
             cell.lunchImage.tintColor = UIColor.lightLightGrayColor()
         }
         if (med.dinner){
-            cell.dinnerImage.tintColor = UIColor.EMITRedColor()
+            cell.dinnerImage.tintColor = UIColor.sunsetColor()
         } else {
             cell.dinnerImage.tintColor = UIColor.lightLightGrayColor()
         }
         if (med.bed){
-            cell.bedImage.tintColor = UIColor.EMITBlueColor()
+            cell.bedImage.tintColor = UIColor.moonColor()
         } else {
             cell.bedImage.tintColor = UIColor.lightLightGrayColor()
         }
+        
+        
         
         if (med.image != nil){
             cell.medImage.image = med.croppedImage;

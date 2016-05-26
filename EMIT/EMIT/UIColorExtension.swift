@@ -97,6 +97,29 @@ extension UIColor{
     //#D02090
     
     
+    
+    class func moonColor() -> UIColor {
+        return UIColor(red: 22/255, green: 70/255, blue: 143/255, alpha: 1.0)
+    }
+    //#16468f
+    
+    class func sunsetColor() -> UIColor {
+        return UIColor(red: 254/255, green: 86/255, blue: 20/255, alpha: 1.0)
+    }
+    //#fe5614
+    
+    class func noonColor() -> UIColor {
+        return UIColor(red: 253/255, green: 211/255, blue: 1/255, alpha: 1.0)
+    }
+    //#fdd301
+    
+    class func morningColor() -> UIColor {
+        return UIColor(red: 252/255, green: 139/255, blue: 0/255, alpha: 1.0)
+    }
+    //#fc8b00
+    
+    
+    
     class func getColorFromString(colorString: String) -> UIColor {
         let colorArray: [String] = colorString.componentsSeparatedByString("|");
         return UIColor(red: CGFloat(NSNumberFormatter().numberFromString(colorArray[0])!),
