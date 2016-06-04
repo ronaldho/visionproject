@@ -20,6 +20,8 @@ protocol SymptomTableDelegate {
 
 class SymptomSplitViewController: UIViewController, CalendarViewDelegate, SymptomTableDelegate, InputViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
+    let CALENDAR_HEIGHT_OFFSET: CGFloat = 47;
+    
     var calendar: SymptomCalendarViewController!;
     var symptomsTable: SymptomSplitTableViewController!;
     
@@ -63,7 +65,7 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
     @IBAction func flip(){
         
         if calendarContainer.hidden == true {
-            calendarButton.tintColor = UIColor.whiteColor()
+            calendarButton.tintColor = UIColor.EMITLightGreenColor()
             calendarContainer.hidden = false;
             symptomsContainerTopConstraintLayout.priority = 400;
             
@@ -72,9 +74,7 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
                 selectedDaySymptoms = getSymptomsWithDate(calendar.selectedCell!.date)
             }
         } else {
-            // Create view to get default tint color (blue)
-            let view = UIView()
-            calendarButton.tintColor = view.tintColor
+            calendarButton.tintColor = UIColor.whiteColor()
             calendarContainer.hidden = true;
             symptomsContainerTopConstraintLayout.priority = 600;
             
@@ -156,6 +156,7 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
         super.viewDidLoad()
         
         self.currentMonth = NSDate.getFirstDayOfMonth(NSDate())
+        self.calendarButton.tintColor = UIColor.EMITLightGreenColor()
         
         // Do any additional setup after loading the view.
     }
@@ -190,11 +191,11 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
 
         // Make calendar area bigger if necessary
         let currentSize = calendar.view.bounds.height
-        let newSize = calendarMonth.calendar.contentSize.height + 41;
+        let newSize = calendarMonth.calendar.contentSize.height + CALENDAR_HEIGHT_OFFSET ;
         print("1 currentSize: \(currentSize), newSize: \(newSize)");
         if (newSize > currentSize){
             
-            self.setCalendarContainerHeight(calendarMonth.calendar.contentSize.height + 41);
+            self.setCalendarContainerHeight(calendarMonth.calendar.contentSize.height + CALENDAR_HEIGHT_OFFSET );
         }
     }
     
@@ -207,11 +208,11 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
             
             // Make calendar smaller if necessary
             let currentSize = calendar.view.bounds.height
-            let newSize = calendar.calendar.contentSize.height + 41;
+            let newSize = calendar.calendar.contentSize.height + CALENDAR_HEIGHT_OFFSET ;
             print("2 currentSize: \(currentSize), newSize: \(newSize)");
-            if (newSize < currentSize){
-                self.setCalendarContainerHeight(calendar.calendar.contentSize.height + 41);
-            }
+//            if (newSize < currentSize){
+                self.setCalendarContainerHeight(calendar.calendar.contentSize.height + CALENDAR_HEIGHT_OFFSET );
+//            }
             
             // Get selected date of new month
             previousMonth.unselectDay()
@@ -264,7 +265,7 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
     }
     
     func setCalendarContainerHeight(){
-        setCalendarContainerHeight(calendar.calendar.contentSize.height + 41)
+        setCalendarContainerHeight(calendar.calendar.contentSize.height + 50)
     }
     
     func setCalendarContainerHeight(height: CGFloat){

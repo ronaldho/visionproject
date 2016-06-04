@@ -15,7 +15,7 @@ class AGViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.EMITTanColor();
+        self.view.backgroundColor = UIColor.whiteColor() //EMITTanColor();
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: #selector(AGViewController.adjustForKeyboard(_:)), name: UIKeyboardWillHideNotification, object: nil)

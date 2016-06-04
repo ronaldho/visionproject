@@ -8,11 +8,12 @@
 
 import UIKit
 
-class SymptomCalendarViewController: UIViewController, UICollectionViewDataSource {
+class SymptomCalendarViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet var monthLabel: UILabel!;
     @IBOutlet var calendar: UICollectionView!;
     @IBOutlet var calendarWidthConstraint: NSLayoutConstraint!;
+    @IBOutlet var todayButton: UIButton!;
     
     var symptoms: Symptoms = Symptoms();
     var firstLoad: Bool?;
@@ -26,10 +27,13 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
     }
     
     override func viewWillAppear(animated: Bool) {
-//        self.firstLoad = true;        
         if (calendarWidth != nil) {
             calendarWidthConstraint.constant = calendarWidth!
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        unselectDay()
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
@@ -61,7 +65,7 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
         let headerCellCount = 7;
         let spacerCellCount = getWeekdayOfDate(self.month) - 1;
         let dayCellCount = getDaysInMonth();
-        return headerCellCount + spacerCellCount + dayCellCount;
+        return headerCellCount + spacerCellCount + dayCellCount + 1; // +1 is DeadCell for workaround
     }
     
     func unselectDay() {
@@ -85,6 +89,9 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
         } else {
             dateToSelect = self.month;
         }
+        
+        let currentCalendar = NSCalendar.currentCalendar()
+        dateToSelect = currentCalendar.startOfDayForDate(dateToSelect!)
 
         for item in calendar.subviews {
             if let dayCell = item as? CalendarDayCell{
@@ -96,8 +103,13 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
             }
         }
         
-        calendar.selectItemAtIndexPath(indexPathToSelect, animated: false, scrollPosition: UICollectionViewScrollPosition.None);
-        collectionView(calendar, didSelectItemAtIndexPath: indexPathToSelect!);
+        if (indexPathToSelect != nil) {
+            calendar.selectItemAtIndexPath(indexPathToSelect, animated: false, scrollPosition: UICollectionViewScrollPosition.None);
+            collectionView(calendar, didSelectItemAtIndexPath: indexPathToSelect!);
+        } else {
+            print("Error in selectAppropriateDayCell")
+        }
+        
         
     }
     
@@ -139,17 +151,16 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
             cell.dayLabel.text = daysOfWeek[indexPath.row];
             
             cell.userInteractionEnabled = false;
-//            cell.view.layer.borderWidth = 1
-//            cell.view.layer.borderColor = UIColor.blackColor().CGColor
-//            
+
             return cell
             
         } else if (indexPath.row >= 7 && indexPath.row < 7 + spacerCellCount) {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CalendarDayCell", forIndexPath: indexPath) as! CalendarDayCell;
-            cell.dayLabel.text = "";
-
-            cell.backgroundColor = UIColor.clearColor();
+            
             cell.userInteractionEnabled = false;
+            cell.dayLabel.text = "";
+            cell.backgroundColor = UIColor.clearColor();
+            cell.dayLabel.textColor = UIColor.blackColor();
             cell.view.layer.borderWidth = 1
             cell.view.layer.borderColor = UIColor.clearColor().CGColor
             cell.indicatorView.hidden = true;
@@ -157,6 +168,23 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
             cell.tag = indexPath.row;
             
             return cell
+            
+        } else if (indexPath.row == getNumberOfCells() - 1) { //Workaround to call method after all cells loaded
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DeadCell", forIndexPath: indexPath)
+
+                if (firstLoad != nil && firstLoad!){
+                    selectAppropriateDayCell();
+                    delegate!.setCalendarContainerHeight();
+                    firstLoad = false;
+                }
+            
+            if selectedCell != nil {
+                calendar.selectItemAtIndexPath(calendar.indexPathForCell(selectedCell!), animated: false, scrollPosition: UICollectionViewScrollPosition.None);
+                self.collectionView(calendar, didSelectItemAtIndexPath: calendar.indexPathForCell(selectedCell!)!)
+            }
+            
+            return cell
+            
             
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CalendarDayCell", forIndexPath: indexPath) as! CalendarDayCell;
@@ -171,10 +199,7 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
 
             cell.tag = indexPath.row;
             cell.backgroundColor = UIColor.whiteColor();
-            
-//            cell.view.layer.borderWidth = 1
-//            cell.view.layer.borderColor = UIColor.blackColor().CGColor
-            
+             
             var indicatorState = false;
             for symptom in symptoms.symptoms
             {
@@ -188,14 +213,6 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
                 cell.indicatorView.hidden = true;
             }
             
-            if (indexPath.row == self.getNumberOfCells()-1){
-                if (firstLoad != nil && firstLoad!){
-                    selectAppropriateDayCell();
-                    delegate!.setCalendarContainerHeight();
-                    firstLoad = false;
-                }
-            }
-            
             return cell
         }
     }
@@ -205,6 +222,8 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if (indexPath.row < 7){
             return getHeaderCellSize()
+        } else if (indexPath.row == getNumberOfCells() - 1){
+            return CGSizeZero; //DeadCell
         } else {
             return getDayCellSize();
         }
@@ -223,6 +242,7 @@ class SymptomCalendarViewController: UIViewController, UICollectionViewDataSourc
 
         monthLabel.text = month.monthYearFormat();
         self.view.backgroundColor = UIColor.whiteColor();
+        self.todayButton.tintColor = UIColor.EMITLightGreenColor()
         
         if (calendarWidth != nil) {
             calendarWidthConstraint.constant = calendarWidth!

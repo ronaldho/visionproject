@@ -23,6 +23,8 @@
 		49CB87D81CF611E00077F67C /* EMITNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87D71CF611E00077F67C /* EMITNavigationViewController.swift */; };
 		49CB87DA1CF614840077F67C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87D91CF614840077F67C /* SettingsViewController.swift */; };
 		49CB87DC1CF675D90077F67C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49CB87DB1CF675D90077F67C /* Assets.xcassets */; };
+		49CB87DE1CFE9D6B0077F67C /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87DD1CFE9D6B0077F67C /* TutorialViewController.swift */; };
+		49CB87E41D0012DC0077F67C /* AlertStyleWarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87E31D0012DC0077F67C /* AlertStyleWarningViewController.swift */; };
 		49D6D5FF1CD4809F00EBDA7B /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */; };
 		49D6D6011CD4819700EBDA7B /* MyMedications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6001CD4819700EBDA7B /* MyMedications.swift */; };
 		49D6D6031CD519C600EBDA7B /* MyMedicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */; };
@@ -78,6 +80,8 @@
 		49CB87D71CF611E00077F67C /* EMITNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMITNavigationViewController.swift; sourceTree = "<group>"; };
 		49CB87D91CF614840077F67C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		49CB87DB1CF675D90077F67C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49CB87DD1CFE9D6B0077F67C /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		49CB87E31D0012DC0077F67C /* AlertStyleWarningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertStyleWarningViewController.swift; sourceTree = "<group>"; };
 		49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		49D6D6001CD4819700EBDA7B /* MyMedications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedications.swift; sourceTree = "<group>"; };
 		49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationViewController.swift; sourceTree = "<group>"; };
@@ -129,15 +133,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		49B8434D1CCF4D7B00F7D81E /* Views */ = {
+		49B8434D1CCF4D7B00F7D81E /* Tab Bar Views */ = {
 			isa = PBXGroup;
 			children = (
+				49CB87D51CF610B40077F67C /* MainTabBarViewController.swift */,
 				49CB87D31CF583860077F67C /* MyMedicationsTableViewController.swift */,
 				49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */,
-				49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */,
-				496CFB501CEAD45800CCC5D9 /* DiscontinuedTableViewController.swift */,
-				496CFB521CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift */,
-				49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */,
 				49E4245A1CDD9D0700CFCA22 /* SymptomTableViewController.swift */,
 				49E4245C1CDD9D2100CFCA22 /* SymptomTableViewCell.swift */,
 				492337D11CE45C4100A15AE2 /* SymptomSplitViewController.swift */,
@@ -145,32 +146,53 @@
 				492337D91CE5977100A15AE2 /* SymptomSplitTableViewController.swift */,
 				492337D31CE45D3C00A15AE2 /* CalendarDayCell.swift */,
 				492337D51CE45D5000A15AE2 /* CalendarHeaderCell.swift */,
-				49E4245E1CDD9D5B00CFCA22 /* SymptomViewController.swift */,
+				49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */,
+				4922D3751CE70F41006BD3ED /* GlossaryTableViewCell.swift */,
+				49CB87D91CF614840077F67C /* SettingsViewController.swift */,
+			);
+			name = "Tab Bar Views";
+			sourceTree = "<group>";
+		};
+		49CB87DF1CFFE5090077F67C /* Secondary Views */ = {
+			isa = PBXGroup;
+			children = (
+				496CFB501CEAD45800CCC5D9 /* DiscontinuedTableViewController.swift */,
+				496CFB521CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift */,
+				49D6D6021CD519C600EBDA7B /* MyMedicationViewController.swift */,
 				49FA10F11CF040A400702701 /* MedHistoryTableViewCell.swift */,
+				49E4245E1CDD9D5B00CFCA22 /* SymptomViewController.swift */,
 				49E424601CDDA6AA00CFCA22 /* SymptomTagViewController.swift */,
 				49E424641CDDD1F000CFCA22 /* SymptomTagCollectionViewCell.swift */,
 				49E424701CE0F8C100CFCA22 /* SendViewController.swift */,
-				49E4246C1CE07A2100CFCA22 /* GlossaryTableViewController.swift */,
-				4922D3751CE70F41006BD3ED /* GlossaryTableViewCell.swift */,
 				49DC221C1CF11F35004F9ED0 /* MedPageHTMLViewController.swift */,
-				49CB87D91CF614840077F67C /* SettingsViewController.swift */,
+				49CB87DD1CFE9D6B0077F67C /* TutorialViewController.swift */,
+				49CB87E31D0012DC0077F67C /* AlertStyleWarningViewController.swift */,
 				49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */,
+				49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */,
 				4993E92D1CE8513B0069B8B7 /* OverlayView.swift */,
 				49D6D6161CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift */,
+			);
+			name = "Secondary Views";
+			sourceTree = "<group>";
+		};
+		49CB87E01CFFE5400077F67C /* Generic Views */ = {
+			isa = PBXGroup;
+			children = (
+				49CB87D71CF611E00077F67C /* EMITNavigationViewController.swift */,
 				49D6D6061CD5330C00EBDA7B /* AGViewController.swift */,
 				49E4246E1CE07A3B00CFCA22 /* AGTableViewController.swift */,
 				49D6D6041CD532C700EBDA7B /* AGInputViewController.swift */,
 				49D6D60F1CD5341300EBDA7B /* AGImageView.swift */,
 			);
-			name = Views;
+			name = "Generic Views";
 			sourceTree = "<group>";
 		};
 		49D6D60A1CD5338900EBDA7B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				49DA89E21CC9C4CB0027CF21 /* Data.swift */,
 				49E424681CDFDC2900CFCA22 /* MailSender.swift */,
 				49D6D60D1CD5340000EBDA7B /* ImageUtils.swift */,
-				49DA89E21CC9C4CB0027CF21 /* Data.swift */,
 				49D6D60B1CD533B600EBDA7B /* StaticDates.swift */,
 				49D6D6081CD5337800EBDA7B /* UIColorExtension.swift */,
 				492337DB1CE5A86A00A15AE2 /* DateExtension.swift */,
@@ -209,12 +231,12 @@
 				49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */,
 				49DA89E61CC9C5950027CF21 /* Model.xcdatamodeld */,
 				49DA89D41CC9C49A0027CF21 /* Main.storyboard */,
-				49CB87D51CF610B40077F67C /* MainTabBarViewController.swift */,
-				49CB87D71CF611E00077F67C /* EMITNavigationViewController.swift */,
 				49DA89D91CC9C49A0027CF21 /* LaunchScreen.storyboard */,
 				49CB87DB1CF675D90077F67C /* Assets.xcassets */,
 				49DA89DC1CC9C49A0027CF21 /* Info.plist */,
-				49B8434D1CCF4D7B00F7D81E /* Views */,
+				49B8434D1CCF4D7B00F7D81E /* Tab Bar Views */,
+				49CB87DF1CFFE5090077F67C /* Secondary Views */,
+				49CB87E01CFFE5400077F67C /* Generic Views */,
 				49DA89E91CC9C5B60027CF21 /* Models */,
 				49D6D60A1CD5338900EBDA7B /* Utilities */,
 				49D6D6151CD5347B00EBDA7B /* Third Party */,
@@ -333,6 +355,7 @@
 				49E424691CDFDC2900CFCA22 /* MailSender.swift in Sources */,
 				49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */,
 				49D6D6091CD5337800EBDA7B /* UIColorExtension.swift in Sources */,
+				49CB87E41D0012DC0077F67C /* AlertStyleWarningViewController.swift in Sources */,
 				49E424711CE0F8C100CFCA22 /* SendViewController.swift in Sources */,
 				49E4245F1CDD9D5B00CFCA22 /* SymptomViewController.swift in Sources */,
 				49E424671CDDD65400CFCA22 /* SymptomTags.swift in Sources */,
@@ -352,6 +375,7 @@
 				492337D01CE45C2000A15AE2 /* SymptomCalendarViewController.swift in Sources */,
 				49CB87D81CF611E00077F67C /* EMITNavigationViewController.swift in Sources */,
 				4922D3761CE70F41006BD3ED /* GlossaryTableViewCell.swift in Sources */,
+				49CB87DE1CFE9D6B0077F67C /* TutorialViewController.swift in Sources */,
 				49D6D60C1CD533B600EBDA7B /* StaticDates.swift in Sources */,
 				492337DC1CE5A86A00A15AE2 /* DateExtension.swift in Sources */,
 				49D6D6141CD5346600EBDA7B /* UITextField+Shake.swift in Sources */,

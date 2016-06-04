@@ -14,5 +14,4 @@ class MedHistoryTableViewCell: UITableViewCell {
     @IBOutlet var stackView: UIStackView!;
     
     var medHistory: MyMedicationHistory?;
-    
 }

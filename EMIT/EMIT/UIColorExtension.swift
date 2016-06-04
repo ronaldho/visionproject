@@ -18,17 +18,36 @@ extension UIColor{
         return UIColor.grayColor().colorWithAlphaComponent(0.5)
     }
     
-    class func EMITTanColor() -> UIColor {
-        return UIColor(red: 239/255, green: 234/255, blue: 219/255, alpha: 1.0)
+//    class func EMITTanColor() -> UIColor {
+//        return UIColor(red: 239/255, green: 234/255, blue: 219/255, alpha: 1.0)
+//    }
+    
+    class func EMITLightGreyColor() -> UIColor {
+        return UIColor(red: 221/255, green: 221/255, blue: 221/255, alpha: 1.0)
     }
     
-    class func EMITDarkGreenColor() -> UIColor {
-        return UIColor(red: 47/255, green: 92/255, blue: 29/255, alpha: 1.0)
+    class func EMITMediumGreyColor() -> UIColor {
+        return UIColor(red: 130/255, green: 130/255, blue: 130/255, alpha: 1.0)
     }
-    //#2F5C1D
     
+    class func EMITDarkGreyColor() -> UIColor {
+        return UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1.0)
+    }
+    
+//    class func EMITDarkGreenColor() -> UIColor {
+//        return UIColor(red: 47/255, green: 92/255, blue: 29/255, alpha: 1.0)
+//    }
+//    //#2F5C1D
+        class func EMITDarkGreenColor() -> UIColor {
+            return UIColor(red: 61/255, green: 119/255, blue: 97/255, alpha: 1.0)
+        }
+    
+//    class func EMITLightGreenColor() -> UIColor {
+//        return UIColor(red: 98/255, green: 169/255, blue: 69/255, alpha: 1.0)
+//    }
+
     class func EMITLightGreenColor() -> UIColor {
-        return UIColor(red: 98/255, green: 169/255, blue: 69/255, alpha: 1.0)
+        return UIColor(red: 136/255, green: 193/255, blue: 2/255, alpha: 1.0)
     }
     
     class func EMITBlueColor() -> UIColor {
@@ -46,10 +65,22 @@ extension UIColor{
     }
     //#C39F3C
     
+//    class func EMITRedColor() -> UIColor {
+//        return UIColor(red: 195/255, green: 64/255, blue: 50/255, alpha: 1.0)
+//    }
+//    //#C34032
+    
     class func EMITRedColor() -> UIColor {
-        return UIColor(red: 195/255, green: 64/255, blue: 50/255, alpha: 1.0)
+        return UIColor(red: 254/255, green: 86/255, blue: 20/255, alpha: 1.0)
     }
-    //#C34032
+    
+    class func EMITOrangeColor() -> UIColor {
+        return UIColor(red: 252/255, green: 139/255, blue: 0/255, alpha: 1.0)
+    }
+    
+    class func EMITYellowColor() -> UIColor {
+        return UIColor(red: 253/255, green: 211/255, blue: 1/255, alpha: 1.0)
+    }
     
     class func mailBlueColor() -> UIColor {
         return UIColor(red: 30/255, green: 90/255, blue: 239/255, alpha: 1.0)
@@ -117,6 +148,7 @@ extension UIColor{
         return UIColor(red: 252/255, green: 139/255, blue: 0/255, alpha: 1.0)
     }
     //#fc8b00
+    
     
     
     

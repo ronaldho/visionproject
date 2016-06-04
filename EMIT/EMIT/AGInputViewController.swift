@@ -27,7 +27,7 @@ UINavigationControllerDelegate, UITextViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.EMITLightGreyColor()
         
         if (photo != nil){
             photo!.userInteractionEnabled = true

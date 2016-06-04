@@ -13,6 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var drugApiUrl = NSURL(string: "http://emitcare.ca/api/v1/drugs")
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -29,9 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             for med in meds {
                 Data.deleteMedication(med)
             }
-            
-            let url = NSURL(string: "http://vision-rest.herokuapp.com/drugs")
-            let request = NSURLRequest(URL: url!)
+
+            let request = NSURLRequest(URL: drugApiUrl!)
             let config = NSURLSessionConfiguration.defaultSessionConfiguration()
             let session = NSURLSession(configuration: config)
             
@@ -54,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                    print ("medication: \(medication)");
                     if let name = medication["name"] as? String {
                         if let pageUrl = medication["page"] as? String {
-                            
                             
                             if let imageUrlString = medication["image"] as? String {
                                 

@@ -41,4 +41,8 @@ class MyMedications: NSObject {
         }
         return discontinuedMeds;
     }
+    
+    func sortAlphabetically(){
+        meds.sortInPlace { $0.name < $1.name }
+    }
 }

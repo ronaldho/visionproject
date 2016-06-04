@@ -13,6 +13,7 @@ class MedPageHTMLViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet var webView: UIWebView! = UIWebView();
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     var med: Medication?;
     var myMed: MyMedication?;
@@ -61,6 +62,16 @@ class MedPageHTMLViewController: UIViewController, UIWebViewDelegate {
             return false
         }
         return true
+    }
+    
+    func webViewDidStartLoad(webView: UIWebView) {
+        activityIndicator.hidden = false;
+        activityIndicator.startAnimating()
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        activityIndicator.hidden = true;
+        activityIndicator.stopAnimating()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -16,4 +16,8 @@ class Medications: NSObject {
         medications = [];
         //medications.append(Medication(withName: "Tacrolimus", andImage: nil, andCroppedImage: nil, andInfo: "", andId: ""));
     }
+    
+    func sortAlphabetically(){
+        medications.sortInPlace { $0.name < $1.name }
+    }
 }

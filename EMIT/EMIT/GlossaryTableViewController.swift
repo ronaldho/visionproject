@@ -17,6 +17,7 @@ class GlossaryTableViewController: AGTableViewController {
     override func viewWillAppear(animated: Bool){
         
         medications.medications = Data.getAllMedications();
+        medications.sortAlphabetically();
         self.tableView.reloadData()
         
 //        print("glossary viewWillAppear");
@@ -77,7 +78,7 @@ class GlossaryTableViewController: AGTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.allowsSelection = true;
         self.tableView.estimatedRowHeight = 25;
     }
 
@@ -103,11 +104,8 @@ class GlossaryTableViewController: AGTableViewController {
         let medication = medications.medications[indexPath.row];
         cell.medication = medication;
         cell.nameLabel.text = medication.name;
-        if (medication.image == nil) {
-            print("image nil for \(medication.name)")
-        }
         cell.medImageView.image = medication.image;
-        cell.backgroundColor = UIColor.EMITTanColor();
+        cell.backgroundColor = UIColor.whiteColor() //EMITTanColor();
 
         return cell
     }

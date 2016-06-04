@@ -17,8 +17,6 @@ protocol MyMedicationCellDelegate {
 }
 
 protocol InputViewDelegate {
-//    var itemToScrollToId: String? {get set};
-//    func autoscroll();
     var itemSaved: Bool {get set};
 }
 
@@ -66,6 +64,7 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
     
     override func viewWillAppear(animated: Bool){
         myMedications.meds = Data.getAllMyMedications();
+        myMedications.sortAlphabetically()
         self.tableView.reloadData();
         
 //        if (itemSaved){
@@ -83,39 +82,22 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
 //    }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.tableView.allowsSelection = false;
         self.tableView.estimatedRowHeight = 130;
         self.navigationItem.backBarButtonItem = UIBarButtonItem.init(title: "Back", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         
-        registerLocal(self)
-        scheduleLocal(self)
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-    
-    func registerLocal(sender: AnyObject) {
-        let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
-    }
-    
-    func scheduleLocal(sender: AnyObject) {
-        let notification = UILocalNotification()
-        notification.fireDate = NSDate(timeIntervalSinceNow: 15)
-        notification.alertBody = "Hey you! Yeah you! Swipe to unlock!"
-        notification.alertAction = "be awesome!"
-        notification.soundName = UILocalNotificationDefaultSoundName
-        notification.userInfo = ["CustomField1": "w00t"]
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let tutorialShown = defaults.objectForKey("tutorialShown") as? Bool;
+        
+        if (tutorialShown == nil || tutorialShown == false){
+            performSegueWithIdentifier("Tutorial", sender: self)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
@@ -137,7 +119,7 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
         cell.myMedication = med;
         cell.medName.text = med.name;
         cell.medInstructions.text = med.instructions;
-        cell.backgroundColor = UIColor.EMITTanColor()
+        cell.backgroundColor = UIColor.whiteColor() //EMITTanColor()
         
 //        // Time Icons
 //        cell.breakfastImage.image = UIImage(named: "coffee")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
@@ -169,10 +151,10 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
 //        
         
         // Time Icons
-        cell.breakfastImage.image = UIImage(named: "morning")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        cell.lunchImage.image = UIImage(named: "noon")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        cell.dinnerImage.image = UIImage(named: "sunset")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        cell.bedImage.image = UIImage(named: "moonnew")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.breakfastImage.image = UIImage(named: "sunrise-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.lunchImage.image = UIImage(named: "noon-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.dinnerImage.image = UIImage(named: "sunset-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.bedImage.image = UIImage(named: "night-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         
         
         if (med.breakfast){
@@ -196,8 +178,6 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
             cell.bedImage.tintColor = UIColor.lightLightGrayColor()
         }
         
-        
-        
         if (med.image != nil){
             cell.medImage.image = med.croppedImage;
             cell.medImage.fullImage = med.image;
@@ -211,6 +191,5 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
         cell.medImage.addGestureRecognizer(tapRecognizer);
         
         return cell
-
     }
 }

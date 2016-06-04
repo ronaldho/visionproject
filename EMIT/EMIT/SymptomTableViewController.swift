@@ -13,7 +13,7 @@ protocol SymptomCellDelegate {
     func editSymptom(cell: SymptomTableViewCell)
 }
 
-class SymptomTableViewController: UITableViewController,
+class SymptomTableViewController: AGTableViewController,
 SymptomCellDelegate, InputViewDelegate {
     
     var symptoms: Symptoms = Symptoms();
@@ -80,11 +80,11 @@ SymptomCellDelegate, InputViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.allowsSelection = false;
+//        self.tableView.allowsSelection = false;
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
+//        self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 130;
-        self.tableView.backgroundColor = UIColor.EMITTanColor();
+//        self.tableView.backgroundColor = UIColor.whiteColor() //EMITTanColor();
     }
     
     override func didReceiveMemoryWarning() {
@@ -108,7 +108,7 @@ SymptomCellDelegate, InputViewDelegate {
         cell.delegate = self;
         let symptom = symptoms.symptoms[indexPath.row];
         
-        cell.backgroundColor = UIColor.EMITTanColor();
+        cell.backgroundColor = UIColor.whiteColor() //EMITTanColor();
         cell.symptom = symptom;
         cell.dateLabel.text = symptom.getDateString();
         cell.symptomTextLabel.text = symptom.text;

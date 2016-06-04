@@ -10,7 +10,6 @@ import UIKit
 
 class MyMedicationViewController: AGInputViewController {
 
-//    @IBOutlet var medImage: AGImageView!;
     @IBOutlet var medName: UITextField!;
     @IBOutlet var breakfastButton: UIButton!;
     @IBOutlet var lunchButton: UIButton!;
@@ -238,7 +237,7 @@ class MyMedicationViewController: AGInputViewController {
     @IBAction func toggleBreakfast(){
         if (breakfastButtonSelected){
             breakfastButtonSelected = false;
-            breakfastButton.tintColor = UIColor.lightLightGrayColor();
+            breakfastButton.tintColor = UIColor.EMITMediumGreyColor();
         } else {
             breakfastButtonSelected = true;
             breakfastButton.tintColor = UIColor.EMITLightGreenColor();
@@ -248,7 +247,7 @@ class MyMedicationViewController: AGInputViewController {
     @IBAction func toggleLunch(){
         if (lunchButtonSelected){
             lunchButtonSelected = false;
-            lunchButton.tintColor = UIColor.lightLightGrayColor();
+            lunchButton.tintColor = UIColor.EMITMediumGreyColor();
         } else {
             lunchButtonSelected = true;
             lunchButton.tintColor = UIColor.EMITDarkYellowColor();
@@ -258,7 +257,7 @@ class MyMedicationViewController: AGInputViewController {
     @IBAction func toggleDinner(){
         if (dinnerButtonSelected){
             dinnerButtonSelected = false;
-            dinnerButton.tintColor = UIColor.lightLightGrayColor();
+            dinnerButton.tintColor = UIColor.EMITMediumGreyColor();
         } else {
             dinnerButtonSelected = true;
             dinnerButton.tintColor = UIColor.EMITRedColor();
@@ -268,7 +267,7 @@ class MyMedicationViewController: AGInputViewController {
     @IBAction func toggleBed(){
         if (bedButtonSelected){
             bedButtonSelected = false;
-            bedButton.tintColor = UIColor.lightLightGrayColor();
+            bedButton.tintColor = UIColor.EMITMediumGreyColor();
         } else {
             bedButtonSelected = true;
             bedButton.tintColor = UIColor.EMITBlueColor();
@@ -292,25 +291,25 @@ class MyMedicationViewController: AGInputViewController {
             breakfastButtonSelected = true;
             breakfastButton.tintColor = UIColor.EMITLightGreenColor();
         } else {
-            breakfastButton.tintColor = UIColor.lightLightGrayColor();
+            breakfastButton.tintColor = UIColor.EMITMediumGreyColor();
         }
         if (med.lunch){
             lunchButtonSelected = true;
             lunchButton.tintColor = UIColor.EMITDarkYellowColor();
         } else {
-            lunchButton.tintColor = UIColor.lightLightGrayColor();
+            lunchButton.tintColor = UIColor.EMITMediumGreyColor();
         }
         if (med.dinner){
             dinnerButtonSelected = true;
             dinnerButton.tintColor = UIColor.EMITRedColor();
         } else {
-            dinnerButton.tintColor = UIColor.lightLightGrayColor();
+            dinnerButton.tintColor = UIColor.EMITMediumGreyColor();
         }
         if (med.bed){
             bedButtonSelected = true;
             bedButton.tintColor = UIColor.EMITBlueColor();
         } else {
-            bedButton.tintColor = UIColor.lightLightGrayColor();
+            bedButton.tintColor = UIColor.EMITMediumGreyColor();
         }
         
         if (med.id != "0"){

@@ -47,4 +47,20 @@ extension NSDate{
         
         return startOfMonth;
     }
+    
+    static func getTimeOfDay(hour: Int) -> NSDate {
+        let calendar = NSCalendar.currentCalendar()
+        let components = NSDateComponents()
+        components.setValue(hour, forComponent: NSCalendarUnit.Hour)
+        let timeOfDay = calendar.dateFromComponents(components)!
+        
+        return timeOfDay;
+    }
+    
+    func getTimeFormat() -> String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "h:mm a"; // 2:00 PM
+        
+        return dateFormatter.stringFromDate(self);
+    }
 }
