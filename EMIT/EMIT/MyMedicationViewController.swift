@@ -186,10 +186,10 @@ class MyMedicationViewController: AGInputViewController {
         medInfoButton.hidden = true;
         
         // Time Icons
-        let breakfastIcon: UIImage = UIImage(named: "coffee")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let lunchIcon: UIImage = UIImage(named: "sun")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let dinnerIcon: UIImage = UIImage(named: "restaurant")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let bedIcon: UIImage = UIImage(named: "moon")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let breakfastIcon: UIImage = UIImage(named: "sunrise-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let lunchIcon: UIImage = UIImage(named: "noon-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let dinnerIcon: UIImage = UIImage(named: "sunset-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let bedIcon: UIImage = UIImage(named: "night-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         
         breakfastButton.setImage(breakfastIcon, forState: UIControlState.Normal)
         lunchButton.setImage(lunchIcon, forState: UIControlState.Normal)
@@ -240,7 +240,7 @@ class MyMedicationViewController: AGInputViewController {
             breakfastButton.tintColor = UIColor.EMITMediumGreyColor();
         } else {
             breakfastButtonSelected = true;
-            breakfastButton.tintColor = UIColor.EMITLightGreenColor();
+            breakfastButton.tintColor = UIColor.morningColor();
         }
     }
     
@@ -250,7 +250,7 @@ class MyMedicationViewController: AGInputViewController {
             lunchButton.tintColor = UIColor.EMITMediumGreyColor();
         } else {
             lunchButtonSelected = true;
-            lunchButton.tintColor = UIColor.EMITDarkYellowColor();
+            lunchButton.tintColor = UIColor.noonColor();
         }
     }
     
@@ -260,7 +260,7 @@ class MyMedicationViewController: AGInputViewController {
             dinnerButton.tintColor = UIColor.EMITMediumGreyColor();
         } else {
             dinnerButtonSelected = true;
-            dinnerButton.tintColor = UIColor.EMITRedColor();
+            dinnerButton.tintColor = UIColor.sunsetColor();
         }
     }
     
@@ -270,7 +270,7 @@ class MyMedicationViewController: AGInputViewController {
             bedButton.tintColor = UIColor.EMITMediumGreyColor();
         } else {
             bedButtonSelected = true;
-            bedButton.tintColor = UIColor.EMITBlueColor();
+            bedButton.tintColor = UIColor.moonColor();
         }
     }
     
@@ -289,25 +289,25 @@ class MyMedicationViewController: AGInputViewController {
         
         if (med.breakfast){
             breakfastButtonSelected = true;
-            breakfastButton.tintColor = UIColor.EMITLightGreenColor();
+            breakfastButton.tintColor = UIColor.morningColor();
         } else {
             breakfastButton.tintColor = UIColor.EMITMediumGreyColor();
         }
         if (med.lunch){
             lunchButtonSelected = true;
-            lunchButton.tintColor = UIColor.EMITDarkYellowColor();
+            lunchButton.tintColor = UIColor.noonColor();
         } else {
             lunchButton.tintColor = UIColor.EMITMediumGreyColor();
         }
         if (med.dinner){
             dinnerButtonSelected = true;
-            dinnerButton.tintColor = UIColor.EMITRedColor();
+            dinnerButton.tintColor = UIColor.sunsetColor();
         } else {
             dinnerButton.tintColor = UIColor.EMITMediumGreyColor();
         }
         if (med.bed){
             bedButtonSelected = true;
-            bedButton.tintColor = UIColor.EMITBlueColor();
+            bedButton.tintColor = UIColor.moonColor();
         } else {
             bedButton.tintColor = UIColor.EMITMediumGreyColor();
         }
