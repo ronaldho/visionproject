@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  AboutViewController.swift
 //  EMIT
 //
 //  Created by Andrew on 4/06/16.
@@ -8,20 +8,14 @@
 
 import UIKit
 
-class SettingsViewController: UISplitViewController, UISplitViewControllerDelegate {
+class AboutViewController: AGViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.delegate = self;
-        //self.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
+
         // Do any additional setup after loading the view.
     }
 
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool{
-        return true
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

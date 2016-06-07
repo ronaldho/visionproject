@@ -47,7 +47,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         let cell: SymptomTagCollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)! as! SymptomTagCollectionViewCell;
         
-        cell.selectSymptomTag(self);
+        cell.selectSymptomTag(self, newState: nil);
     }
 
     
@@ -144,8 +144,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     }
     
     override func viewDidLoad() {
-        addPhotoButton!.hidden = true;
-        photoContainer!.hidden = true;
+        
         if (newMode){
             self.title = "New Symptom"
             self.deleteButton!.hidden = true;
@@ -182,7 +181,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         if (symptom.id != "0"){
             detailsText.text = symptom.text;
             date = symptom.date;
-            dateField!.text = symptom.getDateString();
+            dateField!.text = symptom.date.dayMonthFormat();
             
             if (detailsText!.text == ""){
                 detailsText!.text = "Details"
@@ -191,15 +190,15 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
                 detailsText!.textColor = UIColor.blackColor()
             }
             
-//            if (symptom.image != nil){
-//                photo!.fullImage = symptom.image;
-//                photo!.image = symptom.croppedImage;
-//                photoContainer!.hidden = false;
-//                addPhotoButton!.hidden = true;
-//            } else {
-//                photoContainer!.hidden = true;
-//                addPhotoButton!.hidden = false;
-//            }
+            if (symptom.image != nil){
+                photo!.fullImage = symptom.image;
+                photo!.image = symptom.croppedImage;
+                photoContainer!.hidden = false;
+                addPhotoButton!.hidden = true;
+            } else {
+                photoContainer!.hidden = true;
+                addPhotoButton!.hidden = false;
+            }
         } else {
             // No Symptom to Load, probably New view
         }
@@ -220,7 +219,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
                     }
                 }
                 
-                Data.saveSymptom(Symptom(withId: symptom.id, andDate: date, andText: detailsText.text, andSymptomTags: selectedSymptomTags, andImage: symptom.image, andCroppedImage: symptom.croppedImage));
+                Data.saveSymptom(Symptom(withId: symptom.id, andDate: date, andText: detailsText.text, andSymptomTags: selectedSymptomTags, andImage: photo!.fullImage, andCroppedImage: photo!.image));
                 self.dismissViewControllerAnimated(true, completion: nil)
                 
             } else {
@@ -243,6 +242,5 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         
         picker.setDate((date == StaticDates.sharedInstance.defaultDate) ? newDate : date, animated: true)
     }
-
 
 }

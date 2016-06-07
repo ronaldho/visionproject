@@ -137,8 +137,8 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
             
         } else if (segue.identifier == "SendSymptomPopover"){
             let navCtrl = segue.destinationViewController as! UINavigationController;
-            let sendvc: SendViewController = navCtrl.viewControllers[0] as! SendViewController;
-            sendvc.allSymptoms = self.symptomsTable.symptoms;
+            let sendvc: SendSymptomsViewController = navCtrl.viewControllers[0] as! SendSymptomsViewController;
+            sendvc.allSymptoms = self.symptoms;
         }
     }
     

@@ -26,7 +26,6 @@ class MyMedicationViewController: AGInputViewController {
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
     
     var delegate: InputViewDelegate?;
-    var savedApptId: String = "";
     var med: MyMedication = MyMedication();
     var medList: Medications = Medications();
     var medToAdd: Medication?
@@ -358,7 +357,18 @@ class MyMedicationViewController: AGInputViewController {
                 instructions = "";
             }
             
-            let medIdFromSave = Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: photo!.fullImage, andCroppedImage: photo!.image, andInstructions: instructions, andId: med.id, andBreakfast: breakfastButtonSelected, andLunch: lunchButtonSelected, andDinner: dinnerButtonSelected, andBed: bedButtonSelected, andDate: med.date, andDiscontinued: discontinued));
+            var startedDate = med.startedDate
+            var discontinuedDate = med.discontinuedDate
+            
+            if (med.discontinued != discontinued) {
+                if discontinued {
+                    discontinuedDate = NSDate()
+                } else {
+                    startedDate = NSDate()
+                }
+            }
+            
+            let medIdFromSave = Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: photo!.fullImage, andCroppedImage: photo!.image, andInstructions: instructions, andId: med.id, andBreakfast: breakfastButtonSelected, andLunch: lunchButtonSelected, andDinner: dinnerButtonSelected, andBed: bedButtonSelected, andDate: med.date, andDiscontinued: discontinued, andStartedDate: startedDate, andDiscontinuedDate: discontinuedDate));
             
             
             // Prepare text for history table

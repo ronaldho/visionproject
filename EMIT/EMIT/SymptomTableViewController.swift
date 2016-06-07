@@ -36,7 +36,7 @@ SymptomCellDelegate, InputViewDelegate {
             
         } else if (segue.identifier == "SendSymptomPopover"){
             let navCtrl = segue.destinationViewController as! UINavigationController;
-            let sendvc: SendViewController = navCtrl.viewControllers[0] as! SendViewController;
+            let sendvc: SendSymptomsViewController = navCtrl.viewControllers[0] as! SendSymptomsViewController;
             sendvc.allSymptoms = self.symptoms;
         }
     }
@@ -110,7 +110,7 @@ SymptomCellDelegate, InputViewDelegate {
         
         cell.backgroundColor = UIColor.whiteColor() //EMITTanColor();
         cell.symptom = symptom;
-        cell.dateLabel.text = symptom.getDateString();
+        cell.dateLabel.text = symptom.date.dayMonthFormat();
         cell.symptomTextLabel.text = symptom.text;
         
         cell.symptomTagStack.subviews.forEach({ $0.removeFromSuperview() })

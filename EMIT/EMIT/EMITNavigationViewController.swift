@@ -14,7 +14,7 @@ class EMITNavigationViewController: UINavigationController {
         super.viewDidLoad()
         self.navigationBar.tintColor = UIColor.whiteColor();
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationBar.barTintColor = UIColor.EMITDarkGreenColor();
+        self.navigationBar.barTintColor = UIColor.EMITBlueColor();
         self.navigationBar.barStyle = UIBarStyle.Black
     }
 

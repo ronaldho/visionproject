@@ -68,8 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     if let data = data where error == nil {
                                         
                                         // Save med with image if it downloads correctly
-                                        print("Download \(name) finished")
-                                        
                                         let medImage = UIImage(data: data)
                                         let croppedImage = ImageUtils.cropToSquare(ImageUtils.fixOrientation(medImage!));
                                         

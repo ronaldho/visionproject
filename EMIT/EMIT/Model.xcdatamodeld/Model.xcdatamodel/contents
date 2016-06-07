@@ -15,12 +15,14 @@
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dinner" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="discontinued" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="discontinuedDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="instructions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lunch" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startedDate" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <entity name="MyMedicationHistory" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -44,7 +46,7 @@
     </entity>
     <elements>
         <element name="Medication" positionX="-63" positionY="117" width="128" height="135"/>
-        <element name="MyMedication" positionX="-63" positionY="-18" width="128" height="225"/>
+        <element name="MyMedication" positionX="-63" positionY="-18" width="128" height="255"/>
         <element name="MyMedicationHistory" positionX="-63" positionY="54" width="128" height="105"/>
         <element name="Symptom" positionX="-63" positionY="117" width="128" height="135"/>
         <element name="SymptomTag" positionX="-63" positionY="117" width="128" height="105"/>

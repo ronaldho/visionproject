@@ -31,6 +31,8 @@ class DiscontinuedTableViewController: AGTableViewController, InputViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.allowsSelection = true;
+        self.tableView.estimatedRowHeight = 85;
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,6 +62,8 @@ class DiscontinuedTableViewController: AGTableViewController, InputViewDelegate 
         cell.backgroundColor = UIColor.whiteColor() //EMITTanColor()
         cell.nameLabel.text = med.name
         cell.med = med
+        cell.startedDateLabel.text = med.startedDate.dayMonthFormat()
+        cell.stoppedDateLabel.text = med.discontinuedDate?.dayMonthFormat()
         
         return cell
     }

@@ -1,5 +1,5 @@
 //
-//  SendViewController.swift
+//  SendSymptomsViewController.swift
 //  EMIT Project
 //
 //  Created by Andrew on 9/05/16.
@@ -9,15 +9,34 @@
 import MessageUI
 import UIKit
 
-class SendViewController: AGInputViewController, SymptomTagCellDelegate {
+class SendSymptomsViewController: AGInputViewController, SymptomTagCellDelegate {
     
     @IBOutlet var startDateField: UITextField!;
     @IBOutlet var endDateField: UITextField!;
     @IBOutlet var sendEmailButton: UIButton!;
     @IBOutlet var sendGmailButton: UIButton!;
+    @IBOutlet weak var selectAllButton: UIButton!
+    @IBOutlet weak var selectNoneButton: UIButton!
+    @IBOutlet weak var tagsContainer: UIView!
     
     @IBOutlet weak var symptomTagsCollection: UICollectionView!
     @IBOutlet weak var collectionHeight: NSLayoutConstraint!
+    
+    @IBAction func selectAllButtonPressed(sender: AnyObject) {
+        for view in symptomTagsCollection.subviews {
+            if let cell = view as? SymptomTagCollectionViewCell {
+                cell.selectSymptomTag(self, newState: true)
+            }
+        }
+    }
+
+    @IBAction func selectNoneButtonPressed(sender: AnyObject) {
+        for view in symptomTagsCollection.subviews {
+            if let cell = view as? SymptomTagCollectionViewCell {
+                cell.selectSymptomTag(self, newState: false)
+            }
+        }
+    }
     
     var allSymptoms: Symptoms?;
     var startDate: NSDate?;
@@ -33,7 +52,7 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
                 if let cell = view as? SymptomTagCollectionViewCell {
                     if cell.tagSelected! {
                         selectedSymptomTags.append(cell.symptomTag!)
-                        print("\(cell.symptomTag!.name) enabled")
+//                        print("\(cell.symptomTag!.name) enabled")
                     }
                 }
             }
@@ -41,9 +60,21 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
             
             let filteredSymptoms: Symptoms = Symptoms();
             for symptom in allSymptoms!.symptoms {
-                if startDate == nil || NSCalendar.currentCalendar().compareDate(startDate!, toDate:symptom.date, toUnitGranularity: .Day) == NSComparisonResult.OrderedAscending {
+                
+                var startDateComparison: NSComparisonResult?
+                var endDateComparison: NSComparisonResult?
+                
+                if startDate != nil {
+                    startDateComparison = NSCalendar.currentCalendar().compareDate(startDate!, toDate:symptom.date, toUnitGranularity: .Day)
+                }
+                
+                if endDate != nil {
+                    endDateComparison = NSCalendar.currentCalendar().compareDate(endDate!, toDate:symptom.date, toUnitGranularity: .Day)
+                }
+                
+                if startDate == nil || startDateComparison == NSComparisonResult.OrderedAscending || startDateComparison == NSComparisonResult.OrderedSame {
                     
-                    if endDate == nil || NSCalendar.currentCalendar().compareDate(endDate!, toDate:symptom.date, toUnitGranularity: .Day) == NSComparisonResult.OrderedDescending {
+                    if endDate == nil || endDateComparison == NSComparisonResult.OrderedDescending || endDateComparison == NSComparisonResult.OrderedSame {
                         
                         if selectedSymptomTags.count > 0 {
                             for symptomTag in selectedSymptomTags {
@@ -96,14 +127,14 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
         
         sender.inputView = inputView
         if (sender == startDateField){
-            doneButton.addTarget(self, action: #selector(SendViewController.doneButtonStart(_:)), forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+            doneButton.addTarget(self, action: #selector(SendSymptomsViewController.doneButtonStart(_:)), forControlEvents: UIControlEvents.TouchUpInside) // set button click event
             
-            datePickerView.addTarget(self, action: #selector(SendViewController.handleStartDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            datePickerView.addTarget(self, action: #selector(SendSymptomsViewController.handleStartDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
             handleStartDatePicker(datePickerView) // Set the date
         } else if (sender == endDateField){
-            doneButton.addTarget(self, action: #selector(SendViewController.doneButtonEnd(_:)), forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+            doneButton.addTarget(self, action: #selector(SendSymptomsViewController.doneButtonEnd(_:)), forControlEvents: UIControlEvents.TouchUpInside) // set button click event
             
-            datePickerView.addTarget(self, action: #selector(SendViewController.handleEndDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            datePickerView.addTarget(self, action: #selector(SendSymptomsViewController.handleEndDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
             handleEndDatePicker(datePickerView) // Set the date
         }
 
@@ -160,7 +191,7 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         let cell: SymptomTagCollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)! as! SymptomTagCollectionViewCell;
         
-        cell.selectSymptomTag(self);
+        cell.selectSymptomTag(self, newState: nil);
     }
     
     
@@ -196,6 +227,13 @@ class SendViewController: AGInputViewController, SymptomTagCellDelegate {
         
         symptomTags = SymptomTags().enabledTags;
 
+        tagsContainer.layer.borderColor = UIColor.darkGrayColor().CGColor
+        tagsContainer.layer.borderWidth = 1
+        tagsContainer.layer.cornerRadius = 5
+        
+        selectAllButton.tintColor = UIColor.EMITDarkGreenColor()
+        selectNoneButton.tintColor = UIColor.EMITDarkGreenColor()
+        
         sendEmailButton.backgroundColor = UIColor.mailBlueColor();
         
         ms = MailSender(parentVC: self);

@@ -45,4 +45,15 @@ class MyMedications: NSObject {
     func sortAlphabetically(){
         meds.sortInPlace { $0.name < $1.name }
     }
+    
+    func toEmailString() -> String {
+        var emailString = "";
+        
+        for med in meds {
+            emailString += med.toEmailString();
+            emailString += "\n";
+        }
+        
+        return emailString;
+    }
 }

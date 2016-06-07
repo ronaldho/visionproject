@@ -26,6 +26,32 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
     var myMedications: MyMedications = MyMedications();
     var itemSaved = false;
     
+    @IBOutlet var moreButton: UIBarButtonItem!
+    
+    @IBAction func moreButtonPressed(sender: UIButton){
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        let discontinued = UIAlertAction(title: "Discontinued Medications", style: .Default, handler: { (action) -> Void in
+            self.performSegueWithIdentifier("DiscontinuedMedications", sender: self)
+        })
+        let send = UIAlertAction(title: "Send Medications", style: .Default, handler: { (action) -> Void in
+            self.performSegueWithIdentifier("SendMedications", sender: self)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+        })
+        
+        alertController.addAction(discontinued)
+        alertController.addAction(send)
+        alertController.addAction(cancel)
+        
+        alertController.popoverPresentationController?.barButtonItem = moreButton
+//        alertController.popoverPresentationController?.sourceView = moreButton
+//        alertController.popoverPresentationController?.sourceRect = (moreButton?.bounds)!
+        presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "NewMyMedication"){
             let navCtrl = segue.destinationViewController as! UINavigationController;
@@ -43,6 +69,15 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
         } else if (segue.identifier == "FullImageFromMyMeds") {
             let fivc = segue.destinationViewController as! FullImageViewController;
             fivc.image = ((sender as! UITapGestureRecognizer).view as! AGImageView).fullImage
+        
+        } else if (segue.identifier == "SendMedications") {
+            let navCtrl = segue.destinationViewController as! UINavigationController;
+            let smvc: SendMedsViewController = navCtrl.viewControllers[0] as! SendMedsViewController;
+            smvc.allMeds = myMedications
+            
+        } else if (segue.identifier == "DiscontinuedMedications") {
+            
+            
         }
     }
     
@@ -121,34 +156,6 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
         cell.medInstructions.text = med.instructions;
         cell.backgroundColor = UIColor.whiteColor() //EMITTanColor()
         
-//        // Time Icons
-//        cell.breakfastImage.image = UIImage(named: "coffee")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-//        cell.lunchImage.image = UIImage(named: "sun")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-//        cell.dinnerImage.image = UIImage(named: "restaurant")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-//        cell.bedImage.image = UIImage(named: "moon")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-//
-//
-//        if (med.breakfast){
-//            cell.breakfastImage.tintColor = UIColor.EMITLightGreenColor()
-//        } else {
-//            cell.breakfastImage.tintColor = UIColor.lightLightGrayColor()
-//        }
-//        if (med.lunch){
-//            cell.lunchImage.tintColor = UIColor.EMITDarkYellowColor()
-//        } else {
-//            cell.lunchImage.tintColor = UIColor.lightLightGrayColor()
-//        }
-//        if (med.dinner){
-//            cell.dinnerImage.tintColor = UIColor.EMITRedColor()
-//        } else {
-//            cell.dinnerImage.tintColor = UIColor.lightLightGrayColor()
-//        }
-//        if (med.bed){
-//            cell.bedImage.tintColor = UIColor.EMITBlueColor()
-//        } else {
-//            cell.bedImage.tintColor = UIColor.lightLightGrayColor()
-//        }
-//        
         
         // Time Icons
         cell.breakfastImage.image = UIImage(named: "sunrise-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)

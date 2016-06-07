@@ -32,14 +32,6 @@ class Symptom: NSObject {
         self.croppedImage = croppedImage;
     }
     
-    func getDateString() -> String{
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMMM d";
-        
-        return dateFormatter.stringFromDate(date);
-    }
-    
     func getDateTimeString() -> String{
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEEE MMMM d, h:mm a";
@@ -67,6 +59,19 @@ class Symptom: NSObject {
         return stringOutput;
     }
     
+    func symptomTagsToNameString() -> String{
+        var stringOutput: String = "";
+        var count = 0;
+        for symptomTag in self.symptomTags {
+            if (count != 0){
+                stringOutput = stringOutput + ", "
+            }
+            stringOutput = stringOutput + symptomTag.name
+            count += 1;
+        }
+        return stringOutput;
+    }
+    
     func symptomTagsFromString(tagString: String){
         let tagIDs = tagString.componentsSeparatedByString("|");
         let symptomTagsClass = SymptomTags()
@@ -87,7 +92,11 @@ class Symptom: NSObject {
     }
     
     func toEmailString() -> String {
-        return "\(self.getDateString()) - \(self.text)"
+        return "\(self.date.dayMonthFormat()) - (\(self.symptomTagsToNameString())) \(self.text)"
+    }
+    
+    override var description: String {
+        return "symptom= {\(self.text), date:\(self.date.dayMonthFormat()), tags:\(self.symptomTagsToNameString())}"
     }
     
 }

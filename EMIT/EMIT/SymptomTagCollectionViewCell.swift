@@ -20,8 +20,16 @@ class SymptomTagCollectionViewCell: UICollectionViewCell {
     var symptomTag: SymptomTag?;
     var delegate: SymptomTagCellDelegate?;
     
-    func selectSymptomTag(sender: AnyObject?){
-        if (tagSelected != nil && backgroundSelectedView != nil) {
+    func selectSymptomTag(sender: AnyObject?, newState: Bool?){
+        if newState != nil {
+            if newState! {
+                tagSelected = true;
+                backgroundSelectedView!.backgroundColor = UIColor.EMITLightGreenColor()
+            } else {
+                tagSelected = false;
+                backgroundSelectedView!.backgroundColor = UIColor.clearColor()
+            }
+        } else if (tagSelected != nil && backgroundSelectedView != nil) {
             if (tagSelected!) {
                 tagSelected = false;
                 backgroundSelectedView!.backgroundColor = UIColor.clearColor()

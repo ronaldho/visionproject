@@ -195,6 +195,8 @@ class Data: NSObject {
                     let id = medications[i].valueForKey("id") as! String;
                     let instructions = medications[i].valueForKey("instructions") as! String;
                     let date = medications[i].valueForKey("date") as! NSDate;
+                    let startedDate = medications[i].valueForKey("startedDate") as! NSDate;
+                    let discontinuedDate = medications[i].valueForKey("discontinuedDate") as! NSDate?;
                     let discontinued = medications[i].valueForKey("discontinued") as! Bool;
                     
                     var image: UIImage?;
@@ -205,7 +207,7 @@ class Data: NSObject {
                         croppedImage = UIImage(data: croppedImageData!);
                     }
                     
-                    let temp: MyMedication = MyMedication(withName: name, andImage: image, andCroppedImage: croppedImage, andInstructions: instructions, andId: id, andBreakfast: breakfast, andLunch: lunch, andDinner: dinner, andBed: bed, andDate: date, andDiscontinued: discontinued);
+                    let temp: MyMedication = MyMedication(withName: name, andImage: image, andCroppedImage: croppedImage, andInstructions: instructions, andId: id, andBreakfast: breakfast, andLunch: lunch, andDinner: dinner, andBed: bed, andDate: date, andDiscontinued: discontinued, andStartedDate: startedDate, andDiscontinuedDate: discontinuedDate);
                     
                     medicationArray.append(temp);
                 }
@@ -246,8 +248,17 @@ class Data: NSObject {
             medicationNew.setValue(id, forKey: "id")
             medicationNew.setValue(med.name, forKey: "name")
             medicationNew.setValue(med.instructions, forKey: "instructions")
-            medicationNew.setValue(NSDate(), forKey: "date")
+            medicationNew.setValue(med.date, forKey: "date")
+            medicationNew.setValue(med.startedDate, forKey: "startedDate")
             medicationNew.setValue(med.discontinued, forKey: "discontinued")
+            
+            if med.discontinuedDate != nil {
+                medicationNew.setValue(med.discontinuedDate, forKey: "discontinuedDate")
+            } else {
+                medicationNew.setNilValueForKey("discontinuedDate")
+            }
+            
+            
 
             medicationNew.setValue(med.breakfast, forKey: "breakfast")
             medicationNew.setValue(med.lunch, forKey: "lunch")
@@ -271,6 +282,13 @@ class Data: NSObject {
                     info[0].setValue(med.instructions, forKey: "instructions")
                     info[0].setValue(med.date, forKey: "date")
                     info[0].setValue(med.discontinued, forKey: "discontinued")
+                    info[0].setValue(med.startedDate, forKey: "startedDate")
+                    
+                    if med.discontinuedDate != nil {
+                        info[0].setValue(med.discontinuedDate, forKey: "discontinuedDate")
+                    } else {
+                        info[0].setNilValueForKey("discontinuedDate")
+                    }
                     
                     info[0].setValue(med.breakfast, forKey: "breakfast")
                     info[0].setValue(med.lunch, forKey: "lunch")
@@ -337,7 +355,6 @@ class Data: NSObject {
         
         do {
             try managedContext.save()
-            //5
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
@@ -504,6 +521,8 @@ class Data: NSObject {
                     if (imageData != nil){
                         image = UIImage(data: imageData!);
                         croppedImage = UIImage(data: croppedImageData!);
+                    } else {
+                        //
                     }
                     
                     let temp: Symptom = Symptom(withId: id, andDate: date, andText: text, andSymptomTags: [], andImage: image, andCroppedImage: croppedImage);

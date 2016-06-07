@@ -11,6 +11,11 @@ import UIKit
 class DiscontinuedTableViewCell: UITableViewCell {
 
     @IBOutlet var nameLabel: UILabel!;
+    @IBOutlet weak var startedDateLabel: UILabel!
+    @IBOutlet weak var stoppedDateLabel: UILabel!
+    @IBOutlet weak var startedDateStack: UIStackView!
+    @IBOutlet weak var stoppedDateStack: UIStackView!
+    
     var med: MyMedication?;
     
     override func awakeFromNib() {
