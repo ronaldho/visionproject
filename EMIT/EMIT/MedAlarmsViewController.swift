@@ -11,6 +11,7 @@ import UIKit
 class MedAlarmsViewController: AGInputViewController {
 
     
+
     @IBOutlet weak var breakfastSwitch: UISwitch!
     @IBOutlet weak var lunchSwitch: UISwitch!
     @IBOutlet weak var dinnerSwitch: UISwitch!
@@ -19,11 +20,22 @@ class MedAlarmsViewController: AGInputViewController {
     @IBOutlet weak var lunchTimeField: UITextField!
     @IBOutlet weak var dinnerTimeField: UITextField!
     @IBOutlet weak var bedTimeField: UITextField!
+
+    @IBOutlet weak var instructionsStack: UIStackView!
+    @IBOutlet weak var alarmsStack: UIStackView!
+    @IBOutlet weak var settingsButton: UIButton!
     
     var breakfastTime: NSDate?
     var lunchTime: NSDate?
     var dinnerTime: NSDate?
     var bedTime: NSDate?
+
+
+    @IBAction func settingsButtonPressed(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+//        self.viewWillAppear(false)
+    }
+    
     
     func registerForAlerts() {
         let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
@@ -36,6 +48,7 @@ class MedAlarmsViewController: AGInputViewController {
         let localNotifications = UIApplication.sharedApplication().scheduledLocalNotifications
         
         if localNotifications != nil {
+            
             for notification in UIApplication.sharedApplication().scheduledLocalNotifications! {
                 let info = notification.userInfo! as! [String: String]
                 if info["type"] == type {
@@ -175,50 +188,69 @@ class MedAlarmsViewController: AGInputViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        breakfastTime = defaults.objectForKey("breakfastAlarmTime") as? NSDate;
-        lunchTime = defaults.objectForKey("lunchAlarmTime") as? NSDate;
-        dinnerTime = defaults.objectForKey("dinnerAlarmTime") as? NSDate;
-        bedTime = defaults.objectForKey("bedAlarmTime") as? NSDate;
+        self.navigationItem.title = "Medication Alarms"
         
-        if (breakfastTime != nil) {
-            breakfastSwitch.setOn(true, animated: false)
-            breakfastTimeField.text = breakfastTime!.getTimeFormat()
-        } else {
-            breakfastSwitch.setOn(false, animated: false)
-            breakfastTimeField.text = ""
-        }
-        if (lunchTime != nil) {
-            lunchSwitch.setOn(true, animated: false)
-            lunchTimeField.text = lunchTime!.getTimeFormat()
-        } else {
-            lunchSwitch.setOn(false, animated: false)
-            lunchTimeField.text = ""
-        }
-        if (dinnerTime != nil) {
-            dinnerSwitch.setOn(true, animated: false)
-            dinnerTimeField.text = dinnerTime!.getTimeFormat()
-        } else {
-            dinnerSwitch.setOn(false, animated: false)
-            dinnerTimeField.text = ""
-        }
-        if (bedTime != nil) {
-            bedSwitch.setOn(true, animated: false)
-            bedTimeField.text = bedTime!.getTimeFormat()
-        } else {
-            bedSwitch.setOn(false, animated: false)
-            bedTimeField.text = ""
-        }
         
-        print("Settings viewWillAppear: breakfastTime:\(breakfastTime) lunchTime:\(lunchTime) dinnerTime:\(dinnerTime) bedTime:\(bedTime)")
-    }
-    
-    override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        // Hide everything
+        instructionsStack.hidden = true
+        alarmsStack.hidden = true
+        
+        // Ask permission for alerts if first time
+        registerForAlerts()
+        
+        // Check current notification settings. If not enabled, show instructions to enable. 
+        // If enabled, load Alarms settings.
+        let settings = UIApplication.sharedApplication().currentUserNotificationSettings()
+        
+        if !settings!.types.contains(.Alert) {
+            instructionsStack.hidden = false
+            self.view.backgroundColor = UIColor.whiteColor();
+            
+        } else {
+            alarmsStack.hidden = false
+            self.view.backgroundColor = UIColor.EMITLightGreyColor()
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            breakfastTime = defaults.objectForKey("breakfastAlarmTime") as? NSDate;
+            lunchTime = defaults.objectForKey("lunchAlarmTime") as? NSDate;
+            dinnerTime = defaults.objectForKey("dinnerAlarmTime") as? NSDate;
+            bedTime = defaults.objectForKey("bedAlarmTime") as? NSDate;
+            
+            if (breakfastTime != nil) {
+                breakfastSwitch.setOn(true, animated: false)
+                breakfastTimeField.text = breakfastTime!.getTimeFormat()
+            } else {
+                breakfastSwitch.setOn(false, animated: false)
+                breakfastTimeField.text = ""
+            }
+            if (lunchTime != nil) {
+                lunchSwitch.setOn(true, animated: false)
+                lunchTimeField.text = lunchTime!.getTimeFormat()
+            } else {
+                lunchSwitch.setOn(false, animated: false)
+                lunchTimeField.text = ""
+            }
+            if (dinnerTime != nil) {
+                dinnerSwitch.setOn(true, animated: false)
+                dinnerTimeField.text = dinnerTime!.getTimeFormat()
+            } else {
+                dinnerSwitch.setOn(false, animated: false)
+                dinnerTimeField.text = ""
+            }
+            if (bedTime != nil) {
+                bedSwitch.setOn(true, animated: false)
+                bedTimeField.text = bedTime!.getTimeFormat()
+            } else {
+                bedSwitch.setOn(false, animated: false)
+                bedTimeField.text = ""
+            }
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
+        
         var alertEnabled: Bool = false;
         let defaults = NSUserDefaults.standardUserDefaults()
 
@@ -260,13 +292,11 @@ class MedAlarmsViewController: AGInputViewController {
         
         
         if (alertEnabled) {
-            registerForAlerts()
-//            listAlerts()
-            
             let alertStyleWarningShown = defaults.objectForKey("alertStyleWarningShown") as? Bool;
             
             if (alertStyleWarningShown == nil || alertStyleWarningShown == false) {
-                performSegueWithIdentifier("AlertStyleWarning", sender: self)
+                let alertStyleWarning = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("AlertStyleWarning")
+                self.presentViewController(alertStyleWarning, animated: true, completion: nil)
             }
         } else {
             print("No alerts")
@@ -275,6 +305,5 @@ class MedAlarmsViewController: AGInputViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

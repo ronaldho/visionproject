@@ -25,7 +25,11 @@ class MedPageHTMLViewController: UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func addButtonPressed(sender: AnyObject) {
-        performSegueWithIdentifier("MyMedFromInfo", sender: sender)
+        let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("MyMedNav") as! UINavigationController
+        let mmvc = navCtrl.viewControllers[0] as! MyMedicationViewController
+        mmvc.newMode = true
+        mmvc.medToAdd = self.med
+        self.presentViewController(navCtrl, animated: true, completion: nil)
     }
 
     
@@ -72,14 +76,5 @@ class MedPageHTMLViewController: UIViewController, UIWebViewDelegate {
     func webViewDidFinishLoad(webView: UIWebView) {
         activityIndicator.hidden = true;
         activityIndicator.stopAnimating()
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "MyMedFromInfo" {
-            let navCtrl: UINavigationController = segue.destinationViewController as! UINavigationController
-            let mmvc: MyMedicationViewController = (navCtrl.viewControllers[0]) as! MyMedicationViewController
-            mmvc.newMode = true
-            mmvc.medToAdd = self.med
-        }
     }
 }

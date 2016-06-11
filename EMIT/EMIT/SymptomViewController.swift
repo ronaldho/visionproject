@@ -25,31 +25,11 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     var symptomTags: [SymptomTag]?;
     
     
-//    func toggleSymptomTag(sender: SymptomTagCollectionViewCell) {
-//        var indexToRemove: Int = -1;
-//        var found: Bool = false;
-//        if (symptom.tagIDs.count > 0){
-//            for i in 0...symptom.tagIDs.count-1 {
-//                if (symptom.tagIDs[i] == sender.symptomTag!.id){
-//                    indexToRemove = i;
-//                    found = true;
-//                }
-//            }
-//        }
-//        if (indexToRemove != -1){
-//            symptom.tagIDs.removeAtIndex(indexToRemove);
-//        }
-//        if (!found){
-//            symptom.tagIDs.append(sender.symptomTag!.id);
-//        }
-//    }
-    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         let cell: SymptomTagCollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)! as! SymptomTagCollectionViewCell;
         
         cell.selectSymptomTag(self, newState: nil);
     }
-
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return SymptomTags().enabledTags.count;
@@ -102,7 +82,13 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     
     
     @IBAction func editSymptomTags(sender: UIButton) {
-        performSegueWithIdentifier("EditSymptomTags", sender: sender)
+        let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("SymptomTagsNav") as! UINavigationController
+        
+        let _: SymptomTagViewController = navCtrl.viewControllers[0] as! SymptomTagViewController;
+
+        
+        self.presentViewController(navCtrl, animated: true, completion: nil);
+        
     }
     
     @IBAction func deleteSymptom(){
@@ -126,21 +112,14 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     }
     
     override func imageTapped(sender: UITapGestureRecognizer){
-        performSegueWithIdentifier("FullImageFromSymptom", sender: sender)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "FullImageFromSymptom" {
-            let imageCtrl: FullImageViewController = segue.destinationViewController as! FullImageViewController;
-            
-            imageCtrl.image = photo!.fullImage;
-            imageCtrl.shouldAutorotate();
-        }
+        let fivc = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("FullImage") as! FullImageViewController
+        fivc.image = photo!.fullImage;
+        fivc.shouldAutorotate();
+        self.presentViewController(fivc, animated: true, completion: nil)
     }
     
     override func viewDidLayoutSubviews() {
         tagLabelSpacerViewWidth.constant = (mainStackView!.bounds.width-50)/2;
-        
     }
     
     override func viewDidLoad() {
@@ -233,11 +212,8 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
     
     override func configureDatePicker(inout picker: UIDatePicker){
         picker.datePickerMode = UIDatePickerMode.Date
-        //picker.minuteInterval = 5;
-        
         let calendar = NSCalendar.currentCalendar();
         let components = calendar.components([.Year,.Month,.Day], fromDate: NSDate());
-        //components.hour = 12;
         let newDate: NSDate = calendar.dateFromComponents(components)!;
         
         picker.setDate((date == StaticDates.sharedInstance.defaultDate) ? newDate : date, animated: true)

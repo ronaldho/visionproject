@@ -44,7 +44,11 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
     @IBAction func sendButtonPressed(){
         let ms: MailSender? = MailSender(parentVC: self);
         if ((ms?.anyMailAvailable()) != nil){
-            performSegueWithIdentifier("SendSymptomPopover", sender: self);
+            let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("SendSymptomsNav") as! UINavigationController
+            let sendvc: SendSymptomsViewController = navCtrl.viewControllers[0] as! SendSymptomsViewController;
+            sendvc.allSymptoms = self.symptoms;
+            self.presentViewController(navCtrl, animated: true, completion: nil)
+        
         } else {
             let alertController = UIAlertController(title: nil, message: "No mail account found, please set up an account in iOS Mail app or Gmail", preferredStyle: .Alert)
             
@@ -59,7 +63,11 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
     }
     
     @IBAction func newSymptom(button: UIButton){
-        performSegueWithIdentifier("NewSymptom", sender: button)
+        let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("SymptomNav") as! UINavigationController
+        let svc: SymptomViewController = navCtrl.viewControllers[0] as! SymptomViewController;
+        svc.delegate = self;
+        svc.newMode = true;
+        self.presentViewController(navCtrl, animated: true, completion: nil);
     }
     
     @IBAction func flip(){
@@ -120,32 +128,14 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
             sstvc.delegate = self;
             symptomsTable = sstvc;
         }
-        
-        if (segue.identifier == "NewSymptom"){
-            let navCtrl = segue.destinationViewController as! UINavigationController;
-            let svc: SymptomViewController = navCtrl.viewControllers[0] as! SymptomViewController;
-            svc.delegate = self;
-            svc.newMode = true;
-            
-        } else if (segue.identifier == "EditSymptom"){
-            let navCtrl = segue.destinationViewController as! UINavigationController;
-            let svc: SymptomViewController = navCtrl.viewControllers[0] as! SymptomViewController;
-            svc.symptom = (sender as! SymptomTableViewCell).symptom!;
-            svc.delegate = self;
-            svc.newMode = false;
-            print("EditSymptom segue in SymptomSplitViewController.prepareForSeque()");
-            
-        } else if (segue.identifier == "SendSymptomPopover"){
-            let navCtrl = segue.destinationViewController as! UINavigationController;
-            let sendvc: SendSymptomsViewController = navCtrl.viewControllers[0] as! SendSymptomsViewController;
-            sendvc.allSymptoms = self.symptoms;
-        }
     }
     
     
     override func viewWillAppear(animated: Bool){
         symptoms.symptoms = Data.getAllSymptoms();
         symptoms.sort();
+        reloadSymptoms()
+        
         if (calendar != nil){
             calendar.symptoms = self.symptoms;
             calendar.calendar.reloadData();
@@ -279,7 +269,15 @@ class SymptomSplitViewController: UIViewController, CalendarViewDelegate, Sympto
     }
     
     func editSymptom(cell: SymptomTableViewCell){
-        performSegueWithIdentifier("EditSymptom", sender: cell)
+        let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("SymptomNav") as! UINavigationController
+        
+        let svc: SymptomViewController = navCtrl.viewControllers[0] as! SymptomViewController;
+        svc.symptom = cell.symptom!
+        svc.delegate = self;
+        svc.newMode = false;
+        
+        self.presentViewController(navCtrl, animated: true, completion: nil);
+        
     }
     
     

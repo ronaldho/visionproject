@@ -44,7 +44,12 @@ SymptomCellDelegate, InputViewDelegate {
     @IBAction func sendButtonPressed(){
         let ms: MailSender? = MailSender(parentVC: self);
         if ((ms?.anyMailAvailable()) != nil){
-            performSegueWithIdentifier("SendSymptomPopover", sender: self);
+            let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("SendSymptomNav") as! UINavigationController
+            let sendvc: SendSymptomsViewController = navCtrl.viewControllers[0] as! SendSymptomsViewController;
+            sendvc.allSymptoms = self.symptoms;
+            
+            self.presentViewController(navCtrl, animated: true, completion: nil)
+            
         } else {
             let alertController = UIAlertController(title: nil, message: "No mail account found, please set up an account in iOS Mail app or Gmail", preferredStyle: .Alert)
             
@@ -59,11 +64,22 @@ SymptomCellDelegate, InputViewDelegate {
     }
     
     @IBAction func newSymptom(button: UIButton){
-        performSegueWithIdentifier("NewSymptom", sender: button)
+        let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("SymptomNav") as! UINavigationController
+        let svc: SymptomViewController = navCtrl.viewControllers[0] as! SymptomViewController;
+        svc.delegate = self;
+        svc.newMode = true;
+        
+        self.presentViewController(navCtrl, animated: true, completion: nil);
     }
     
     func editSymptom(cell: SymptomTableViewCell) {
-        performSegueWithIdentifier("EditSymptom", sender: cell);
+        let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("SymptomNav") as! UINavigationController
+        let svc: SymptomViewController = navCtrl.viewControllers[0] as! SymptomViewController;
+        svc.symptom = cell.symptom!
+        svc.delegate = self;
+        svc.newMode = false;
+        
+        self.presentViewController(navCtrl, animated: true, completion: nil);
     }
     
     func filterMedList(time: String){
@@ -79,12 +95,7 @@ SymptomCellDelegate, InputViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.tableView.allowsSelection = false;
-        
-//        self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 130;
-//        self.tableView.backgroundColor = UIColor.whiteColor() //EMITTanColor();
     }
     
     override func didReceiveMemoryWarning() {

@@ -32,10 +32,16 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
         let discontinued = UIAlertAction(title: "Discontinued Medications", style: .Default, handler: { (action) -> Void in
-            self.performSegueWithIdentifier("DiscontinuedMedications", sender: self)
+            let discMeds = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("DiscontinuedMeds")
+            self.navigationController?.pushViewController(discMeds, animated: true)
+            
         })
         let send = UIAlertAction(title: "Send Medications", style: .Default, handler: { (action) -> Void in
-            self.performSegueWithIdentifier("SendMedications", sender: self)
+            let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("SendMedsNav") as! UINavigationController
+            let smvc: SendMedsViewController = navCtrl.viewControllers[0] as! SendMedsViewController;
+            smvc.allMeds = self.myMedications
+            
+            self.presentViewController(navCtrl, animated: true, completion: nil)
         })
         
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
@@ -46,51 +52,35 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
         alertController.addAction(cancel)
         
         alertController.popoverPresentationController?.barButtonItem = moreButton
-//        alertController.popoverPresentationController?.sourceView = moreButton
-//        alertController.popoverPresentationController?.sourceRect = (moreButton?.bounds)!
-        presentViewController(alertController, animated: true, completion: nil)
+        self.presentViewController(alertController, animated: true, completion: nil)
         
     }
+
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "NewMyMedication"){
-            let navCtrl = segue.destinationViewController as! UINavigationController;
+    @IBAction func newMyMedication(button: UIButton){
+        let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("MyMedNav") as! UINavigationController
             let mmvc: MyMedicationViewController = navCtrl.viewControllers[0] as! MyMedicationViewController;
             mmvc.delegate = self;
             mmvc.newMode = true;
-            
-        } else if (segue.identifier == "EditMyMedication"){
-            let navCtrl = segue.destinationViewController as! UINavigationController;
-            let mmvc: MyMedicationViewController = navCtrl.viewControllers[0] as! MyMedicationViewController;
-            mmvc.med = (sender as! MyMedicationTableViewCell).myMedication;
-            mmvc.delegate = self;
-            mmvc.newMode = false;
-            
-        } else if (segue.identifier == "FullImageFromMyMeds") {
-            let fivc = segue.destinationViewController as! FullImageViewController;
-            fivc.image = ((sender as! UITapGestureRecognizer).view as! AGImageView).fullImage
-        
-        } else if (segue.identifier == "SendMedications") {
-            let navCtrl = segue.destinationViewController as! UINavigationController;
-            let smvc: SendMedsViewController = navCtrl.viewControllers[0] as! SendMedsViewController;
-            smvc.allMeds = myMedications
-            
-        } else if (segue.identifier == "DiscontinuedMedications") {
-            
-            
-        }
-    }
-    
-    @IBAction func newMyMedication(button: UIButton){
-        performSegueWithIdentifier("NewMyMedication", sender: button)
+
+        self.presentViewController(navCtrl, animated: true, completion: nil);
     }
     
     func imageTapped(sender: UITapGestureRecognizer){
-        performSegueWithIdentifier("FullImageFromMyMeds", sender: sender)
+        let fivc = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("FullImage") as! FullImageViewController
+        fivc.image = (sender.view as! AGImageView).fullImage
+        
+        self.presentViewController(fivc, animated: true, completion: nil)
     }
     
     func editMed(cell: MyMedicationTableViewCell){
-        performSegueWithIdentifier("EditMyMedication", sender: cell);
+        let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("MyMedNav") as! UINavigationController
+        let mmvc: MyMedicationViewController = navCtrl.viewControllers[0] as! MyMedicationViewController;
+        mmvc.med = cell.myMedication;
+        mmvc.delegate = self;
+        mmvc.newMode = false;
+        
+        self.presentViewController(navCtrl, animated: true, completion: nil)
     }
     
     func filterMedList(time: String){
@@ -127,7 +117,8 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
         let tutorialShown = defaults.objectForKey("tutorialShown") as? Bool;
         
         if (tutorialShown == nil || tutorialShown == false){
-            performSegueWithIdentifier("Tutorial", sender: self)
+            let tutorial = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("Tutorial")
+            self.presentViewController(tutorial, animated: true, completion: nil)
         }
     }
 

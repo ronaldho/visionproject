@@ -18,6 +18,7 @@
 		496CFB531CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496CFB521CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift */; };
 		49723A4D1D0626FB0058303A /* SendMedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49723A4C1D0626FB0058303A /* SendMedsViewController.swift */; };
 		4993E92E1CE8513B0069B8B7 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993E92D1CE8513B0069B8B7 /* OverlayView.swift */; };
+		4993F78B1D0BBADE007BF6C5 /* ModalViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4993F7891D0BBADE007BF6C5 /* ModalViews.storyboard */; };
 		49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */; };
 		49CB87D41CF583860077F67C /* MyMedicationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87D31CF583860077F67C /* MyMedicationsTableViewController.swift */; };
 		49CB87D61CF610B40077F67C /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87D51CF610B40077F67C /* MainTabBarViewController.swift */; };
@@ -80,6 +81,7 @@
 		496CFB521CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscontinuedTableViewCell.swift; sourceTree = "<group>"; };
 		49723A4C1D0626FB0058303A /* SendMedsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMedsViewController.swift; sourceTree = "<group>"; };
 		4993E92D1CE8513B0069B8B7 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayView.swift; path = ../OverlayView.swift; sourceTree = "<group>"; };
+		4993F78A1D0BBADE007BF6C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = EMIT/Base.lproj/ModalViews.storyboard; sourceTree = "<group>"; };
 		49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationTableViewCell.swift; sourceTree = "<group>"; };
 		49CB87D31CF583860077F67C /* MyMedicationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationsTableViewController.swift; sourceTree = "<group>"; };
 		49CB87D51CF610B40077F67C /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
@@ -179,12 +181,12 @@
 				49723A4C1D0626FB0058303A /* SendMedsViewController.swift */,
 				49DC221C1CF11F35004F9ED0 /* MedPageHTMLViewController.swift */,
 				49CB87DD1CFE9D6B0077F67C /* TutorialViewController.swift */,
-				49CB87E31D0012DC0077F67C /* AlertStyleWarningViewController.swift */,
 				49D6D6111CD5343500EBDA7B /* FullImageViewController.swift */,
 				49D6D5FE1CD4809F00EBDA7B /* FilterTableViewCell.swift */,
 				4993E92D1CE8513B0069B8B7 /* OverlayView.swift */,
 				49D6D6161CD5D6A400EBDA7B /* NextMedicationTimerCircle.swift */,
 				49CB87D91CF614840077F67C /* MedAlarmsViewController.swift */,
+				49CB87E31D0012DC0077F67C /* AlertStyleWarningViewController.swift */,
 				49CB87E71D0401D20077F67C /* AboutViewController.swift */,
 			);
 			name = "Secondary Views";
@@ -246,6 +248,7 @@
 				49DA89CE1CC9C49A0027CF21 /* AppDelegate.swift */,
 				49DA89E61CC9C5950027CF21 /* Model.xcdatamodeld */,
 				49DA89D41CC9C49A0027CF21 /* Main.storyboard */,
+				4993F7891D0BBADE007BF6C5 /* ModalViews.storyboard */,
 				49DA89D91CC9C49A0027CF21 /* LaunchScreen.storyboard */,
 				49CB87DB1CF675D90077F67C /* Assets.xcassets */,
 				49DA89DC1CC9C49A0027CF21 /* Info.plist */,
@@ -337,6 +340,7 @@
 				49DA89DB1CC9C49A0027CF21 /* LaunchScreen.storyboard in Resources */,
 				49CB87DC1CF675D90077F67C /* Assets.xcassets in Resources */,
 				49DA89D61CC9C49A0027CF21 /* Main.storyboard in Resources */,
+				4993F78B1D0BBADE007BF6C5 /* ModalViews.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +413,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		4993F7891D0BBADE007BF6C5 /* ModalViews.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4993F78A1D0BBADE007BF6C5 /* Base */,
+			);
+			name = ModalViews.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		49DA89D41CC9C49A0027CF21 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

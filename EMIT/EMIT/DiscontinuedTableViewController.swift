@@ -12,14 +12,6 @@ class DiscontinuedTableViewController: AGTableViewController, InputViewDelegate 
 
     var discontinuedMeds: MyMedications?
     var itemSaved = false;
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let navCtrl = segue.destinationViewController as! UINavigationController;
-        let mmvc: MyMedicationViewController = navCtrl.viewControllers[0] as! MyMedicationViewController;
-        mmvc.med = (sender as! DiscontinuedTableViewCell).med!
-        mmvc.newMode = false;
-        mmvc.delegate = self;
-    }
     
     override func viewWillAppear(animated: Bool) {
         let allMeds = MyMedications()
@@ -50,7 +42,12 @@ class DiscontinuedTableViewController: AGTableViewController, InputViewDelegate 
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("EditDiscontinued", sender: tableView.cellForRowAtIndexPath(indexPath))
+        let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("MyMedNav") as! UINavigationController
+        let mmvc: MyMedicationViewController = navCtrl.viewControllers[0] as! MyMedicationViewController;
+        mmvc.med = (tableView.cellForRowAtIndexPath(indexPath) as! DiscontinuedTableViewCell).med!
+        mmvc.newMode = false;
+        mmvc.delegate = self;
+        self.presentViewController(navCtrl, animated: true, completion: nil)
     }
 
 

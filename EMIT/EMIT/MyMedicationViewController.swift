@@ -64,7 +64,13 @@ class MyMedicationViewController: AGInputViewController {
     
     
     @IBAction func medInfoButtonPressed(sender: AnyObject) {
-        performSegueWithIdentifier("MedInfoFromMyMed", sender: sender)
+        let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("MedInfoNav") as! UINavigationController
+        let infoCtrl: MedPageHTMLViewController = (navCtrl.viewControllers[0]) as! MedPageHTMLViewController;
+        
+        infoCtrl.myMed = med;
+
+        self.presentViewController(navCtrl, animated: true, completion: nil)
+        
     }
     
     @IBAction func medNameChanged(textField: UITextField){
@@ -120,11 +126,10 @@ class MyMedicationViewController: AGInputViewController {
                 self.discontinueButton.backgroundColor = UIColor.EMITPurpleColor();
                 self.discontinueButton.setTitle("Discontinue", forState: UIControlState.Normal)
             })
-            
         }
     }
+    
     @IBAction func deleteMyMedication(){
-        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
         let delete = UIAlertAction(title: "Delete", style: .Destructive, handler: { (action) -> Void in
@@ -144,23 +149,11 @@ class MyMedicationViewController: AGInputViewController {
     }
     
     override func imageTapped(sender: UITapGestureRecognizer){
-        performSegueWithIdentifier("FullImageFromMyMed", sender: sender)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "FullImageFromMyMed" {
-            let imageCtrl: FullImageViewController = segue.destinationViewController as! FullImageViewController;
-            
-            imageCtrl.image = photo!.fullImage;
-            imageCtrl.shouldAutorotate();
-            
-        } else if segue.identifier == "MedInfoFromMyMed" {
-            let navCtrl: UINavigationController = segue.destinationViewController as! UINavigationController
-            let infoCtrl: MedPageHTMLViewController = (navCtrl.viewControllers[0]) as! MedPageHTMLViewController;
-            
-            infoCtrl.myMed = med;
-            
-        }
+        let fivc = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("FullImage") as! FullImageViewController
+        fivc.image = photo!.fullImage;
+        fivc.shouldAutorotate()
+        self.presentViewController(fivc, animated: true, completion: nil)
+        
     }
     
     override func viewDidLoad() {
@@ -463,8 +456,6 @@ class MyMedicationViewController: AGInputViewController {
             tableHeight.constant = newHeight > 250 ? 250 : newHeight;
         }
 
-        
         return cell
     }
-
 }
