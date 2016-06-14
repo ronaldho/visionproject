@@ -8,6 +8,14 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pageUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="MedicationDosage" syncable="YES">
+        <attribute name="croppedImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="dosage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="medicationId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="MyMedication" syncable="YES">
         <attribute name="bed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="breakfast" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -50,5 +58,6 @@
         <element name="MyMedicationHistory" positionX="-63" positionY="54" width="128" height="105"/>
         <element name="Symptom" positionX="-63" positionY="117" width="128" height="135"/>
         <element name="SymptomTag" positionX="-63" positionY="117" width="128" height="105"/>
+        <element name="MedicationDosage" positionX="-63" positionY="99" width="128" height="135"/>
     </elements>
 </model>

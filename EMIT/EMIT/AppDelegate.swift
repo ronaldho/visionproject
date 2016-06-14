@@ -9,117 +9,29 @@
 import UIKit
 import CoreData
 
+enum ImageObject {
+    case Medication
+    case MedicationDosage
+}
+
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var drugApiUrl = NSURL(string: "http://emitcare.ca/api/v1/drugs")
-
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        saveDefaultSymptomTags();
+        SymptomTags().saveDefaultSymptomTags();
         
         // Get latest Medication Data from API
         let defaults = NSUserDefaults.standardUserDefaults()
         let lastUpdateDate = defaults.objectForKey("lastUpdateDate") as? NSDate;
         
         if lastUpdateDate == nil {
-            let meds: [Medication] = Data.getAllMedications()
-            for med in meds {
-                Data.deleteMedication(med)
-            }
-
-            let request = NSURLRequest(URL: drugApiUrl!)
-            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-            let session = NSURLSession(configuration: config)
-            
-            let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
-                // Callback when response received
-                
-                var json: [[String: AnyObject]] = [[:]];
-                do {
-                    if data != nil {
-                            json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as! [[String:AnyObject]];
-                    } else {
-                        print("Data nil in server call");
-                    }
-
-                } catch {
-                    print(error)
-                }
-                
-                for medication in json{
-//                    print ("medication: \(medication)");
-                    if let name = medication["name"] as? String {
-                        if let pageUrl = medication["page"] as? String {
-                            
-                            if let imageUrlString = medication["image"] as? String {
-                                
-                                // Get image if api returns image url
-                                let imageUrl = NSURL(string: imageUrlString)
-                                let request = NSURLRequest(URL: imageUrl!)
-                                let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-                                let session = NSURLSession(configuration: config)
-                                
-                                let imageTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
-                                    
-                                    if let data = data where error == nil {
-                                        
-                                        // Save med with image if it downloads correctly
-                                        let medImage = UIImage(data: data)
-                                        let croppedImage = ImageUtils.cropToSquare(ImageUtils.fixOrientation(medImage!));
-                                        
-                                        if NSThread.currentThread().isMainThread {
-                                            Data.saveMedication(Medication(withName: name, andImage: medImage!, andCroppedImage: croppedImage, andId: "0", andImageUrl: imageUrlString, andPageUrl: pageUrl));
-                                        } else {
-                                            dispatch_async(dispatch_get_main_queue()){
-                                                Data.saveMedication(Medication(withName: name, andImage: medImage!, andCroppedImage: croppedImage, andId: "0", andImageUrl: imageUrlString, andPageUrl: pageUrl));
-                                            }
-                                        }
-                                        
-                                        
-                                    } else {
-                                        
-                                        // Save med without image if failure downloading from image url
-                                        if NSThread.currentThread().isMainThread {
-                                            Data.saveMedication(Medication(withName: name, andImage: nil, andCroppedImage: nil, andId: "0", andImageUrl: imageUrlString, andPageUrl: pageUrl));
-                                        } else {
-                                            dispatch_async(dispatch_get_main_queue()){
-                                                Data.saveMedication(Medication(withName: name, andImage: nil, andCroppedImage: nil, andId: "0", andImageUrl: imageUrlString, andPageUrl: pageUrl));
-                                            }
-                                        }
-                                        
-                                    }
-                                    
-                                }); // End image callback
-                                
-                                // Send image request
-                                imageTask.resume()
-                                
-                            } else {
-                                
-                                // Save med without image if api doesn't return image url
-                                if NSThread.currentThread().isMainThread {
-                                    Data.saveMedication(Medication(withName: name, andImage: nil, andCroppedImage: nil, andId: "0", andImageUrl: nil, andPageUrl: pageUrl));
-                                } else {
-                                    dispatch_async(dispatch_get_main_queue()){
-                                        Data.saveMedication(Medication(withName: name, andImage: nil, andCroppedImage: nil, andId: "0", andImageUrl: nil, andPageUrl: pageUrl));
-                                    }
-                                }
-
-                            } // End if image url exists in json
-                        } //End if page url exists in json
-                    } // End if med name exists in json
-                } // End med json loop
-            }); // End med callback
-            
-            // Send med request
-            task.resume()
-
+            MedicationAPI().getMedicationData()
         }
-        
         
         return true
     }
@@ -206,26 +118,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
                 abort()
             }
-        }
-    }
-    
-    func saveDefaultSymptomTags(){
-        let symptomTags: [SymptomTag] = Data.getAllSymptomTags();
-        
-        if symptomTags.count == 0 {
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.redColor(), andName: "Pain", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.redOrangeColor(), andName: "", andEnabled: false));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.orangeColor(), andName: "Mood", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.orangeYellowColor(), andName: "", andEnabled: false));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.yellowColor(), andName: "Nausea", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.yellowGreenColor(), andName: "", andEnabled: false));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.greenColor(), andName: "Blood Pressure", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.greenBlueColor(), andName: "", andEnabled: false));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.blueColor(), andName: "Blood Sugars", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.bluePurpleColor(), andName: "", andEnabled: false));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.purpleColor(), andName: "Diarrhea", andEnabled: true));
-            Data.saveSymptomTag(SymptomTag(withId: "0", andColor: UIColor.purpleRedColor(), andName: "", andEnabled: false));
-            
         }
     }
 }

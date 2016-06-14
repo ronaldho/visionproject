@@ -57,35 +57,19 @@ class Data: NSObject {
         return medicationArray;
     }
     
+    
     static func saveMedication(med: Medication) -> String{
         let appDelegate =
             UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        
         var id = NSUUID().UUIDString
+        var medicationObject: NSManagedObject?
         
         if (med.id == "0"){
             let entity =  NSEntityDescription.entityForName("Medication",
                                                             inManagedObjectContext:managedContext)
-            
-            let medicationNew = NSManagedObject(entity: entity!,
+            medicationObject = NSManagedObject(entity: entity!,
                                                 insertIntoManagedObjectContext: managedContext)
-            
-            if (med.image != nil){
-                let imageData = UIImageJPEGRepresentation(med.image!, 1)
-                medicationNew.setValue(imageData, forKey: "image")
-                let croppedImageData = UIImageJPEGRepresentation(med.croppedImage!, 1)
-                medicationNew.setValue(croppedImageData, forKey: "croppedImage")
-            } else {
-                medicationNew.setNilValueForKey("image");
-                medicationNew.setNilValueForKey("croppedImage");
-            }
-
-            medicationNew.setValue(id, forKey: "id")
-            medicationNew.setValue(med.name, forKey: "name")
-            medicationNew.setValue(med.imageUrl, forKey: "imageUrl")
-            medicationNew.setValue(med.pageUrl, forKey: "pageUrl")
-            
         } else {
             id = med.id
             
@@ -97,27 +81,30 @@ class Data: NSObject {
                     try managedContext.executeFetchRequest(fetchRequest)
                 let info = results as! [NSManagedObject]
                 if (info.count == 1){
-                    info[0].setValue(med.name, forKey: "name")
-                    info[0].setValue(med.imageUrl, forKey: "imageUrl")
-                    info[0].setValue(med.pageUrl, forKey: "pageUrl")
-                    
-                    if (med.image != nil){
-                        let imageData = UIImageJPEGRepresentation(med.image!, 1)
-                        info[0].setValue(imageData, forKey: "image")
-                        let croppedImageData = UIImageJPEGRepresentation(med.croppedImage!, 1)
-                        info[0].setValue(croppedImageData, forKey: "croppedImage")
-                    } else {
-                        info[0].setNilValueForKey("image")
-                        info[0].setNilValueForKey("croppedImage")
-                    }
-                    
-                    
+                    medicationObject = info[0]
                 } else {
                     print("Error: trying to saveMedication(), but more or less than 1 object was found with the id");
                 }
             } catch let error as NSError {
                 print("Could not fetch \(error), \(error.userInfo)")
             }
+        }
+        
+        if medicationObject != nil {
+            if (med.image != nil){
+                let imageData = UIImageJPEGRepresentation(med.image!, 1)
+                medicationObject!.setValue(imageData, forKey: "image")
+                let croppedImageData = UIImageJPEGRepresentation(med.croppedImage!, 1)
+                medicationObject!.setValue(croppedImageData, forKey: "croppedImage")
+            } else {
+                medicationObject!.setNilValueForKey("image");
+                medicationObject!.setNilValueForKey("croppedImage");
+            }
+            
+            medicationObject!.setValue(id, forKey: "id")
+            medicationObject!.setValue(med.name, forKey: "name")
+            medicationObject!.setValue(med.imageUrl, forKey: "imageUrl")
+            medicationObject!.setValue(med.pageUrl, forKey: "pageUrl")
         }
         
         do {
@@ -168,6 +155,150 @@ class Data: NSObject {
     }
 
     
+    //
+    // MARK: MedicationDosage
+    //
+    static func getMedicationDosagesForMedication(med: Medication) -> [MedicationDosage] {
+        
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let dosageFetchRequest = NSFetchRequest(entityName: "MedicationDosage")
+        dosageFetchRequest.predicate = NSPredicate(format: "medicationId=%@", med.id);
+        var dosagesArray = [MedicationDosage]()
+        
+        do {
+            let results =
+                try managedContext.executeFetchRequest(dosageFetchRequest)
+            let dosages = results as! [NSManagedObject]
+            if (dosages.count > 0){
+                for i in 0...dosages.count-1 {
+                    let id = dosages[i].valueForKey("id") as! String;
+                    let medId = dosages[i].valueForKey("medicationId") as! String;
+                    let dosage = dosages[i].valueForKey("dosage") as! String;
+                    let imageUrl = dosages[i].valueForKey("imageUrl") as! String?;
+                    let imageData = dosages[i].valueForKey("image") as! NSData?;
+                    let croppedImageData = dosages[i].valueForKey("croppedImage") as! NSData?;
+                    
+                    var image: UIImage?;
+                    var croppedImage: UIImage?;
+                    
+                    if (imageData != nil){
+                        image = UIImage(data: imageData!);
+                        croppedImage = UIImage(data: croppedImageData!);
+                    }
+                    
+                    let temp = MedicationDosage(withId: id, andMedicationId: medId, andDosage: dosage, andImageUrl: imageUrl, andImage: image, andCroppedImage: croppedImage)
+                    dosagesArray.append(temp)
+                }
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        return dosagesArray
+        
+    }
+    
+    static func saveMedicationDosage(medDosage: MedicationDosage) -> String{
+        print("saveMedicationDosage: \(medDosage.dosage)")
+        
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        var id = NSUUID().UUIDString
+        var dosageObject: NSManagedObject?
+        
+        if (medDosage.id == "0"){
+            let entity =  NSEntityDescription.entityForName("MedicationDosage",
+                                                            inManagedObjectContext:managedContext)
+            dosageObject = NSManagedObject(entity: entity!,
+                                           insertIntoManagedObjectContext: managedContext)
+        } else {
+            id = medDosage.id
+            
+            let fetchRequest = NSFetchRequest(entityName: "MedicationDosage")
+            fetchRequest.predicate = NSPredicate(format: "id=%@", medDosage.id);
+            
+            do {
+                let results =
+                    try managedContext.executeFetchRequest(fetchRequest)
+                let info = results as! [NSManagedObject]
+                if (info.count == 1){
+                    dosageObject = info[0]
+                } else {
+                    print("Error: trying to saveMedicationDosage(), but more or less than 1 object was found with the id");
+                }
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
+        }
+        
+        if dosageObject != nil {
+            if (medDosage.image != nil){
+                let imageData = UIImageJPEGRepresentation(medDosage.image!, 1)
+                dosageObject!.setValue(imageData, forKey: "image")
+                let croppedImageData = UIImageJPEGRepresentation(medDosage.croppedImage!, 1)
+                dosageObject!.setValue(croppedImageData, forKey: "croppedImage")
+            } else {
+                dosageObject!.setNilValueForKey("image");
+                dosageObject!.setNilValueForKey("croppedImage");
+            }
+            
+            dosageObject!.setValue(id, forKey: "id")
+            dosageObject!.setValue(medDosage.medicationId, forKey: "medicationId")
+            dosageObject!.setValue(medDosage.dosage, forKey: "dosage")
+            dosageObject!.setValue(medDosage.imageUrl, forKey: "imageUrl")
+            
+        }
+        
+        do {
+            try managedContext.save()
+            //5
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+        
+        return id
+    }
+
+    static func deleteMedicationDosage(medDosage: MedicationDosage){
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        if (medDosage.id == "0"){
+            print("Error: trying to delete MedicationDosage with id == 0");
+            
+        } else {
+            let fetchRequest = NSFetchRequest(entityName: "MedicationDosage")
+            fetchRequest.predicate = NSPredicate(format: "id=%@", medDosage.id);
+            
+            do {
+                let results =
+                    try managedContext.executeFetchRequest(fetchRequest)
+                let info = results as! [NSManagedObject]
+                if (info.count == 1){
+                    
+                    managedContext.deleteObject(info[0]);
+                    
+                } else {
+                    print("Error: trying to deleteMedicationDosage(), but more or less than 1 object was found with the id");
+                }
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
+        }
+        
+        do {
+            try managedContext.save()
+            //5
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
     
     //
     // MARK: MyMedication
@@ -225,47 +356,14 @@ class Data: NSObject {
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        
         var id = NSUUID().UUIDString
+        var myMedicationObject: NSManagedObject?
         
         if (med.id == "0"){
             let entity =  NSEntityDescription.entityForName("MyMedication",
                 inManagedObjectContext:managedContext)
-            
-            let medicationNew = NSManagedObject(entity: entity!,
+            myMedicationObject = NSManagedObject(entity: entity!,
                 insertIntoManagedObjectContext: managedContext)
-            
-            if (med.image != nil){
-                let imageData = UIImageJPEGRepresentation(med.image!, 1)
-                medicationNew.setValue(imageData, forKey: "image")
-                let croppedImageData = UIImageJPEGRepresentation(med.croppedImage!, 1)
-                medicationNew.setValue(croppedImageData, forKey: "croppedImage")
-            } else {
-                medicationNew.setNilValueForKey("image");
-                medicationNew.setNilValueForKey("croppedImage");
-            }
-            
-            medicationNew.setValue(id, forKey: "id")
-            medicationNew.setValue(med.name, forKey: "name")
-            medicationNew.setValue(med.instructions, forKey: "instructions")
-            medicationNew.setValue(med.date, forKey: "date")
-            medicationNew.setValue(med.startedDate, forKey: "startedDate")
-            medicationNew.setValue(med.discontinued, forKey: "discontinued")
-            
-            if med.discontinuedDate != nil {
-                medicationNew.setValue(med.discontinuedDate, forKey: "discontinuedDate")
-            } else {
-                medicationNew.setNilValueForKey("discontinuedDate")
-            }
-            
-            
-
-            medicationNew.setValue(med.breakfast, forKey: "breakfast")
-            medicationNew.setValue(med.lunch, forKey: "lunch")
-            medicationNew.setValue(med.dinner, forKey: "dinner")
-            medicationNew.setValue(med.bed, forKey: "bed")
-            
-
             
         } else {
             id = med.id
@@ -278,40 +376,44 @@ class Data: NSObject {
                 try managedContext.executeFetchRequest(fetchRequest)
                 let info = results as! [NSManagedObject]
                 if (info.count == 1){
-                    info[0].setValue(med.name, forKey: "name")
-                    info[0].setValue(med.instructions, forKey: "instructions")
-                    info[0].setValue(med.date, forKey: "date")
-                    info[0].setValue(med.discontinued, forKey: "discontinued")
-                    info[0].setValue(med.startedDate, forKey: "startedDate")
-                    
-                    if med.discontinuedDate != nil {
-                        info[0].setValue(med.discontinuedDate, forKey: "discontinuedDate")
-                    } else {
-                        info[0].setNilValueForKey("discontinuedDate")
-                    }
-                    
-                    info[0].setValue(med.breakfast, forKey: "breakfast")
-                    info[0].setValue(med.lunch, forKey: "lunch")
-                    info[0].setValue(med.dinner, forKey: "dinner")
-                    info[0].setValue(med.bed, forKey: "bed")
-                    
-                    if (med.image != nil){
-                        let imageData = UIImageJPEGRepresentation(med.image!, 1)
-                        info[0].setValue(imageData, forKey: "image")
-                        let croppedImageData = UIImageJPEGRepresentation(med.croppedImage!, 1)
-                        info[0].setValue(croppedImageData, forKey: "croppedImage")
-                    } else {
-                        info[0].setNilValueForKey("image")
-                        info[0].setNilValueForKey("croppedImage")
-                    }
-                    
-                    
+                    myMedicationObject = info[0]
                 } else {
                     print("Error: trying to saveMedication(), but more or less than 1 object was found with the id");
                 }
             } catch let error as NSError {
                 print("Could not fetch \(error), \(error.userInfo)")
             }
+        }
+        
+        if myMedicationObject != nil {
+            if (med.image != nil){
+                let imageData = UIImageJPEGRepresentation(med.image!, 1)
+                myMedicationObject!.setValue(imageData, forKey: "image")
+                let croppedImageData = UIImageJPEGRepresentation(med.croppedImage!, 1)
+                myMedicationObject!.setValue(croppedImageData, forKey: "croppedImage")
+            } else {
+                myMedicationObject!.setNilValueForKey("image");
+                myMedicationObject!.setNilValueForKey("croppedImage");
+            }
+            
+            myMedicationObject!.setValue(id, forKey: "id")
+            myMedicationObject!.setValue(med.name, forKey: "name")
+            myMedicationObject!.setValue(med.instructions, forKey: "instructions")
+            myMedicationObject!.setValue(med.date, forKey: "date")
+            myMedicationObject!.setValue(med.startedDate, forKey: "startedDate")
+            myMedicationObject!.setValue(med.discontinued, forKey: "discontinued")
+            
+            if med.discontinuedDate != nil {
+                myMedicationObject!.setValue(med.discontinuedDate, forKey: "discontinuedDate")
+            } else {
+                myMedicationObject!.setNilValueForKey("discontinuedDate")
+            }
+            
+            myMedicationObject!.setValue(med.breakfast, forKey: "breakfast")
+            myMedicationObject!.setValue(med.lunch, forKey: "lunch")
+            myMedicationObject!.setValue(med.dinner, forKey: "dinner")
+            myMedicationObject!.setValue(med.bed, forKey: "bed")
+
         }
         
         do {
@@ -404,20 +506,14 @@ class Data: NSObject {
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        
         var id = NSUUID().UUIDString
+        var historyObject: NSManagedObject?
         
         if (medHistory.id == "0"){
             let entity =  NSEntityDescription.entityForName("MyMedicationHistory",
                 inManagedObjectContext:managedContext)
-            
-            let medicationHistoryNew = NSManagedObject(entity: entity!,
+            historyObject = NSManagedObject(entity: entity!,
                 insertIntoManagedObjectContext: managedContext)
-            
-            medicationHistoryNew.setValue(medHistory.medId, forKey: "medId")
-            medicationHistoryNew.setValue(medHistory.date, forKey: "date")
-            medicationHistoryNew.setValue(id, forKey: "id")
-            medicationHistoryNew.setValue(medHistory.text, forKey: "text")
             
         } else {
             id = medHistory.id
@@ -430,9 +526,7 @@ class Data: NSObject {
                 try managedContext.executeFetchRequest(fetchRequest)
                 let info = results as! [NSManagedObject]
                 if (info.count == 1){
-                    info[0].setValue(medHistory.medId, forKey: "medId")
-                    info[0].setValue(medHistory.date, forKey: "date")
-                    info[0].setValue(medHistory.text, forKey: "text")
+                    historyObject = info[0]
                     
                 } else {
                     print("Error: trying to saveMedicationHistory(), but more or less than 1 object was found with the id");
@@ -440,6 +534,13 @@ class Data: NSObject {
             } catch let error as NSError {
                 print("Could not fetch \(error), \(error.userInfo)")
             }
+        }
+        
+        if historyObject != nil {
+            historyObject!.setValue(id, forKey: "id")
+            historyObject!.setValue(medHistory.medId, forKey: "medId")
+            historyObject!.setValue(medHistory.date, forKey: "date")
+            historyObject!.setValue(medHistory.text, forKey: "text")
         }
         
         do {
@@ -544,34 +645,17 @@ class Data: NSObject {
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        
         var id = NSUUID().UUIDString
+        var symptomObject: NSManagedObject?
         
         if (symptom.id == "0"){
             let entity =  NSEntityDescription.entityForName("Symptom",
                 inManagedObjectContext:managedContext)
-            
-            let symptomNew = NSManagedObject(entity: entity!,
+            symptomObject = NSManagedObject(entity: entity!,
                 insertIntoManagedObjectContext: managedContext)
-            
-            if (symptom.image != nil){
-                let imageData = UIImageJPEGRepresentation(symptom.image!, 1)
-                symptomNew.setValue(imageData, forKey: "image")
-                let croppedImageData = UIImageJPEGRepresentation(symptom.croppedImage!, 1)
-                symptomNew.setValue(croppedImageData, forKey: "croppedImage")
-            } else {
-                symptomNew.setNilValueForKey("image");
-                symptomNew.setNilValueForKey("croppedImage");
-            }
 
-            symptomNew.setValue(id, forKey: "id")
-            symptomNew.setValue(symptom.date, forKey: "date")
-            symptomNew.setValue(symptom.text, forKey: "text")
-            symptomNew.setValue(symptom.symptomTagsToString(), forKey: "tags")
-            
         } else {
             id = symptom.id
-            
             let fetchRequest = NSFetchRequest(entityName: "Symptom")
             fetchRequest.predicate = NSPredicate(format: "id=%@", symptom.id);
             
@@ -580,26 +664,30 @@ class Data: NSObject {
                 try managedContext.executeFetchRequest(fetchRequest)
                 let info = results as! [NSManagedObject]
                 if (info.count == 1){
-                    info[0].setValue(symptom.date, forKey: "date")
-                    info[0].setValue(symptom.text, forKey: "text")
-                    info[0].setValue(symptom.symptomTagsToString(), forKey: "tags")
-                    
-                    if (symptom.image != nil){
-                        let imageData = UIImageJPEGRepresentation(symptom.image!, 1)
-                        info[0].setValue(imageData, forKey: "image")
-                        let croppedImageData = UIImageJPEGRepresentation(symptom.croppedImage!, 1)
-                        info[0].setValue(croppedImageData, forKey: "croppedImage")
-                    } else {
-                        info[0].setNilValueForKey("image")
-                        info[0].setNilValueForKey("croppedImage")
-                    }
-                    
+                    symptomObject = info[0]
                 } else {
                     print("Error: trying to saveSymptom(), but more or less than 1 object was found with the id");
                 }
             } catch let error as NSError {
                 print("Could not fetch \(error), \(error.userInfo)")
             }
+        }
+        
+        if symptomObject != nil {
+            if (symptom.image != nil){
+                let imageData = UIImageJPEGRepresentation(symptom.image!, 1)
+                symptomObject!.setValue(imageData, forKey: "image")
+                let croppedImageData = UIImageJPEGRepresentation(symptom.croppedImage!, 1)
+                symptomObject!.setValue(croppedImageData, forKey: "croppedImage")
+            } else {
+                symptomObject!.setNilValueForKey("image");
+                symptomObject!.setNilValueForKey("croppedImage");
+            }
+            
+            symptomObject!.setValue(id, forKey: "id")
+            symptomObject!.setValue(symptom.date, forKey: "date")
+            symptomObject!.setValue(symptom.text, forKey: "text")
+            symptomObject!.setValue(symptom.symptomTagsToString(), forKey: "tags")
         }
         
         do {
@@ -691,24 +779,17 @@ class Data: NSObject {
         let appDelegate =
             UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        
         var id = NSUUID().UUIDString
+        var symptomTagObject: NSManagedObject?
         
         if (symptomTag.id == "0"){
             let entity =  NSEntityDescription.entityForName("SymptomTag",
                                                             inManagedObjectContext:managedContext)
-            
-            let symptomTagNew = NSManagedObject(entity: entity!,
+            symptomTagObject = NSManagedObject(entity: entity!,
                                              insertIntoManagedObjectContext: managedContext)
-            
-            symptomTagNew.setValue(id, forKey: "id")
-            symptomTagNew.setValue(symptomTag.name, forKey: "name")
-            symptomTagNew.setValue(symptomTag.enabled, forKey: "enabled")
-            symptomTagNew.setValue(symptomTag.color.getStringFromColor(), forKey: "color")
             
         } else {
             id = symptomTag.id
-            
             let fetchRequest = NSFetchRequest(entityName: "SymptomTag")
             fetchRequest.predicate = NSPredicate(format: "id=%@", symptomTag.id);
             
@@ -717,11 +798,7 @@ class Data: NSObject {
                     try managedContext.executeFetchRequest(fetchRequest)
                 let info = results as! [NSManagedObject]
                 if (info.count == 1){
-                    info[0].setValue(symptomTag.name, forKey: "name")
-                    info[0].setValue(symptomTag.enabled, forKey: "enabled")
-                    info[0].setValue(symptomTag.color.getStringFromColor(), forKey: "color")
-                    
-                    
+                    symptomTagObject = info[0]
                     
                 } else {
                     print("Error: trying to saveSymptomTag(), but more or less than 1 object was found with the id");
@@ -731,6 +808,13 @@ class Data: NSObject {
             }
         }
         
+        if symptomTagObject != nil {
+            symptomTagObject!.setValue(id, forKey: "id")
+            symptomTagObject!.setValue(symptomTag.name, forKey: "name")
+            symptomTagObject!.setValue(symptomTag.enabled, forKey: "enabled")
+            symptomTagObject!.setValue(symptomTag.color.getStringFromColor(), forKey: "color")
+        }
+
         do {
             try managedContext.save()
             //5

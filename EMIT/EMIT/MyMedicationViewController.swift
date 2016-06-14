@@ -40,26 +40,58 @@ class MyMedicationViewController: AGInputViewController {
     
     @IBAction func addMedFromGlossaryButtonPressed(sender: AnyObject) {
         if medToAdd != nil {
-            setMedFromGlossary()
+            let dosages = Data.getMedicationDosagesForMedication(medToAdd!)
+            
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            
+            for dosage in dosages {
+                alertController.addAction(UIAlertAction(title: dosage.dosage, style: .Default, handler: { (action) -> Void in
+                    self.setMedFromGlossary(dosage)
+                }));
+
+            }
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+            })
+            
+            alertController.addAction(cancel)
+            
+            alertController.popoverPresentationController?.sourceView = addFromGlossaryButton
+            alertController.popoverPresentationController?.sourceRect = (addFromGlossaryButton?.bounds)!
+            presentViewController(alertController, animated: true, completion: nil)
+
         } else {
             print("Error in addMedFromGlossaryButtonPressed")
         }
     }
     
-    func setMedFromGlossary() {
-        medName.text = medToAdd!.name;
-        med.imageUrl = medToAdd!.imageUrl
+    func setMedFromGlossary(dosage: MedicationDosage?) {
+        if dosage != nil {
+            medName.text = medToAdd!.name + " " + dosage!.dosage;
+            
+            if dosage!.image != nil {
+                photo!.fullImage = dosage!.image
+                photo!.image = dosage!.croppedImage
+                photoContainer!.hidden = false;
+                addPhotoButton!.hidden = true;
+            }
+        } else {
+            medName.text = medToAdd!.name
+            
+            if medToAdd!.image != nil {
+                photo!.fullImage = medToAdd!.image
+                photo!.image = medToAdd!.croppedImage
+                photoContainer!.hidden = false;
+                addPhotoButton!.hidden = true;
+            }
+        }
+        
         med.pageUrl = medToAdd!.pageUrl
         medInfoButton.hidden = false;
         addFromGlossaryButton.hidden = true;
         medAdded = true;
         
-        if medToAdd!.image != nil {
-            photo!.fullImage = medToAdd!.image
-            photo!.image = medToAdd!.croppedImage
-            photoContainer!.hidden = false;
-            addPhotoButton!.hidden = true;
-        }
+        
     }
     
     
@@ -207,7 +239,7 @@ class MyMedicationViewController: AGInputViewController {
         loadFields();
         
         if (medToAdd != nil) {
-            setMedFromGlossary()
+            setMedFromGlossary(nil)
         }
         
         medInstructions!.delegate = self

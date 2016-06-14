@@ -35,5 +35,4 @@ class Medication: NSObject {
     func toString() -> String{
         return "Medication: { Name: \(name), Id: \(id) }";
     }
-    
 }
