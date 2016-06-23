@@ -50,15 +50,15 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
             self.navigationController?.pushViewController(discMeds, animated: true)
             
         })
-        let send = UIAlertAction(title: "Send Medications", style: .Default, handler: { (action) -> Void in
-            let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("SendMedsNav") as! UINavigationController
-            let smvc: SendMedsViewController = navCtrl.viewControllers[0] as! SendMedsViewController;
-            smvc.allMeds = self.myMedications
-            
-            self.presentViewController(navCtrl, animated: true, completion: nil)
-        })
+//        let send = UIAlertAction(title: "Send Medications", style: .Default, handler: { (action) -> Void in
+//            let navCtrl = UIStoryboard(name: "ModalViews", bundle: nil).instantiateViewControllerWithIdentifier("SendMedsNav") as! UINavigationController
+//            let smvc: SendMedsViewController = navCtrl.viewControllers[0] as! SendMedsViewController;
+//            smvc.allMeds = self.myMedications
+//            
+//            self.presentViewController(navCtrl, animated: true, completion: nil)
+//        })
         
-        let share = UIAlertAction(title: "Share", style: .Default) { (action) in
+        let share = UIAlertAction(title: "Send Medications", style: .Default) { (action) in
             
             let objectsToShare = [self]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
@@ -75,7 +75,7 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
         })
         
         alertController.addAction(discontinued)
-        alertController.addAction(send)
+//        alertController.addAction(send)
         alertController.addAction(share)
         alertController.addAction(cancel)
         

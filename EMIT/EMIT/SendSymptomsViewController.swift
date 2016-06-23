@@ -9,7 +9,7 @@
 import MessageUI
 import UIKit
 
-class SendSymptomsViewController: AGInputViewController, SymptomTagCellDelegate {
+class SendSymptomsViewController: AGInputViewController, SymptomTagCellDelegate, UIActivityItemSource {
     
     @IBOutlet var startDateField: UITextField!;
     @IBOutlet var endDateField: UITextField!;
@@ -166,26 +166,52 @@ class SendSymptomsViewController: AGInputViewController, SymptomTagCellDelegate 
         endDateField!.resignFirstResponder() // To resign the inputView on clicking done.
     }
     
-    
-    
     @IBAction func onSendPressed(sender: UIButton) {
-        ms = MailSender(parentVC: self);
         
-        let title = "Symptoms"
-        let messageBody = filteredSymptoms().toEmailString();
-        //let toRecipents = ["foo@bar.com"]
+        let objectsToShare = [self]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
-        if (sender == self.sendGmailButton){
-            let gmailString: String = String("googlegmail:///co?subject=\(title)&body=\(messageBody)");
-            let urlString = gmailString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet());
-            let gmailURL: NSURL = NSURL(string: urlString!)!;
-            
-            UIApplication.sharedApplication().openURL(gmailURL);
-            
-        } else if (sender == self.sendEmailButton) {
-            ms?.send(title, messageBody: messageBody, toRecipents: []);
-        }
+        activityVC.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAirDrop, UIActivityTypePostToVimeo, UIActivityTypePostToWeibo, UIActivityTypeOpenInIBooks, UIActivityTypePostToFacebook, UIActivityTypePostToFlickr, UIActivityTypePostToTwitter, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypePostToTencentWeibo, UIActivityTypeSaveToCameraRoll]
+        
+        //            activityVC.setValue("My Medication List", forKey: "subject")
+        
+        activityVC.popoverPresentationController?.sourceView = sender
+        activityVC.popoverPresentationController?.sourceRect = sender.bounds
+        self.presentViewController(activityVC, animated: true, completion: nil)
+//        
+//        
+//        ms = MailSender(parentVC: self);
+//        
+//        let title = "Symptoms"
+//        let messageBody = filteredSymptoms().toEmailString();
+//        //let toRecipents = ["foo@bar.com"]
+//        
+//        if (sender == self.sendGmailButton){
+//            let gmailString: String = String("googlegmail:///co?subject=\(title)&body=\(messageBody)");
+//            let urlString = gmailString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet());
+//            let gmailURL: NSURL = NSURL(string: urlString!)!;
+//            
+//            UIApplication.sharedApplication().openURL(gmailURL);
+//            
+//        } else if (sender == self.sendEmailButton) {
+//            ms?.send(title, messageBody: messageBody, toRecipents: []);
+//        }
     }
+    
+    func activityViewControllerPlaceholderItem(activityViewController: UIActivityViewController) -> AnyObject {
+//        return myMedications.toShareString()
+        return filteredSymptoms().toEmailString();
+    }
+    
+    func activityViewController(activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject? {
+//        if activityType == UIActivityTypeMail {
+//            return myMedications.toHTMLTable()
+//        } else {
+//            return myMedications.toShareString()
+//        }
+        return filteredSymptoms().toEmailString()
+    }
+    
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
@@ -231,8 +257,14 @@ class SendSymptomsViewController: AGInputViewController, SymptomTagCellDelegate 
         tagsContainer.layer.borderWidth = 1
         tagsContainer.layer.cornerRadius = 5
         
-        selectAllButton.tintColor = UIColor.EMITDarkGreenColor()
-        selectNoneButton.tintColor = UIColor.EMITDarkGreenColor()
+        selectAllButton.tintColor = UIColor.blackColor()
+        selectAllButton.layer.borderColor = UIColor.darkGrayColor().CGColor
+        selectAllButton.layer.borderWidth = 1
+        selectAllButton.layer.cornerRadius = 5
+        selectNoneButton.tintColor = UIColor.blackColor()
+        selectNoneButton.layer.borderColor = UIColor.darkGrayColor().CGColor
+        selectNoneButton.layer.borderWidth = 1
+        selectNoneButton.layer.cornerRadius = 5
         
         sendEmailButton.backgroundColor = UIColor.mailBlueColor();
         
@@ -243,6 +275,10 @@ class SendSymptomsViewController: AGInputViewController, SymptomTagCellDelegate 
         } else {
             sendGmailButton.hidden = true;
         }
+        
+        sendEmailButton.setTitle("Send", forState: UIControlState.Normal)
+        sendEmailButton.backgroundColor = UIColor.EMITLightGreenColor()
+        sendGmailButton.hidden = true
     }
     
     override func didReceiveMemoryWarning() {

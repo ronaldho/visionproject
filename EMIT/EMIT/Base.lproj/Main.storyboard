@@ -328,7 +328,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pxk-Ci-Wb9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1609" y="-1618"/>
+            <point key="canvasLocation" x="1420" y="-1606"/>
         </scene>
         <!--My Medications-->
         <scene sceneID="zwe-c9-fmH">
@@ -701,7 +701,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5th-Bb-FAB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1571" y="-2273"/>
+            <point key="canvasLocation" x="1382" y="-2285"/>
         </scene>
         <!--Settings-->
         <scene sceneID="c6T-3f-uhc">
@@ -745,7 +745,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BBO-Rs-zU9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2485" y="1659"/>
+            <point key="canvasLocation" x="2309" y="571"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="Do9-nk-9H6">
@@ -761,7 +761,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pXf-ik-fpO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1661" y="1659"/>
+            <point key="canvasLocation" x="1485" y="571"/>
         </scene>
         <!--Settings-->
         <scene sceneID="SVT-7P-b8O">
@@ -774,7 +774,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Cy-gy-uI9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869" y="1651"/>
+            <point key="canvasLocation" x="717" y="555"/>
         </scene>
         <!--Main Tab Bar View Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -800,7 +800,7 @@
         <!--Medications-->
         <scene sceneID="Ksm-E5-KXa">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MT8-Li-XFm" customClass="EMITNavigationViewController" customModule="EMIT" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OldMedsTable" automaticallyAdjustsScrollViewInsets="NO" id="MT8-Li-XFm" customClass="EMITNavigationViewController" customModule="EMIT" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Medications" image="pill" id="3Vh-2t-6s3"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zcs-Bx-pgc">
@@ -814,7 +814,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEy-SS-tJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="759" y="-1606"/>
+            <point key="canvasLocation" x="733" y="-1590"/>
         </scene>
         <!--Medication Glossary-->
         <scene sceneID="5kD-hP-fU4">
@@ -870,7 +870,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYy-WT-IKw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1697" y="512"/>
+            <point key="canvasLocation" x="1545" y="-168"/>
         </scene>
         <!--Symptoms-->
         <scene sceneID="JdH-Pd-k0b">
@@ -945,7 +945,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3uD-CC-7R0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1538" y="-726"/>
+            <point key="canvasLocation" x="1485" y="-910"/>
         </scene>
         <!--Glossary-->
         <scene sceneID="aeN-pG-SP5">
@@ -964,7 +964,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vVd-0f-9ma" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="885" y="512"/>
+            <point key="canvasLocation" x="733" y="-168"/>
         </scene>
         <!--Symptom Calendar View Controller-->
         <scene sceneID="74z-cs-8p5">
@@ -1172,7 +1172,7 @@
                 <swipeGestureRecognizer direction="right" id="Exz-rh-KlR"/>
                 <swipeGestureRecognizer direction="left" id="vtM-pc-ovz"/>
             </objects>
-            <point key="canvasLocation" x="2486" y="-884"/>
+            <point key="canvasLocation" x="2470" y="-1068"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="mtq-WR-Kfm">
@@ -1183,7 +1183,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U9l-g1-iwS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2102" y="-884"/>
+            <point key="canvasLocation" x="2062" y="-1052"/>
         </scene>
         <!--Symptom Split Table View Controller-->
         <scene sceneID="342-Rq-Rf4">
@@ -1266,7 +1266,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sHB-da-l4g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2252" y="-524"/>
+            <point key="canvasLocation" x="2244" y="-700"/>
         </scene>
         <!--Symptoms-->
         <scene sceneID="h10-tD-lwD">
@@ -1285,7 +1285,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TdX-uO-94d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="754" y="-892"/>
+            <point key="canvasLocation" x="722" y="-884"/>
         </scene>
         <!--Medications-->
         <scene sceneID="uK3-lj-HYq">
@@ -1304,7 +1304,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3UG-oW-HGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="759" y="-2273"/>
+            <point key="canvasLocation" x="759" y="-2305"/>
         </scene>
     </scenes>
     <resources>

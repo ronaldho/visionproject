@@ -10,8 +10,6 @@ import UIKit
 
 class MedAlarmsViewController: AGInputViewController {
 
-    
-
     @IBOutlet weak var breakfastSwitch: UISwitch!
     @IBOutlet weak var lunchSwitch: UISwitch!
     @IBOutlet weak var dinnerSwitch: UISwitch!
@@ -24,16 +22,24 @@ class MedAlarmsViewController: AGInputViewController {
     @IBOutlet weak var instructionsStack: UIStackView!
     @IBOutlet weak var alarmsStack: UIStackView!
     @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var okButton: UIButton!
     
     var breakfastTime: NSDate?
     var lunchTime: NSDate?
     var dinnerTime: NSDate?
     var bedTime: NSDate?
 
+    @IBAction func okButtonPressed(sender: AnyObject){
+        self.viewWillAppear(true)
+    }
 
     @IBAction func settingsButtonPressed(sender: AnyObject) {
         UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
-//        self.viewWillAppear(false)
+        
+        let triggerTime = (Int64(NSEC_PER_SEC) * 1)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue()) {
+            self.okButton.hidden = false
+        }
     }
     
     
@@ -193,7 +199,6 @@ class MedAlarmsViewController: AGInputViewController {
     override func viewWillAppear(animated: Bool) {
         self.navigationItem.title = "Medication Alarms"
         
-        
         super.viewDidLoad()
         
         // Hide everything
@@ -209,6 +214,7 @@ class MedAlarmsViewController: AGInputViewController {
         
         if !settings!.types.contains(.Alert) {
             instructionsStack.hidden = false
+            okButton.hidden = true;
             self.view.backgroundColor = UIColor.whiteColor();
             
         } else {
@@ -250,6 +256,10 @@ class MedAlarmsViewController: AGInputViewController {
                 bedTimeField.text = ""
             }
         }
+    }
+    
+    override func viewDidLoad(){
+        self.viewWillAppear(true)
     }
     
     override func viewWillDisappear(animated: Bool) {
