@@ -50,9 +50,11 @@ class MedAlarmsViewController: AGInputViewController {
         if localNotifications != nil {
             
             for notification in UIApplication.sharedApplication().scheduledLocalNotifications! {
-                let info = notification.userInfo! as! [String: String]
-                if info["type"] == type {
-                    localNotification = notification
+                let info = notification.userInfo! as! [String: AnyObject]
+                if let notifType = info["type"] as? String {
+                    if notifType == type {
+                        localNotification = notification
+                    }
                 }
             }
         }
@@ -65,12 +67,12 @@ class MedAlarmsViewController: AGInputViewController {
         
         if localNotifications != nil {
             for notification in UIApplication.sharedApplication().scheduledLocalNotifications! {
-                print("fireDate: \(notification.fireDate), alertBody: \(notification.alertBody)")
+                print("fireDate: \(notification.fireDate!.getTimeFormat()), alertBody: \(notification.alertBody)")
             }
         }
     }
     
-    func startAlert(time: NSDate, type: String) {
+    func startAlert(time: NSDate, type: String, timeOfDay: TimeOfDay) {
         let existingNotification = findAlert(type)
         if existingNotification != nil {
             stopAlert(type)
@@ -79,9 +81,10 @@ class MedAlarmsViewController: AGInputViewController {
         let notification = UILocalNotification()
         notification.fireDate = time
         notification.repeatInterval = NSCalendarUnit.Day
-        notification.alertBody = "\(type) Alert for Medications"
+        notification.alertBody = "Time to take your \(type.lowercaseString) medications"
         notification.soundName = UILocalNotificationDefaultSoundName
-        notification.userInfo = ["type": type];
+        notification.userInfo = ["type": type, "timeOfDay": timeOfDay.rawValue];
+        notification.applicationIconBadgeNumber += 1
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
@@ -99,7 +102,7 @@ class MedAlarmsViewController: AGInputViewController {
         
         let datePickerView  : UIDatePicker = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
         datePickerView.datePickerMode = UIDatePickerMode.Time
-        datePickerView.minuteInterval = 5;
+        datePickerView.minuteInterval = 1;
         
         datePickerView.center = CGPointMake(inputView.frame.size.width  / 2,
                                             inputView.frame.size.height - datePickerView.frame.size.height / 2);
@@ -256,7 +259,7 @@ class MedAlarmsViewController: AGInputViewController {
 
         if (breakfastTime != nil && breakfastSwitch.on) {
             defaults.setObject(breakfastTime!, forKey: "breakfastAlarmTime")
-            startAlert(breakfastTime!, type: "Breakfast")
+            startAlert(breakfastTime!, type: "Breakfast", timeOfDay: .Breakfast)
             alertEnabled = true
         } else {
             defaults.removeObjectForKey("breakfastAlarmTime")
@@ -265,7 +268,7 @@ class MedAlarmsViewController: AGInputViewController {
         
         if (lunchTime != nil && lunchSwitch.on) {
             defaults.setObject(lunchTime!, forKey: "lunchAlarmTime")
-            startAlert(lunchTime!, type: "Lunch")
+            startAlert(lunchTime!, type: "Lunch", timeOfDay: .Lunch)
             alertEnabled = true
         } else {
             defaults.removeObjectForKey("lunchAlarmTime")
@@ -274,7 +277,7 @@ class MedAlarmsViewController: AGInputViewController {
         
         if (dinnerTime != nil && dinnerSwitch.on) {
             defaults.setObject(dinnerTime!, forKey: "dinnerAlarmTime")
-            startAlert(dinnerTime!, type: "Dinner")
+            startAlert(dinnerTime!, type: "Dinner", timeOfDay: .Dinner)
             alertEnabled = true
         } else {
             defaults.removeObjectForKey("dinnerAlarmTime")
@@ -283,7 +286,7 @@ class MedAlarmsViewController: AGInputViewController {
         
         if (bedTime != nil && bedSwitch.on) {
             defaults.setObject(bedTime!, forKey: "bedAlarmTime")
-            startAlert(bedTime!, type: "Bed")
+            startAlert(bedTime!, type: "Bed", timeOfDay: .Bed)
             alertEnabled = true
         } else {
             defaults.removeObjectForKey("bedAlarmTime")
@@ -301,6 +304,8 @@ class MedAlarmsViewController: AGInputViewController {
         } else {
             print("No alerts")
         }
+        
+        listAlerts()
     }
 
     override func didReceiveMemoryWarning() {

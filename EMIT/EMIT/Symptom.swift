@@ -92,11 +92,11 @@ class Symptom: NSObject {
     }
     
     func toEmailString() -> String {
-        return "\(self.date.dayMonthFormat()) - (\(self.symptomTagsToNameString())) \(self.text)"
+        return "\(self.date.dayMonthYearFormat()) - (\(self.symptomTagsToNameString())) \(self.text)"
     }
     
     override var description: String {
-        return "symptom= {\(self.text), date:\(self.date.dayMonthFormat()), tags:\(self.symptomTagsToNameString())}"
+        return "symptom= {\(self.text), date:\(self.date.dayMonthYearFormat()), tags:\(self.symptomTagsToNameString())}"
     }
     
 }

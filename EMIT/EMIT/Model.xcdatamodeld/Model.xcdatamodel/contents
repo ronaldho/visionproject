@@ -30,6 +30,7 @@
         <attribute name="instructions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lunch" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startedDate" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <entity name="MyMedicationHistory" syncable="YES">
@@ -54,7 +55,7 @@
     </entity>
     <elements>
         <element name="Medication" positionX="-63" positionY="117" width="128" height="135"/>
-        <element name="MyMedication" positionX="-63" positionY="-18" width="128" height="255"/>
+        <element name="MyMedication" positionX="-63" positionY="-18" width="128" height="270"/>
         <element name="MyMedicationHistory" positionX="-63" positionY="54" width="128" height="105"/>
         <element name="Symptom" positionX="-63" positionY="117" width="128" height="135"/>
         <element name="SymptomTag" positionX="-63" positionY="117" width="128" height="105"/>

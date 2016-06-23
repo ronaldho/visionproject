@@ -121,7 +121,7 @@ SymptomCellDelegate, InputViewDelegate {
         
         cell.backgroundColor = UIColor.whiteColor() //EMITTanColor();
         cell.symptom = symptom;
-        cell.dateLabel.text = symptom.date.dayMonthFormat();
+        cell.dateLabel.text = symptom.date.dayMonthYearFormat();
         cell.symptomTextLabel.text = symptom.text;
         
         cell.symptomTagStack.subviews.forEach({ $0.removeFromSuperview() })

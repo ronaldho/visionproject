@@ -22,7 +22,7 @@ class SendMedsViewController: AGInputViewController, SymptomTagCellDelegate {
         ms = MailSender(parentVC: self);
         
         let title = "Symptoms"
-        let messageBody = allMeds!.toEmailString();
+        let messageBody = allMeds!.toShareString();
         //let toRecipents = ["foo@bar.com"]
         
         if (sender == self.sendGmailButton){

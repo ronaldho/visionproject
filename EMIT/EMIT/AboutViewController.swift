@@ -8,8 +8,25 @@
 
 import UIKit
 
-class AboutViewController: AGViewController {
+class AboutViewController: AGViewController, UIWebViewDelegate {
 
+    let aboutUrl = "http://emitcare.ca/about/"
+    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    
+    override func viewWillDisappear(animated: Bool) {
+        // Apparently it's important to nil the delegate
+        webView.delegate = nil
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        activityIndicator.hidden = true;
+        webView.delegate = self
+        let url = NSURL(string: aboutUrl)
+        let request = NSURLRequest(URL: url!)
+        webView.loadRequest(request)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +38,28 @@ class AboutViewController: AGViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+        activityIndicator.stopAnimating()
+        activityIndicator.hidden = true;
+
+        let alertController = UIAlertController(title: nil, message: error?.localizedDescription, preferredStyle: .Alert)
+        
+        let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+        })
+        
+        alertController.addAction(ok)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func webViewDidStartLoad(webView: UIWebView) {
+        activityIndicator.hidden = false;
+        activityIndicator.startAnimating()
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        activityIndicator.hidden = true;
+        activityIndicator.stopAnimating()
+    }
 
     /*
     // MARK: - Navigation

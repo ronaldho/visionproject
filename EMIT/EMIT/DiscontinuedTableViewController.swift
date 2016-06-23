@@ -59,8 +59,8 @@ class DiscontinuedTableViewController: AGTableViewController, InputViewDelegate 
         cell.backgroundColor = UIColor.whiteColor() //EMITTanColor()
         cell.nameLabel.text = med.name
         cell.med = med
-        cell.startedDateLabel.text = med.startedDate.dayMonthFormat()
-        cell.stoppedDateLabel.text = med.discontinuedDate?.dayMonthFormat()
+        cell.startedDateLabel.text = med.startedDate.dayMonthYearFormat()
+        cell.stoppedDateLabel.text = med.discontinuedDate?.dayMonthYearFormat()
         
         return cell
     }

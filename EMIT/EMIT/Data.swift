@@ -203,7 +203,6 @@ class Data: NSObject {
     }
     
     static func saveMedicationDosage(medDosage: MedicationDosage) -> String{
-        print("saveMedicationDosage: \(medDosage.dosage)")
         
         let appDelegate =
             UIApplication.sharedApplication().delegate as! AppDelegate
@@ -329,6 +328,7 @@ class Data: NSObject {
                     let startedDate = medications[i].valueForKey("startedDate") as! NSDate;
                     let discontinuedDate = medications[i].valueForKey("discontinuedDate") as! NSDate?;
                     let discontinued = medications[i].valueForKey("discontinued") as! Bool;
+                    let pageUrl = medications[i].valueForKey("pageUrl") as! String?;
                     
                     var image: UIImage?;
                     var croppedImage: UIImage?;
@@ -338,7 +338,7 @@ class Data: NSObject {
                         croppedImage = UIImage(data: croppedImageData!);
                     }
                     
-                    let temp: MyMedication = MyMedication(withName: name, andImage: image, andCroppedImage: croppedImage, andInstructions: instructions, andId: id, andBreakfast: breakfast, andLunch: lunch, andDinner: dinner, andBed: bed, andDate: date, andDiscontinued: discontinued, andStartedDate: startedDate, andDiscontinuedDate: discontinuedDate);
+                    let temp: MyMedication = MyMedication(withName: name, andImage: image, andCroppedImage: croppedImage, andInstructions: instructions, andId: id, andBreakfast: breakfast, andLunch: lunch, andDinner: dinner, andBed: bed, andDate: date, andDiscontinued: discontinued, andStartedDate: startedDate, andDiscontinuedDate: discontinuedDate, andPageUrl: pageUrl);
                     
                     medicationArray.append(temp);
                 }
@@ -402,6 +402,7 @@ class Data: NSObject {
             myMedicationObject!.setValue(med.date, forKey: "date")
             myMedicationObject!.setValue(med.startedDate, forKey: "startedDate")
             myMedicationObject!.setValue(med.discontinued, forKey: "discontinued")
+            myMedicationObject!.setValue(med.pageUrl, forKey: "pageUrl")
             
             if med.discontinuedDate != nil {
                 myMedicationObject!.setValue(med.discontinuedDate, forKey: "discontinuedDate")

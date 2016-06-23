@@ -20,6 +20,69 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    func handleLocalNotification(notification: UILocalNotification){
+        if let userInfo = notification.userInfo as? [String: AnyObject] {
+            let timeOfDay = TimeOfDay(rawValue: userInfo["timeOfDay"] as! Int)!
+            print("handleLocalNotification: \(timeOfDay)")
+            
+            if let tabBar = self.window?.rootViewController as? UITabBarController {
+                tabBar.selectedIndex = 0
+                
+                if let nav = tabBar.viewControllers![0] as? EMITNavigationViewController {
+                    
+                    if let mmvc = nav.viewControllers[0] as? MyMedicationsViewController {
+                        let _ = mmvc.view
+                        switch (timeOfDay){
+                        case .Breakfast:
+                            mmvc.toggleBreakfast()
+                        case .Lunch:
+                            mmvc.toggleLunch()
+                        case .Dinner:
+                            mmvc.toggleDinner()
+                        case .Bed:
+                            mmvc.toggleBed()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func localNotificationAlert(notification: UILocalNotification){
+        if let userInfo = notification.userInfo as? [String: AnyObject] {
+            let timeOfDay = TimeOfDay(rawValue: userInfo["timeOfDay"] as! Int)!
+            print("localNotificationAlert: \(timeOfDay)")
+            
+            let type = userInfo["type"] as! String
+            
+            if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
+                }
+                
+                let alertController = UIAlertController(title: nil, message: "Time to take your \(type.lowercaseString) medications", preferredStyle: .Alert)
+                
+                let cancel = UIAlertAction(title: "Cancel",
+                                           style: .Default,
+                                           handler: nil)
+                
+                let openMeds = UIAlertAction(title: "Show Meds",
+                                             style: .Default,
+                                             handler: {(alert: UIAlertAction!) in
+                                                self.handleLocalNotification(notification)})
+                
+                alertController.addAction(cancel)
+                alertController.addAction(openMeds)
+                
+                topController.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        localNotificationAlert(notification)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -30,7 +93,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let lastUpdateDate = defaults.objectForKey("lastUpdateDate") as? NSDate;
         
         if lastUpdateDate == nil {
-            MedicationAPI().getMedicationData()
+            MedicationAPI().getMedicationData(withCompletion: {() -> Void in
+                // No completion handler
+            });
+        }
+        
+        if let aLaunchOptions = launchOptions { // Checking if there are any launch options.
+            // Check if there are any local notification objects.
+            if let notification = (aLaunchOptions as NSDictionary).objectForKey("UIApplicationLaunchOptionsLocalNotificationKey") as? UILocalNotification {
+                // Handle the notification action on opening. Like updating a table or showing an alert.
+                handleLocalNotification(notification)
+            }
         }
         
         return true
@@ -51,8 +124,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
+        if application.applicationIconBadgeNumber > 0 {
+            application.applicationIconBadgeNumber = 0
+        }
     }
+    
+//    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+//        // Point for handling the local notification Action. Provided alongside creating the notification.
+//        if identifier == "ShowDetails" {
+//            // Showing reminder details in an alertview
+//            UIAlertView(title: notification.alertTitle, message: notification.alertBody, delegate: nil, cancelButtonTitle: "OK").show()
+//        } else if identifier == "Snooze" {
+//            // Snooze the reminder for 5 minutes
+//            notification.fireDate = NSDate().dateByAddingTimeInterval(60*5)
+//            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+//        } else if identifier == "Confirm" {
+//            // Confirmed the reminder. Mark the reminder as complete maybe?
+//        }
+//        completionHandler()
+//    }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

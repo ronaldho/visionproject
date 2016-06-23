@@ -20,6 +20,8 @@ class MyMedicationTableViewCell: UITableViewCell {
     @IBOutlet var dinnerImage: UIImageView!;
     @IBOutlet var bedImage: UIImageView!;
     @IBOutlet var medInstructions: UILabel!;
+    @IBOutlet weak var nameBackground: UIView!
+    
     
     @IBAction func editMed(){
         self.delegate.editMed(self);

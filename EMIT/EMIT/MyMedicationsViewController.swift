@@ -7,38 +7,42 @@
 //
 
 import UIKit
+//
+//enum TimeOfDay {
+//    case Breakfast
+//    case Lunch
+//    case Dinner
+//    case Bed
+//}
+//
+//let unselectedColor = UIColor.EMITMediumGreyColor()
+//let breakfastColor = UIColor.morningColor()
+//let lunchColor = UIColor.noonColor()
+//let dinnerColor = UIColor.sunsetColor()
+//let bedColor = UIColor.moonColor()
+//
+//protocol FilterCellDelegate {
+//    func filterMedList(time: TimeOfDay?);
+//}
+//
+//protocol MyMedicationCellDelegate {
+//    func editMed(cell: MyMedicationTableViewCell)
+//}
+//
+//protocol InputViewDelegate {
+//    var itemSaved: Bool {get set};
+//}
+//
 
-enum TimeOfDay: Int {
-    case Breakfast = 1
-    case Lunch = 2
-    case Dinner = 3
-    case Bed = 4
-}
-
-let unselectedColor = UIColor.EMITMediumGreyColor()
-let breakfastColor = UIColor.morningColor()
-let lunchColor = UIColor.noonColor()
-let dinnerColor = UIColor.sunsetColor()
-let bedColor = UIColor.moonColor()
-
-protocol FilterCellDelegate {
-    func filterMedList(time: TimeOfDay?);
-}
-
-protocol MyMedicationCellDelegate {
-    func editMed(cell: MyMedicationTableViewCell)
-}
-
-protocol InputViewDelegate {
-    var itemSaved: Bool {get set};
-}
-
-class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegate,
-    MyMedicationCellDelegate, InputViewDelegate, UIActivityItemSource {
+class MyMedicationsViewController: UIViewController, FilterCellDelegate,
+    MyMedicationCellDelegate, InputViewDelegate, UIActivityItemSource, UITableViewDataSource, UITableViewDelegate {
 
     var myMedications: MyMedications = MyMedications();
     var itemSaved = false;
     var filterTime: TimeOfDay?
+    
+    @IBOutlet var filterView: UIView!
+    @IBOutlet var tableView: UITableView!
     
     @IBOutlet var moreButton: UIBarButtonItem!
     
@@ -134,20 +138,21 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
     let dinnerColor = UIColor.sunsetColor()
     let bedColor = UIColor.moonColor()
     
-    func toggleButton(time: TimeOfDay) {
+    
+    func toggleButton(time: TimeOfDay?) {
         
         breakfastButton.tintColor = unselectedColor;
         lunchButton.tintColor = unselectedColor;
         dinnerButton.tintColor = unselectedColor;
         bedButton.tintColor = unselectedColor;
         
-        if time == selectedTime {
+        if time == nil || time == selectedTime {
             filterMedList(nil)
             selectedTime = nil
         } else {
-            filterMedList(time)
-            selectedTime = time
-            switch (time) {
+            filterMedList(time!)
+            selectedTime = time!
+            switch (time!) {
             case .Breakfast:
                 breakfastButton.tintColor = breakfastColor
             case .Lunch:
@@ -185,8 +190,7 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
     }
 
     override func viewWillDisappear(animated: Bool) {
-        filterTime = nil
-        selectedTime = nil
+        toggleButton(nil)
     }
     
     override func viewWillAppear(animated: Bool){
@@ -211,8 +215,13 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.filterView.backgroundColor = UIColor.EMITLightGreyColor()
         self.tableView.allowsSelection = false;
         self.tableView.estimatedRowHeight = 130;
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.backgroundColor = UIColor.EMITLightGreyColor()
+        
+        
         self.navigationItem.backBarButtonItem = UIBarButtonItem.init(title: "Back", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -255,19 +264,19 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if filterTime == nil {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if filterTime == nil {
             return myMedications.getCurrentMeds().count // + 1; // +1 for Filter Cell
-        } else {
-            return myMedications.countCurrentMedsAtTime(filterTime!) // + 1
-        }
+//        } else {
+//            return myMedications.countCurrentMedsAtTime(filterTime!) // + 1
+//        }
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
 //        if indexPath.row == 0 {
 //            let cell = tableView.dequeueReusableCellWithIdentifier("MedicationFilterCell", forIndexPath: indexPath) as! MyMedicationFilterTableViewCell;
@@ -299,74 +308,90 @@ class MyMedicationsTableViewController: AGTableViewController, FilterCellDelegat
 //            }
 //            
 //            return cell
-//
-//        } else {
+        //
+        //        } else {
         
-            let cell = tableView.dequeueReusableCellWithIdentifier("MyMedicationCell", forIndexPath: indexPath) as! MyMedicationTableViewCell;
-            cell.delegate = self;
+        let cell = tableView.dequeueReusableCellWithIdentifier("MyMedicationCell", forIndexPath: indexPath) as! MyMedicationTableViewCell;
+        cell.delegate = self;
+        
+        cell.nameBackground.layer.cornerRadius = 5
+        
+        var med: MyMedication = MyMedication()
+        if filterTime == nil {
+            med = myMedications.getCurrentMeds()[indexPath.row];
+            cell.nameBackground.backgroundColor = UIColor.whiteColor()
+//            cell.contentView.backgroundColor = UIColor.whiteColor()
+        } else {
+//            med = myMedications.currentMedsAtTime(filterTime!)[indexPath.row];
+            med = MyMedications.timeFirstSort(myMedications.getCurrentMeds(), time: filterTime!)[indexPath.row]
+            let countAtTime = myMedications.countTakenAtTime(filterTime!)
             
-            var med: MyMedication = MyMedication()
-            if filterTime == nil {
-                med = myMedications.getCurrentMeds()[indexPath.row - 1];
-                cell.backgroundColor = UIColor.whiteColor()
-            } else {
-                med = myMedications.currentMedsAtTime(filterTime!)[indexPath.row - 1];
+            if (indexPath.row < countAtTime) {
                 switch (filterTime!) {
                 case .Breakfast:
-                    cell.backgroundColor = breakfastColor.lighter()
+                    cell.nameBackground.backgroundColor = breakfastColor.lighter()
+//                    cell.contentView.backgroundColor = breakfastColor.lighter()
                 case .Lunch:
-                    cell.backgroundColor = lunchColor.lighter()
+                    cell.nameBackground.backgroundColor = lunchColor.lighter()
+//                    cell.contentView.backgroundColor = lunchColor.lighter()
                 case .Dinner:
-                    cell.backgroundColor = dinnerColor.lighter()
+                    cell.nameBackground.backgroundColor = dinnerColor.lighter()
+//                    cell.contentView.backgroundColor = dinnerColor.lighter()
                 case .Bed:
-                    cell.backgroundColor = UIColor.blackColor()
+                    cell.nameBackground.backgroundColor = bedColor.lighter()
+//                    cell.contentView.backgroundColor = bedColor.lighter()
                 }
-            }
-            
-            cell.myMedication = med;
-            cell.medName.text = med.name;
-            cell.medInstructions.text = med.instructions;
-            cell.backgroundColor = UIColor.whiteColor() //EMITTanColor()
-            
-            
-            // Time Icons
-            cell.breakfastImage.image = UIImage(named: "sunrise-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            cell.lunchImage.image = UIImage(named: "noon-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            cell.dinnerImage.image = UIImage(named: "sunset-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            cell.bedImage.image = UIImage(named: "night-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            
-            cell.breakfastImage.tintColor = UIColor.lightLightGrayColor()
-            cell.lunchImage.tintColor = UIColor.lightLightGrayColor()
-            cell.dinnerImage.tintColor = UIColor.lightLightGrayColor()
-            cell.bedImage.tintColor = UIColor.lightLightGrayColor()
-            
-            if (med.breakfast){
-                cell.breakfastImage.tintColor = breakfastColor
-            }
-            if (med.lunch){
-                cell.lunchImage.tintColor = UIColor.noonColor()
-            }
-            if (med.dinner){
-                cell.dinnerImage.tintColor = UIColor.sunsetColor()
-            }
-            if (med.bed){
-                cell.bedImage.tintColor = UIColor.moonColor()
-            }
-            
-            if (med.image != nil){
-                cell.medImage.image = med.croppedImage;
-                cell.medImage.fullImage = med.image;
-                cell.medImage.userInteractionEnabled = true;
             } else {
-                cell.medImage.image = UIImage(named: "pill-thumb");
-                cell.medImage.userInteractionEnabled = false;
+                cell.nameBackground.backgroundColor = UIColor.whiteColor()
+//                cell.contentView.backgroundColor = UIColor.whiteColor()
             }
             
-            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MyMedicationsTableViewController.imageTapped(_:)))
-            cell.medImage.addGestureRecognizer(tapRecognizer);
-            
-            return cell
-
-//        }
+        }
+        
+        cell.myMedication = med;
+        cell.medName.text = med.name;
+        cell.medInstructions.text = med.instructions;
+        cell.backgroundColor = UIColor.whiteColor() //EMITTanColor()
+        
+        
+        // Time Icons
+        cell.breakfastImage.image = UIImage(named: "sunrise-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.lunchImage.image = UIImage(named: "noon-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.dinnerImage.image = UIImage(named: "sunset-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.bedImage.image = UIImage(named: "night-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        
+        cell.breakfastImage.tintColor = UIColor.lightLightGrayColor()
+        cell.lunchImage.tintColor = UIColor.lightLightGrayColor()
+        cell.dinnerImage.tintColor = UIColor.lightLightGrayColor()
+        cell.bedImage.tintColor = UIColor.lightLightGrayColor()
+        
+        if (med.breakfast){
+            cell.breakfastImage.tintColor = breakfastColor
+        }
+        if (med.lunch){
+            cell.lunchImage.tintColor = UIColor.noonColor()
+        }
+        if (med.dinner){
+            cell.dinnerImage.tintColor = UIColor.sunsetColor()
+        }
+        if (med.bed){
+            cell.bedImage.tintColor = UIColor.moonColor()
+        }
+        
+        if (med.image != nil){
+            cell.medImage.image = med.croppedImage;
+            cell.medImage.fullImage = med.image;
+            cell.medImage.userInteractionEnabled = true;
+        } else {
+            cell.medImage.image = UIImage(named: "pill-thumb");
+            cell.medImage.userInteractionEnabled = false;
+        }
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MyMedicationsTableViewController.imageTapped(_:)))
+        cell.medImage.addGestureRecognizer(tapRecognizer);
+        
+        return cell
+        
+        //        }
     }
 }

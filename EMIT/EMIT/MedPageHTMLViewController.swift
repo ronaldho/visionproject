@@ -77,4 +77,17 @@ class MedPageHTMLViewController: UIViewController, UIWebViewDelegate {
         activityIndicator.hidden = true;
         activityIndicator.stopAnimating()
     }
+    
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+        activityIndicator.stopAnimating()
+        activityIndicator.hidden = true;
+        
+        let alertController = UIAlertController(title: nil, message: error?.localizedDescription, preferredStyle: .Alert)
+        
+        let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+        })
+        
+        alertController.addAction(ok)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
 }

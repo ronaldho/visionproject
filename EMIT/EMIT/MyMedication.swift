@@ -33,7 +33,7 @@ class MyMedication: Medication {
         super.init();
     };
     
-    init(withName name: String, andImage image: UIImage?, andCroppedImage croppedImage: UIImage?, andInstructions instructions: String, andId id: String, andBreakfast breakfast: Bool, andLunch lunch: Bool, andDinner dinner:Bool, andBed bed: Bool, andDate date: NSDate, andDiscontinued discontinued: Bool, andStartedDate startedDate: NSDate, andDiscontinuedDate discontinuedDate: NSDate?){
+    init(withName name: String, andImage image: UIImage?, andCroppedImage croppedImage: UIImage?, andInstructions instructions: String, andId id: String, andBreakfast breakfast: Bool, andLunch lunch: Bool, andDinner dinner:Bool, andBed bed: Bool, andDate date: NSDate, andDiscontinued discontinued: Bool, andStartedDate startedDate: NSDate, andDiscontinuedDate discontinuedDate: NSDate?, andPageUrl pageUrl: String?){
         self.instructions = instructions;
         self.breakfast = breakfast;
         self.lunch = lunch;
@@ -44,7 +44,7 @@ class MyMedication: Medication {
         self.startedDate = startedDate
         self.discontinuedDate = discontinuedDate
         
-        super.init(withName: name, andImage: image, andCroppedImage: croppedImage, andId: id, andImageUrl: nil, andPageUrl: nil);
+        super.init(withName: name, andImage: image, andCroppedImage: croppedImage, andId: id, andImageUrl: nil, andPageUrl: pageUrl);
     }
     
     func timesOfDayToString() -> String {
@@ -75,12 +75,42 @@ class MyMedication: Medication {
         return "Taken at: " + times
     }
     
+    func isTakenAtTime(time: TimeOfDay) -> Bool {
+        switch (time) {
+        case .Breakfast:
+            if self.breakfast {
+                return true
+            }
+        case .Lunch:
+            if self.lunch {
+                return true
+            }
+        case .Dinner:
+            if self.dinner {
+                return true
+            }
+        case .Bed:
+            if self.bed {
+                return true
+           }
+        }
+        return false
+    }
+    
     override func toString() -> String{
         return "My Medication: { Name: \(name), Notes: \(instructions) }";
     }
     
-    func toEmailString() -> String {
-        return "\(self.name)\n  \(self.timesOfDayToString())\n  \(self.instructions)"
+    func toHTMLTableRowString() -> String {
+        let nameCell = "<td>\(self.name)</td>"
+        let timeOfDayP = "<p>\(self.timesOfDayToString())\n</p>"
+        let instructionP = "<p>\(self.instructions)</p>"
+        let instructionsCell = "<td>\(timeOfDayP)\(instructionP)</td>"
+        return "<tr>\(nameCell)\(instructionsCell)</tr>\n"
+    }
+    
+    func toShareString() -> String {
+        return "\(self.name)\n\t\(self.timesOfDayToString())\n\t\(self.instructions)\n"
     }
     
 }

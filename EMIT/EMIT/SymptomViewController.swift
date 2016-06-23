@@ -160,7 +160,7 @@ class SymptomViewController: AGInputViewController , SymptomTagCellDelegate{
         if (symptom.id != "0"){
             detailsText.text = symptom.text;
             date = symptom.date;
-            dateField!.text = symptom.date.dayMonthFormat();
+            dateField!.text = symptom.date.dayMonthYearFormat();
             
             if (detailsText!.text == ""){
                 detailsText!.text = "Details"

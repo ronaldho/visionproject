@@ -18,6 +18,33 @@ class GlossaryTableViewController: AGTableViewController {
         medications.medications = Data.getAllMedications();
         medications.sortAlphabetically();
         self.tableView.reloadData()
+        
+        if medications.medications.count == 0 {
+            if Reachability.isConnectedToNetwork() {
+                let activityIndicator = UIActivityIndicatorView()
+                self.tableView.backgroundView = activityIndicator
+                activityIndicator.startAnimating()
+                
+                MedicationAPI().getMedicationData(withCompletion: {() -> Void in
+                    self.medications.medications = Data.getAllMedications();
+                    self.medications.sortAlphabetically();
+                    self.tableView.reloadData()
+                    activityIndicator.stopAnimating()
+                    self.tableView.backgroundView = nil
+                })
+            } else {
+                let label = UILabel()
+                label.text = "Internet connection required"
+                label.textAlignment = .Center
+                self.tableView.backgroundView = label
+            }
+        } else {
+            self.tableView.backgroundView = nil
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.tableView.backgroundView = nil
     }
     
     override func viewDidLoad() {

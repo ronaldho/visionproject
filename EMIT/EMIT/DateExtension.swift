@@ -25,6 +25,13 @@ extension NSDate{
         return dateFormatter.stringFromDate(self);
     }
     
+    func dayMonthYearFormat() -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "d MMMM YYYY";
+        
+        return dateFormatter.stringFromDate(self);
+    }
+    
     func sameDate(dateToCompareWith: NSDate) -> Bool {
         return NSCalendar.currentCalendar().compareDate(self, toDate:dateToCompareWith, toUnitGranularity: .Day) == NSComparisonResult.OrderedSame;
     }

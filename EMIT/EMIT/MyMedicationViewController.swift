@@ -19,9 +19,11 @@ class MyMedicationViewController: AGInputViewController {
     @IBOutlet var discontinueButton: UIButton!;
     @IBOutlet var addFromGlossaryButton: UIButton!;
     @IBOutlet var medInfoButton: UIButton!;
+    @IBOutlet var photoActivityIndicator: UIActivityIndicatorView!
     
     @IBOutlet var medHistoryStack: UIStackView!;
     @IBOutlet var medHistoryTable: UITableView!
+    
     
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
     
@@ -40,25 +42,26 @@ class MyMedicationViewController: AGInputViewController {
     
     @IBAction func addMedFromGlossaryButtonPressed(sender: AnyObject) {
         if medToAdd != nil {
-            let dosages = Data.getMedicationDosagesForMedication(medToAdd!)
             
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            
-            for dosage in dosages {
-                alertController.addAction(UIAlertAction(title: dosage.dosage, style: .Default, handler: { (action) -> Void in
-                    self.setMedFromGlossary(dosage)
-                }));
-
-            }
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
-            })
-            
-            alertController.addAction(cancel)
-            
-            alertController.popoverPresentationController?.sourceView = addFromGlossaryButton
-            alertController.popoverPresentationController?.sourceRect = (addFromGlossaryButton?.bounds)!
-            presentViewController(alertController, animated: true, completion: nil)
+            self.setMedFromGlossary(nil)
+//            let dosages = Data.getMedicationDosagesForMedication(medToAdd!)
+//            
+//            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+//            
+//            for dosage in dosages {
+//                alertController.addAction(UIAlertAction(title: dosage.dosage, style: .Default, handler: { (action) -> Void in
+//                    self.setMedFromGlossary(dosage)
+//                }));
+//            }
+//            
+//            let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+//            })
+//            
+//            alertController.addAction(cancel)
+//            
+//            alertController.popoverPresentationController?.sourceView = addFromGlossaryButton
+//            alertController.popoverPresentationController?.sourceRect = (addFromGlossaryButton?.bounds)!
+//            presentViewController(alertController, animated: true, completion: nil)
 
         } else {
             print("Error in addMedFromGlossaryButtonPressed")
@@ -66,23 +69,19 @@ class MyMedicationViewController: AGInputViewController {
     }
     
     func setMedFromGlossary(dosage: MedicationDosage?) {
+//        var imageUrl: String?
+        
         if dosage != nil {
             medName.text = medToAdd!.name + " " + dosage!.dosage;
             
-            if dosage!.image != nil {
-                photo!.fullImage = dosage!.image
-                photo!.image = dosage!.croppedImage
-                photoContainer!.hidden = false;
-                addPhotoButton!.hidden = true;
+            if dosage!.imageUrl != nil {
+//                imageUrl = dosage!.imageUrl
             }
         } else {
             medName.text = medToAdd!.name
             
             if medToAdd!.image != nil {
-                photo!.fullImage = medToAdd!.image
-                photo!.image = medToAdd!.croppedImage
-                photoContainer!.hidden = false;
-                addPhotoButton!.hidden = true;
+//                imageUrl = medToAdd!.imageUrl
             }
         }
         
@@ -91,7 +90,23 @@ class MyMedicationViewController: AGInputViewController {
         addFromGlossaryButton.hidden = true;
         medAdded = true;
         
-        
+//        if imageUrl != nil {
+//            self.addPhotoButton!.hidden = true;
+//            photoActivityIndicator.hidden = false
+//            photoActivityIndicator.startAnimating()
+//            
+//            MedicationAPI().getImageFromUrlWithCompletion(imageUrl!, completion: { (imageFromUrl) in
+//                if imageFromUrl != nil {
+//                    self.photo!.fullImage = imageFromUrl!
+//                    self.photo!.image = ImageUtils.cropToSquare(imageFromUrl!)
+//                    self.photoContainer!.hidden = false;
+//                } else {
+//                    self.addPhotoButton!.hidden = false;
+//                }
+//                self.photoActivityIndicator.hidden = true
+//                self.photoActivityIndicator.stopAnimating()
+//            })
+//        }
     }
     
     
@@ -117,6 +132,7 @@ class MyMedicationViewController: AGInputViewController {
                     found = true;
                     addFromGlossaryButton.hidden = false;
                     addFromGlossaryButton.setTitle(String(format: "Add %@ from Glossary", arguments: [med.name]), forState: UIControlState.Normal)
+                    addFromGlossaryButton.sizeToFit()
                     medToAdd = med;
                 }
             }
@@ -190,6 +206,8 @@ class MyMedicationViewController: AGInputViewController {
     
     override func viewDidLoad() {
         
+        photoActivityIndicator.hidden = true
+        
         for view: UIView in self.mainStackView!.arrangedSubviews {
             for  constraint in view.constraints {
                 constraint.priority = 999;
@@ -207,7 +225,13 @@ class MyMedicationViewController: AGInputViewController {
         medHistories = []
         
         addFromGlossaryButton.hidden = true;
-        medInfoButton.hidden = true;
+        medInfoButton.tintColor = UIColor.EMITDarkGreenColor()
+        
+        if (med.pageUrl != nil) {
+            medInfoButton.hidden = false;
+        } else {
+            medInfoButton.hidden = true;
+        }
         
         // Time Icons
         let breakfastIcon: UIImage = UIImage(named: "sunrise-filled")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
@@ -393,7 +417,7 @@ class MyMedicationViewController: AGInputViewController {
                 }
             }
             
-            let medIdFromSave = Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: photo!.fullImage, andCroppedImage: photo!.image, andInstructions: instructions, andId: med.id, andBreakfast: breakfastButtonSelected, andLunch: lunchButtonSelected, andDinner: dinnerButtonSelected, andBed: bedButtonSelected, andDate: med.date, andDiscontinued: discontinued, andStartedDate: startedDate, andDiscontinuedDate: discontinuedDate));
+            let medIdFromSave = Data.saveMyMedication(MyMedication(withName: medName.text!, andImage: photo!.fullImage, andCroppedImage: photo!.image, andInstructions: instructions, andId: med.id, andBreakfast: breakfastButtonSelected, andLunch: lunchButtonSelected, andDinner: dinnerButtonSelected, andBed: bedButtonSelected, andDate: med.date, andDiscontinued: discontinued, andStartedDate: startedDate, andDiscontinuedDate: discontinuedDate, andPageUrl: med.pageUrl));
             
             
             // Prepare text for history table
@@ -477,14 +501,16 @@ class MyMedicationViewController: AGInputViewController {
         let medHistory = medHistories![indexPath.row];
         cell.medHistory = medHistory;
         
-        cell.dateLabel.text = medHistory.date.dayMonthFormat();
+        cell.dateLabel.text = medHistory.date.dayMonthYearFormat();
         cell.historyTextLabel.text = medHistory.text;
         
         if medHistoryTable.contentSize.height > 250 {
+            medHistoryTable.scrollEnabled = true
             tableHeight.constant = 250;
         }
         if tableHeight.constant < 250 {
-            let newHeight = medHistoryTable.contentSize.height + 20
+            medHistoryTable.scrollEnabled = false
+            let newHeight = medHistoryTable.contentSize.height + 12
             tableHeight.constant = newHeight > 250 ? 250 : newHeight;
         }
 

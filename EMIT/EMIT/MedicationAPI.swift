@@ -14,7 +14,7 @@ class MedicationAPI: NSObject {
     
     var drugApiUrl = NSURL(string: "http://emitcare.ca/api/v1/drugs")
     
-    func getMedicationData(){
+    func getMedicationData(withCompletion completion: () -> Void){
         // Delete current data
         let meds: [Medication] = Data.getAllMedications()
         for med in meds {
@@ -44,6 +44,11 @@ class MedicationAPI: NSObject {
             for medication in json {
                 self.getMedicationFromData(medication)
             }
+            
+            dispatch_async(dispatch_get_main_queue(), { 
+                completion()
+            })
+            
         });
         
         // Send med request
@@ -70,9 +75,9 @@ class MedicationAPI: NSObject {
                 }
             }
             
-            if imageUrl != nil {
-                self.getImageFromUrl(imageUrl!, med: med, medDosage: nil)
-            }
+//            if imageUrl != nil {
+//                self.getImageFromUrl(imageUrl!, med: med, medDosage: nil)
+//            }
         }
     }
 
@@ -86,9 +91,32 @@ class MedicationAPI: NSObject {
         
         medDosage.id = Data.saveMedicationDosage(medDosage)
         
-        if imageUrl != nil {
-            self.getImageFromUrl(imageUrl!, med: nil, medDosage: medDosage)
-        }
+//        if imageUrl != nil {
+//            self.getImageFromUrl(imageUrl!, med: nil, medDosage: medDosage)
+//        }
+    }
+    
+    func getImageFromUrlWithCompletion(imageUrlString: String, completion: (image: UIImage?) -> Void) {
+        
+        let imageUrl = NSURL(string: imageUrlString)
+        let request = NSURLRequest(URL: imageUrl!)
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: config)
+        
+        let imageTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+            
+            if let data = data where error == nil {
+                dispatch_async(dispatch_get_main_queue(), { 
+                    completion(image: UIImage(data: data))
+                })
+                
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    completion(image: nil)
+                })
+            }
+        });
+        imageTask.resume()
     }
     
     func getImageFromUrl(imageUrlString: String, med: Medication?, medDosage: MedicationDosage?) {

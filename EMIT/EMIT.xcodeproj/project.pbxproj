@@ -21,6 +21,9 @@
 		4993F78B1D0BBADE007BF6C5 /* ModalViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4993F7891D0BBADE007BF6C5 /* ModalViews.storyboard */; };
 		4993F78D1D0C9571007BF6C5 /* MedicationDosage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993F78C1D0C9571007BF6C5 /* MedicationDosage.swift */; };
 		4993F78F1D0FAB72007BF6C5 /* MedicationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993F78E1D0FAB72007BF6C5 /* MedicationAPI.swift */; };
+		4993F7911D10FC04007BF6C5 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993F7901D10FC04007BF6C5 /* Reachability.swift */; };
+		4993F7931D15FDCE007BF6C5 /* MyMedicationFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993F7921D15FDCE007BF6C5 /* MyMedicationFilterTableViewCell.swift */; };
+		4993F7951D1646E2007BF6C5 /* MyMedicationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993F7941D1646E1007BF6C5 /* MyMedicationsViewController.swift */; };
 		49B8434C1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */; };
 		49CB87D41CF583860077F67C /* MyMedicationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87D31CF583860077F67C /* MyMedicationsTableViewController.swift */; };
 		49CB87D61CF610B40077F67C /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB87D51CF610B40077F67C /* MainTabBarViewController.swift */; };
@@ -86,6 +89,9 @@
 		4993F78A1D0BBADE007BF6C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = EMIT/Base.lproj/ModalViews.storyboard; sourceTree = "<group>"; };
 		4993F78C1D0C9571007BF6C5 /* MedicationDosage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationDosage.swift; sourceTree = "<group>"; };
 		4993F78E1D0FAB72007BF6C5 /* MedicationAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationAPI.swift; sourceTree = "<group>"; };
+		4993F7901D10FC04007BF6C5 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		4993F7921D15FDCE007BF6C5 /* MyMedicationFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationFilterTableViewCell.swift; sourceTree = "<group>"; };
+		4993F7941D1646E1007BF6C5 /* MyMedicationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationsViewController.swift; sourceTree = "<group>"; };
 		49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationTableViewCell.swift; sourceTree = "<group>"; };
 		49CB87D31CF583860077F67C /* MyMedicationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMedicationsTableViewController.swift; sourceTree = "<group>"; };
 		49CB87D51CF610B40077F67C /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
@@ -154,7 +160,9 @@
 			children = (
 				49CB87D51CF610B40077F67C /* MainTabBarViewController.swift */,
 				49CB87D31CF583860077F67C /* MyMedicationsTableViewController.swift */,
+				4993F7941D1646E1007BF6C5 /* MyMedicationsViewController.swift */,
 				49B8434B1CCF4A3400F7D81E /* MyMedicationTableViewCell.swift */,
+				4993F7921D15FDCE007BF6C5 /* MyMedicationFilterTableViewCell.swift */,
 				49E4245A1CDD9D0700CFCA22 /* SymptomTableViewController.swift */,
 				49E4245C1CDD9D2100CFCA22 /* SymptomTableViewCell.swift */,
 				492337D11CE45C4100A15AE2 /* SymptomSplitViewController.swift */,
@@ -213,6 +221,7 @@
 			children = (
 				49DA89E21CC9C4CB0027CF21 /* Data.swift */,
 				4993F78E1D0FAB72007BF6C5 /* MedicationAPI.swift */,
+				4993F7901D10FC04007BF6C5 /* Reachability.swift */,
 				49E424681CDFDC2900CFCA22 /* MailSender.swift */,
 				49D6D60D1CD5340000EBDA7B /* ImageUtils.swift */,
 				49D6D60B1CD533B600EBDA7B /* StaticDates.swift */,
@@ -365,11 +374,13 @@
 				49E424611CDDA6AA00CFCA22 /* SymptomTagViewController.swift in Sources */,
 				49D6D6101CD5341300EBDA7B /* AGImageView.swift in Sources */,
 				49DA89E51CC9C4E00027CF21 /* Medication.swift in Sources */,
+				4993F7951D1646E2007BF6C5 /* MyMedicationsViewController.swift in Sources */,
 				4993E92E1CE8513B0069B8B7 /* OverlayView.swift in Sources */,
 				49E424571CDB1DE500CFCA22 /* Symptom.swift in Sources */,
 				49CB87D41CF583860077F67C /* MyMedicationsTableViewController.swift in Sources */,
 				49CB87D61CF610B40077F67C /* MainTabBarViewController.swift in Sources */,
 				49E4245B1CDD9D0700CFCA22 /* SymptomTableViewController.swift in Sources */,
+				4993F7911D10FC04007BF6C5 /* Reachability.swift in Sources */,
 				49DA89EB1CC9C8080027CF21 /* MyMedication.swift in Sources */,
 				492337D21CE45C4100A15AE2 /* SymptomSplitViewController.swift in Sources */,
 				49E4246B1CE04DEA00CFCA22 /* Medications.swift in Sources */,
@@ -392,6 +403,7 @@
 				49DC221D1CF11F35004F9ED0 /* MedPageHTMLViewController.swift in Sources */,
 				49723A4D1D0626FB0058303A /* SendMedsViewController.swift in Sources */,
 				49CB87DA1CF614840077F67C /* MedAlarmsViewController.swift in Sources */,
+				4993F7931D15FDCE007BF6C5 /* MyMedicationFilterTableViewCell.swift in Sources */,
 				49E4245D1CDD9D2100CFCA22 /* SymptomTableViewCell.swift in Sources */,
 				49E424591CDB1E2800CFCA22 /* SymptomTag.swift in Sources */,
 				496CFB531CEADC5B00CCC5D9 /* DiscontinuedTableViewCell.swift in Sources */,
